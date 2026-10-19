@@ -239,7 +239,7 @@ html[data-hub] .hub-name {
   to { transform: translateX(-50%); }
 }
 .metals-ticker-track {
-  animation: metalsTicker 45s linear infinite;
+  animation: metalsTicker 70s linear infinite;
 }
 .metals-ticker:hover .metals-ticker-track {
   animation-play-state: paused;

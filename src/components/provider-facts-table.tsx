@@ -20,7 +20,7 @@ export function ProviderFactsTable({ providers }: { providers: Provider[] }) {
         account size - always confirm in writing with the company.
       </p>
       <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
-        <table className="w-full min-w-[980px] border-collapse text-left text-[15px]">
+        <table className="w-full min-w-[980px] border-collapse text-left text-[13px]">
           <caption className="sr-only">Gold IRA companies compared by minimum investment, setup fee, yearly fees, storage, buyback terms, promotion and founding year</caption>
           <thead>
             <tr className="border-b-2 border-gray-200 bg-[#F7F1E3]">

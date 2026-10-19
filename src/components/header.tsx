@@ -17,7 +17,7 @@ export function Header() {
 
   return (
     <header className="border-b border-[#E5E5E5] bg-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-1.5">
         <Link href="/" className="flex items-center gap-2" aria-label="Gold IRA Planet home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -25,12 +25,12 @@ export function Header() {
             alt="GoldIRAPlanet.com - Compare. Learn. Invest smarter."
             width={640}
             height={298}
-            className="h-[60px] w-auto sm:h-[84px]"
+            className="h-[42px] w-auto sm:h-[52px]"
           />
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-7 text-[16px] font-medium text-[#191919]">
+        <nav className="hidden md:flex items-center gap-6 text-[14px] font-medium text-[#191919]">
           {NAV.map((item) => (
             <Link key={item.label} href={item.href} className="hover:text-[#191919] hover:underline transition-colors">
               {item.label}
@@ -56,7 +56,7 @@ export function Header() {
               key={item.label}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="block text-[17px] font-medium text-[#191919] hover:text-[#1E3A5F]"
+              className="block text-[15px] font-medium text-[#191919] hover:text-[#1E3A5F]"
             >
               {item.label}
             </Link>

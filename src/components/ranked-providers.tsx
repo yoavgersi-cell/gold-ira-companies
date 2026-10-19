@@ -22,11 +22,11 @@ export function RankedProviders({ products }: { products: ComparisonCardProduct[
   const eligible = amount === null ? products.length : products.filter((p) => !isBelow(p, amount)).length;
 
   return (
-    <div className="space-y-5">
-      <fieldset className="rounded-md border border-gray-300 bg-white px-4 py-4 sm:px-6">
+    <div className="space-y-3.5">
+      <fieldset className="rounded-md border border-gray-300 bg-white px-4 py-3 sm:px-5">
         <legend className="sr-only">How much are you looking to invest?</legend>
-        <p className="text-[17px] font-bold text-[#191919] sm:text-[19px]">How much are you looking to invest?</p>
-        <div className="mt-3 flex flex-wrap gap-2.5">
+        <p className="text-[14px] font-bold text-[#191919] sm:text-[15px]">How much are you looking to invest?</p>
+        <div className="mt-2 flex flex-wrap gap-2">
           {AMOUNTS.map((a) => {
             const active = amount === a.value;
             return (
@@ -36,7 +36,7 @@ export function RankedProviders({ products }: { products: ComparisonCardProduct[
                 aria-pressed={active}
                 onClick={() => setAmount(active ? null : a.value)}
                 className={cn(
-                  "min-h-[48px] rounded-full border-2 px-5 text-[16px] font-semibold transition-colors",
+                  "min-h-[36px] rounded-full border px-4 text-[13px] font-semibold transition-colors",
                   active
                     ? "border-[#1E4E79] bg-[#1E4E79] text-white"
                     : "border-gray-300 bg-white text-[#191919] hover:border-[#1E4E79]",
@@ -47,7 +47,7 @@ export function RankedProviders({ products }: { products: ComparisonCardProduct[
             );
           })}
         </div>
-        <p className="mt-3 text-[15px] text-gray-600" aria-live="polite">
+        <p className="mt-2 text-[12px] text-gray-600" aria-live="polite">
           {amount === null
             ? "Pick an amount to see which companies accept it."
             : `${eligible} of ${products.length} companies accept this amount, based on their published minimums.`}
@@ -58,7 +58,7 @@ export function RankedProviders({ products }: { products: ComparisonCardProduct[
         <ComparisonCard key={product.id} product={product} belowMinimum={amount !== null && isBelow(product, amount)} />
       ))}
 
-      <p className="text-[13px] leading-relaxed text-gray-500">
+      <p className="text-[11px] leading-relaxed text-gray-500">
         <sup>1</sup> Offers, guarantees, endorsements and review counts shown on these cards are the companies&apos; own advertised claims; terms,
         minimum purchase amounts and eligibility apply. Confirm current terms with the company in writing before you invest.
       </p>

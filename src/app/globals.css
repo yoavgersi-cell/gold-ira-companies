@@ -231,3 +231,21 @@ html[data-hub] .hub-name {
   color: #16304F;
   border-bottom-color: #16304F;
 }
+
+/* Metal-price ticker above the header: continuous right-to-left scroll. The
+   track holds two identical halves, so moving it by -50% loops seamlessly. */
+@keyframes metalsTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.metals-ticker-track {
+  animation: metalsTicker 45s linear infinite;
+}
+.metals-ticker:hover .metals-ticker-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .metals-ticker-track {
+    animation: none;
+  }
+}

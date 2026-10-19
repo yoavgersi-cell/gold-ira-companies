@@ -8,7 +8,7 @@ export function DisclosureBar() {
 
   return (
     <>
-      <div className="bg-[#FAF6EC] border-b-[1.5px] border-[#E2D9FA] px-4 py-1.5 sm:py-2 text-center text-[10px] sm:text-[13px] leading-tight sm:leading-normal text-gray-600">
+      <div className="bg-[#FAF6EC] border-b-[1.5px] border-[#EDE3C8] px-4 py-1 sm:py-1.5 text-center text-[10px] sm:text-[11.5px] leading-tight sm:leading-normal text-gray-600">
         Some companies featured on this site pay us when you request a kit or open an account through our links. This can affect which companies appear and where. Not financial advice.{" "}
         <button
           onClick={() => setIsOpen(true)}

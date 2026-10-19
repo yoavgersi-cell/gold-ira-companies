@@ -96,10 +96,10 @@ export function ComparisonCard({
 
         {/* Content */}
         <div className="min-w-0 flex-1">
-          <h3 className="text-[17px] font-semibold leading-tight text-[#191919] sm:text-[18px]">{product.name}</h3>
+          <h3 className="text-[16px] font-semibold leading-tight text-[#191919] sm:text-[17px]">{product.name}</h3>
           <a
             href={`${linkPrefix}/reviews/${product.id}`}
-            className="mt-0.5 inline-block text-[13px] font-semibold text-[#2E6DA4] hover:underline sm:text-[14px]"
+            className="mt-0.5 inline-block text-[12px] font-semibold text-[#2E6DA4] hover:underline sm:text-[13px]"
           >
             Read Review
           </a>

@@ -174,7 +174,7 @@ export function EditorialContent({ midSlot }: { midSlot?: React.ReactNode }) {
         publish it. In the enforcement cases we cover, buyers of &quot;premium&quot; or proof coins
         paid markups of 30% to 130%. Ask for the markup in writing on the exact product before you
         pay. See{" "}
-        <Link href="/articles/gold-ira-fees-explained" className={link}>gold IRA fees explained</Link>{" "}
+        <Link href="/articles/gold-ira-fees" className={link}>gold IRA fees explained</Link>{" "}
         or estimate your own costs with our{" "}
         <Link href="/gold-ira-fee-calculator" className={link}>gold IRA fee calculator</Link>.
       </p>
@@ -257,7 +257,7 @@ export function EditorialContent({ midSlot }: { midSlot?: React.ReactNode }) {
         <li><strong>Anyone wanting income</strong> - gold pays no interest or dividends.</li>
         <li><strong>Investors who just want gold exposure</strong> - a gold ETF in an ordinary IRA is usually cheaper and easier to sell. Compare them in{" "}
           <Link href="/articles/gold-ira-vs-gold-etf" className={link}>gold IRA vs gold ETF</Link>.</li>
-        <li><strong>Moving most of your savings at once</strong> - gold prices swing; the record close of about $5,318 an ounce in January 2026 was followed by a drop of roughly 20% by October.</li>
+        <li><strong>Moving most of your savings at once</strong> - gold prices swing; the record of about $5,595 an ounce in January 2026 was followed by a drop of roughly 25% by October.</li>
       </ul>
       <p className="mb-8">
         For general education on sizing, see{" "}

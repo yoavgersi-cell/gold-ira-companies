@@ -1,5 +1,25 @@
 import type { ArticleData } from "@/lib/config";
 import { articlesA } from "./articles-a";
 import { articlesB } from "./articles-b";
+import { goldIraCompleteGuide } from "./pillars/gold-ira-guide";
+import { goldIraRolloverGuide } from "./pillars/gold-ira-rollover";
+import { goldIraFeesGuide } from "./pillars/gold-ira-fees";
+import { goldIraRulesGuide } from "./pillars/gold-ira-rules";
+import { goldIraCustodiansGuide } from "./pillars/gold-ira-custodians";
+import { howToChooseGoldIraCompanyGuide } from "./pillars/how-to-choose-a-gold-ira-company";
+import { isGoldIraGoodInvestmentGuide } from "./pillars/is-a-gold-ira-a-good-investment";
+import { investGoldRetirementGuide } from "./pillars/how-to-invest-in-gold-for-retirement";
 
-export const articles: ArticleData[] = [...articlesA, ...articlesB];
+// Long-form pillar guides first (the hubs), then the shorter supporting guides.
+export const articles: ArticleData[] = [
+  goldIraCompleteGuide,
+  goldIraRolloverGuide,
+  goldIraFeesGuide,
+  goldIraRulesGuide,
+  goldIraCustodiansGuide,
+  howToChooseGoldIraCompanyGuide,
+  isGoldIraGoodInvestmentGuide,
+  investGoldRetirementGuide,
+  ...articlesA,
+  ...articlesB,
+];

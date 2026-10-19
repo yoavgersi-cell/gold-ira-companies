@@ -56,7 +56,7 @@ export default async function FeeCalculatorPage() {
           </li>
         </ul>
         <p>
-          Read the full breakdown in <Link className="font-semibold text-[#2E6DA4] hover:underline" href="/articles/gold-ira-fees-explained">gold IRA fees explained</Link>, or{" "}
+          Read the full breakdown in <Link className="font-semibold text-[#2E6DA4] hover:underline" href="/articles/gold-ira-fees">gold IRA fees explained</Link>, or{" "}
           <Link className="font-semibold text-[#2E6DA4] hover:underline" href="/">compare gold IRA companies</Link>.
         </p>
         <p className="text-[14px] italic text-gray-500">

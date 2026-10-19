@@ -20,8 +20,13 @@ const nextConfig: NextConfig = {
   // JSON-LD "image" URLs (and any URL Google already discovered) returning
   // the image instead of a 404. Re-check the hashes in the build output
   // ("opengraph-image-xxxxxx") if an opengraph-image.tsx file is ever moved.
-  // TODO: hashes carried over from the template - re-check them against this
-  // site's first `next build` output before launch.
+  // Checked against this site's `next build` output (Oct 2026): unchanged.
+  // The short fees guide was folded into the long-form fees pillar.
+  async redirects() {
+    return [
+      { source: "/articles/gold-ira-fees-explained", destination: "/articles/gold-ira-fees", permanent: true },
+    ];
+  },
   async rewrites() {
     return [
       { source: "/opengraph-image", destination: "/opengraph-image-12jlf3" },

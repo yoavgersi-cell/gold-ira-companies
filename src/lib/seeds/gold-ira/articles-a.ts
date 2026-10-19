@@ -41,11 +41,11 @@ export const articlesA: ArticleData[] = [
       },
       {
         heading: "What does a gold IRA cost?",
-        body: `<p>Costs come in two layers:</p><ul><li><strong>Account fees</strong> - a one-time setup fee (from $0 to a few hundred dollars), plus yearly custodian and storage fees. Annual fees cluster around <strong>$175-$300 a year</strong> and are usually <strong>flat</strong>, not a percentage of your balance. Segregated storage (your own coins kept separately) usually costs more than non-segregated (commingled) storage.</li><li><strong>The markup or spread on the metal</strong> - the difference between what you pay and the metal's market value. On common bullion this is often in the range of roughly 5-10%. On "premium", proof or numismatic coins, enforcement cases have found markups of 30% to well over 100%.</li></ul><p>The markup is usually the bigger number, and few dealers publish it. Ask for it in writing before you sign. Our <a href="/articles/gold-ira-fees-explained">gold IRA fees explained</a> guide breaks this down, and the <a href="/gold-ira-fee-calculator">gold IRA fee calculator</a> lets you estimate the total.</p>`,
+        body: `<p>Costs come in two layers:</p><ul><li><strong>Account fees</strong> - a one-time setup fee (from $0 to a few hundred dollars), plus yearly custodian and storage fees. Annual fees cluster around <strong>$175-$300 a year</strong> and are usually <strong>flat</strong>, not a percentage of your balance. Segregated storage (your own coins kept separately) usually costs more than non-segregated (commingled) storage.</li><li><strong>The markup or spread on the metal</strong> - the difference between what you pay and the metal's market value. On common bullion this is often in the range of roughly 5-10%. On "premium", proof or numismatic coins, enforcement cases have found markups of 30% to well over 100%.</li></ul><p>The markup is usually the bigger number, and few dealers publish it. Ask for it in writing before you sign. Our <a href="/articles/gold-ira-fees">gold IRA fees explained</a> guide breaks this down, and the <a href="/gold-ira-fee-calculator">gold IRA fee calculator</a> lets you estimate the total.</p>`,
       },
       {
         heading: "Pros and cons of a gold IRA",
-        body: `<p><strong>Possible advantages</strong></p><ul><li>You own physical metal rather than a paper claim, held in a professional vault in your name's account.</li><li>Gold has historically behaved differently from stocks and bonds, so some people use a small slice for diversification.</li><li>You keep the IRA tax treatment - tax-deferred (traditional) or tax-free growth (Roth).</li><li>Flat fees can become a smaller percentage as the account grows.</li></ul><p><strong>Real drawbacks</strong></p><ul><li>Gold pays no dividends or interest; any gain depends entirely on the price going up. Prices can fall sharply - gold closed at a record of about $5,318 an ounce on January 29, 2026 and was trading around $4,150-$4,200 in mid-October 2026, roughly 20% lower.</li><li>Costs are higher than a gold fund in a regular brokerage IRA - compare in <a href="/articles/gold-ira-vs-gold-etf">gold IRA vs gold ETF</a>.</li><li>Dealer markups and buyback spreads mean you start behind the market price.</li><li>Required minimum distributions still apply to traditional accounts from age 73; you can take cash or the metal itself. See <a href="/articles/gold-ira-taxes-and-rmds">gold IRA taxes and RMDs</a>.</li><li>The industry has a history of high-pressure sales and fraud - read <a href="/articles/gold-ira-scams-red-flags">gold IRA scams and red flags</a>.</li></ul>`,
+        body: `<p><strong>Possible advantages</strong></p><ul><li>You own physical metal rather than a paper claim, held in a professional vault in your name's account.</li><li>Gold has historically behaved differently from stocks and bonds, so some people use a small slice for diversification.</li><li>You keep the IRA tax treatment - tax-deferred (traditional) or tax-free growth (Roth).</li><li>Flat fees can become a smaller percentage as the account grows.</li></ul><p><strong>Real drawbacks</strong></p><ul><li>Gold pays no dividends or interest; any gain depends entirely on the price going up. Prices can fall sharply - gold hit a record of about $5,595 an ounce (intraday spot) on January 29, 2026 and was trading around $4,150-$4,200 in mid-October 2026, roughly 25% lower.</li><li>Costs are higher than a gold fund in a regular brokerage IRA - compare in <a href="/articles/gold-ira-vs-gold-etf">gold IRA vs gold ETF</a>.</li><li>Dealer markups and buyback spreads mean you start behind the market price.</li><li>Required minimum distributions still apply to traditional accounts from age 73; you can take cash or the metal itself. See <a href="/articles/gold-ira-taxes-and-rmds">gold IRA taxes and RMDs</a>.</li><li>The industry has a history of high-pressure sales and fraud - read <a href="/articles/gold-ira-scams-red-flags">gold IRA scams and red flags</a>.</li></ul>`,
       },
       {
         heading: "Is a gold IRA right for you?",
@@ -145,7 +145,7 @@ export const articlesA: ArticleData[] = [
       },
       {
         heading: "Things federal employees should weigh first",
-        body: `<ul><li><strong>The TSP is known for very low costs.</strong> A gold IRA adds setup fees, yearly custodian and storage fees (often a flat $175-$300 a year) and a markup on the metal. See <a href="/articles/gold-ira-fees-explained">gold IRA fees explained</a>.</li><li><strong>You do not have to move everything.</strong> Many people move only part of their balance, if their withdrawal options allow it. Read <a href="/articles/how-much-gold-in-retirement-portfolio">how much gold in a retirement portfolio</a>.</li><li><strong>Gold pays no income</strong> and its price can drop - it closed at a record of about $5,318 an ounce in January 2026 and was around $4,150-$4,200 by mid-October 2026.</li><li><strong>Required minimum distributions</strong> still apply to traditional IRAs from age 73. See <a href="/articles/gold-ira-taxes-and-rmds">gold IRA taxes and RMDs</a>.</li></ul>`,
+        body: `<ul><li><strong>The TSP is known for very low costs.</strong> A gold IRA adds setup fees, yearly custodian and storage fees (often a flat $175-$300 a year) and a markup on the metal. See <a href="/articles/gold-ira-fees">gold IRA fees explained</a>.</li><li><strong>You do not have to move everything.</strong> Many people move only part of their balance, if their withdrawal options allow it. Read <a href="/articles/how-much-gold-in-retirement-portfolio">how much gold in a retirement portfolio</a>.</li><li><strong>Gold pays no income</strong> and its price can drop - it hit a record of about $5,595 an ounce in January 2026 and was around $4,150-$4,200 by mid-October 2026.</li><li><strong>Required minimum distributions</strong> still apply to traditional IRAs from age 73. See <a href="/articles/gold-ira-taxes-and-rmds">gold IRA taxes and RMDs</a>.</li></ul>`,
       },
       {
         heading: "Watch for scams aimed at TSP savers",
@@ -161,54 +161,6 @@ export const articlesA: ArticleData[] = [
   // ---------------------------------------------------------------------------
   // 4. Fees explained
   // ---------------------------------------------------------------------------
-  {
-    slug: "gold-ira-fees-explained",
-    title: "Gold IRA Fees Explained: Setup, Storage, Markups & Spreads",
-    description:
-      "Every gold IRA cost explained - setup, custodian and storage fees, dealer markups and buyback spreads - with real ranges and the questions to ask.",
-    category: "Fees & Costs",
-    readTime: "8 min read",
-    publishedAt: UPDATED,
-    updatedAt: UPDATED,
-    heroColor: "#FBF5E6",
-    author: AUTHOR,
-    keyTakeaways: [
-      "Yearly custodian and storage fees typically total about $175-$300 and are usually flat, not a percentage of your balance.",
-      "The dealer's markup on the metal is often the largest cost - roughly 5-10% on common bullion, far more on premium or proof coins.",
-      "The buyback spread decides how much you get back when you sell - ask for the buyback policy before you buy.",
-      "Few dealers publish their markups, so ask for every cost in writing before money moves.",
-    ],
-    sections: [
-      {
-        heading: "The two layers of gold IRA costs",
-        body: `<p>Gold IRA costs fall into two groups, and most advertising only talks about the first:</p><ul><li><strong>Account fees</strong> - what the custodian and depository charge to set up and run the account.</li><li><strong>Metal costs</strong> - the markup you pay above the market (spot) price when you buy, and the discount you take when you sell back.</li></ul><p>On a typical account, the metal costs can easily be larger than several years of account fees combined. Knowing both is the only way to compare companies fairly.</p>`,
-      },
-      {
-        heading: "Setup and account fees",
-        body: `<p>Most companies charge a <strong>one-time setup or application fee</strong>. Reported figures range from $0 (Noble Gold, per ConsumerAffairs) to about $50 (Birch Gold Group, Silver Gold Bull) to around $230-$275 at some others. Some also charge a <strong>wire fee</strong> - Birch Gold Group is reported at $30.</p><p>Then there is a <strong>yearly custodian or administration fee</strong>, often in the $80-$125 range on its own. Custodians such as Equity Trust, STRATA and Goldstar charge this, not the dealer - though the dealer may present it as one bundle.</p><p>Promotions sometimes waive these fees for a year or more on larger accounts. That is a real saving, but it is small next to the markup on the metal, so do not let a fee waiver decide the choice on its own.</p>`,
-      },
-      {
-        heading: "Storage fees: segregated vs non-segregated",
-        body: `<p>Your metal must be held in an approved depository (see <a href="/articles/can-you-store-ira-gold-at-home">why home storage is not allowed</a>). Storage is usually charged yearly:</p><ul><li><strong>Non-segregated (commingled)</strong> - your metal is stored with other customers' metal of the same type. You get back the same kind and amount, not necessarily the exact coins. Usually cheaper, often around $100-$225 a year as reported.</li><li><strong>Segregated</strong> - your specific coins and bars are kept separately. Usually about $50 a year more - for example, American Hartford Gold is reported at $225 non-segregated vs $275 segregated.</li></ul><p>Add custodian and storage fees together and most companies land in the <strong>$175-$300 a year</strong> range. Importantly, these are usually <strong>flat fees</strong>: you pay about the same on $25,000 as on $250,000, so they matter more on smaller accounts.</p>`,
-      },
-      {
-        heading: "Markups and spreads: the cost most people miss",
-        body: `<p>The <strong>markup</strong> (or premium) is how much more you pay than the metal's spot price. The dealer keeps it. It is built into the price per coin, so it never shows up as a "fee" on a statement.</p><ul><li><strong>Common bullion</strong> (Gold Eagles, Maple Leafs, standard bars) - often roughly <strong>5-10%</strong> over spot.</li><li><strong>"Premium", proof or numismatic coins</strong> - much higher. In enforcement cases, regulators have described markups from about 30% to well over 100%.</li></ul><p>Some real examples from public cases:</p><ul><li><strong>Red Rock Secured (2023)</strong> - average markups of 100-130%, while customers were told 4-29%.</li><li><strong>Safeguard Metals</strong> - markups averaging about 50% more than disclosed.</li><li><strong>Lear Capital</strong> - sued by the New York Attorney General in 2021 over undisclosed markups of up to 33%.</li><li><strong>Goldline (2012)</strong> - a judgment requiring refunds after coin markups above 55%.</li></ul><p>A 30% markup means the metal has to rise about 43% just for you to break even on what you paid. That is why the markup matters more than almost anything else on the fee sheet.</p>`,
-      },
-      {
-        heading: "What is a buyback spread?",
-        body: `<p>The <strong>buyback spread</strong> is the gap between what you pay for the metal and what a dealer will pay you to buy it back. Even with a modest markup, you start behind: if you buy at 7% over spot and the dealer buys back at spot, you are down 7% on day one.</p><p>Policies vary. Some companies advertise a buyback commitment; others buy back in practice without a written guarantee (Fortune reported Augusta Precious Metals buys back at about 5% under its sell price). Neither is a promise of a good price. You are also usually free to sell to a different dealer through your custodian, so compare offers when the time comes.</p>`,
-      },
-      {
-        heading: "What questions should you ask about fees?",
-        body: `<p>Ask every company for these answers <strong>in writing</strong>, for the exact products you would buy:</p><ul><li>What is the one-time setup fee, and are there wire or transaction fees?</li><li>What is the yearly custodian fee, and who is the custodian?</li><li>What is yearly storage - segregated or non-segregated - and which depository?</li><li>What is the price per coin or bar today, and what is the spot price right now? (That gives you the markup.)</li><li>What would you pay to buy it back today?</li><li>Is anything waived only for the first year, and what happens after?</li></ul><p>The joint CFTC, FINRA and NASAA advisory "10 Things to Ask Before Buying Physical Gold, Silver, or Other Metals" (March 2024) covers similar ground and is worth reading.</p>`,
-      },
-      {
-        heading: "How to compare total cost",
-        body: `<p>Add up year-one fees, ongoing yearly fees over the number of years you expect to hold, the markup on purchase and the expected buyback spread. Our <a href="/gold-ira-fee-calculator">gold IRA fee calculator</a> does this for you. Companies that publish prices or account fees online make this easier; for the rest, a written quote is the only reliable source.</p><p>Then compare companies side by side on our <a href="/">best gold IRA companies</a> page, or in head-to-heads like <a href="/augusta-vs-goldco">Augusta vs Goldco</a>, <a href="/american-hartford-gold-vs-goldco">American Hartford Gold vs Goldco</a> and <a href="/augusta-vs-american-hartford-gold">Augusta vs American Hartford Gold</a>. Figures above are third-party snapshots and change often - confirm current numbers with each company.</p>${DISCLAIMER}`,
-      },
-    ],
-  },
 
   // ---------------------------------------------------------------------------
   // 5. IRS-approved precious metals
@@ -245,7 +197,7 @@ export const articlesA: ArticleData[] = [
       },
       {
         heading: "Which coins are not eligible?",
-        body: `<ul><li><strong>South African Krugerrands</strong> - a popular bullion coin, but at 91.67% gold it is below .995 and is not covered by the US-coin exception.</li><li><strong>Most proof and numismatic "rare" coins</strong> - collector coins valued for rarity or condition, not just metal content.</li><li><strong>Collectibles</strong> of any kind - commemorative pieces, graded "slabbed" coins sold for their grade, jewelry and similar.</li></ul><p>Be careful with sales pitches for "premium", "exclusive" or "semi-numismatic" coins. Even where a product technically qualifies, these typically carry much higher markups than standard bullion. In public enforcement cases, regulators described markups from roughly 30% to over 100% on such products. See <a href="/articles/gold-ira-fees-explained">gold IRA fees explained</a> and <a href="/articles/gold-ira-scams-red-flags">gold IRA scams and red flags</a>.</p>`,
+        body: `<ul><li><strong>South African Krugerrands</strong> - a popular bullion coin, but at 91.67% gold it is below .995 and is not covered by the US-coin exception.</li><li><strong>Most proof and numismatic "rare" coins</strong> - collector coins valued for rarity or condition, not just metal content.</li><li><strong>Collectibles</strong> of any kind - commemorative pieces, graded "slabbed" coins sold for their grade, jewelry and similar.</li></ul><p>Be careful with sales pitches for "premium", "exclusive" or "semi-numismatic" coins. Even where a product technically qualifies, these typically carry much higher markups than standard bullion. In public enforcement cases, regulators described markups from roughly 30% to over 100% on such products. See <a href="/articles/gold-ira-fees">gold IRA fees explained</a> and <a href="/articles/gold-ira-scams-red-flags">gold IRA scams and red flags</a>.</p>`,
       },
       {
         heading: "Does the storage rule matter for eligibility?",
@@ -297,7 +249,7 @@ export const articlesA: ArticleData[] = [
       },
       {
         heading: "Your legal storage options",
-        body: `<ul><li><strong>Non-segregated (commingled) storage</strong> - your metal is held with other investors' metal of the same type. When you sell or take a distribution, you receive the same type and quantity. Usually the cheaper option.</li><li><strong>Segregated storage</strong> - your specific coins and bars are kept apart and labelled for your account. Typically costs more - often about $50 a year extra in the figures we have seen.</li></ul><p>Common depositories include the Delaware Depository, Brink's and IDS of Texas. Combined custodian and storage fees typically run about $175-$300 a year - see <a href="/articles/gold-ira-fees-explained">gold IRA fees explained</a>.</p>`,
+        body: `<ul><li><strong>Non-segregated (commingled) storage</strong> - your metal is held with other investors' metal of the same type. When you sell or take a distribution, you receive the same type and quantity. Usually the cheaper option.</li><li><strong>Segregated storage</strong> - your specific coins and bars are kept apart and labelled for your account. Typically costs more - often about $50 a year extra in the figures we have seen.</li></ul><p>Common depositories include the Delaware Depository, Brink's and IDS of Texas. Combined custodian and storage fees typically run about $175-$300 a year - see <a href="/articles/gold-ira-fees">gold IRA fees explained</a>.</p>`,
       },
       {
         heading: "Can you ever take the gold home?",

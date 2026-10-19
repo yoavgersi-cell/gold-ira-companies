@@ -34,7 +34,7 @@ export const faqs: FaqItem[] = [
   {
     question: "Are gold IRAs safe, or are they a scam?",
     answer:
-      "A gold IRA itself is a legitimate account type, but regulators have brought cases against dealers that allegedly charged hidden markups of 50% to over 100%, often on premium or proof coins. Gold's price can also fall - it dropped roughly 20% from its January 2026 record by mid-October 2026. Avoid high-pressure sales, get all prices in writing and read the CFTC, FINRA and NASAA advisory before you buy.",
+      "A gold IRA itself is a legitimate account type, but regulators have brought cases against dealers that allegedly charged hidden markups of 50% to over 100%, often on premium or proof coins. Gold's price can also fall - it dropped roughly 25% from its January 2026 record by mid-October 2026. Avoid high-pressure sales, get all prices in writing and read the CFTC, FINRA and NASAA advisory before you buy.",
   },
   {
     question: "How do I choose a gold IRA company?",

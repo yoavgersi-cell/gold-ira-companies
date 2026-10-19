@@ -54,7 +54,7 @@ export const part1: ArticleSection[] = [
 <li><strong>Past performance is not a guide to the future.</strong> History shows the <em>range</em> of things that have happened. It does not tell you what will happen next.</li>
 <li><strong>This is education, not advice.</strong> Whether gold belongs in your retirement savings depends on your whole financial picture. A fee-only financial adviser - one you pay directly, not one paid by commission on what you buy - can help you decide.</li>
 </ul>
-<p>If you are considering gold for retirement specifically, our companion guide <a href="/articles/is-a-gold-ira-a-good-investment">Is a Gold IRA a Good Investment?</a> uses the same data to weigh the pros and cons, including what fees do to your returns. This article focuses on the price itself.</p>`,
+<p>If you are considering gold for retirement specifically, our companion guide <a href="/articles/is-a-gold-ira-a-good-investment">Is a Gold IRA a Good Investment?</a> uses the same data to weigh the pros and cons, including what fees do to your returns. This article focuses on the price itself. New to the topic? Our <a href="/articles/gold-ira">gold IRA guide</a> explains how gold is held in a retirement account.</p>`,
   },
   {
     heading: "How the gold price is set: spot, futures, the LBMA auction and dealer prices",

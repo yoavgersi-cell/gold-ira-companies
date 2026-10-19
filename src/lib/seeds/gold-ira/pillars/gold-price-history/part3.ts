@@ -139,7 +139,7 @@ export const part3: ArticleSection[] = [
 </table>
 <p>These figures ignore dealer markups, storage and account fees, all of which make the results worse for a real buyer - especially in a gold IRA, where an all-in markup of 5-15% is common. The <a href="/gold-ira-fee-calculator">gold IRA fee calculator</a> shows how much the price must rise just to cover costs.</p>
 <h3>Demand stayed strong even as the price fell</h3>
-<p>One notable feature of 2026 is that <strong>demand did not collapse</strong>. Our research notes record total demand at a record of about 1,231 tonnes in Q1 2026, with central banks still buying. The price fall was driven mostly by Western investors and leveraged traders reacting to the change in interest-rate expectations - another reminder that gold's price in the short run depends on who is buying and selling at the margin, not on the long-term story.</p>`,
+<p>One notable feature of 2026 is that <strong>demand did not collapse</strong>. Our research notes record total demand at a record of about 1,231 tonnes in Q1 2026, with central banks still buying. The price fall was driven mostly by Western investors and leveraged traders reacting to the change in interest-rate expectations - another reminder, explored in <a href="/articles/how-much-gold-in-retirement-portfolio">how much gold to hold</a>, that gold's price in the short run depends on who is buying and selling at the margin, not on the long-term story.</p>`,
   },
   {
     heading: "Gold prices year by year: tables from 1971 to 2025",

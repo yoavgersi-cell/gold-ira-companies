@@ -122,7 +122,7 @@ export const part2: ArticleSection[] = [
 <ol>
 <li><strong>Gold fell even though many of the "reasons to own gold" were still being advertised.</strong> Government debt was still high and money-printing continued for years. The price fell anyway, mostly because real interest rates rose and fear faded.</li>
 <li><strong>A 45% fall on a well-known, widely held asset happened in about four years.</strong> That is comparable to a severe stock bear market.</li>
-<li><strong>Buyers at the top waited most of a decade to break even</strong> - longer if you include dealer markups and annual fees, which can easily add 10-20% to the break-even point for a physical gold IRA.</li>
+<li><strong>Buyers at the top waited most of a decade to break even</strong> - longer if you include dealer markups and annual fees, which can easily add 10-20% to the break-even point for a physical gold IRA (see our <a href="/articles/gold-ira-fees">gold IRA fees guide</a>).</li>
 </ol>`,
   },
   {

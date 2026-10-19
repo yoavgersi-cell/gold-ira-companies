@@ -103,6 +103,7 @@ export const part4: ArticleSection[] = [
 <li><strong>Falls of 20-30% have come every few years,</strong> and falls of 45% or more have happened three times since 1974.</li>
 <li><strong>Recovery has ranged from about 18 months to about 28 years</strong> in plain dollars - and longer after inflation.</li>
 <li><strong>Losses hurt more than gains help.</strong> A 50% fall needs a 100% gain to recover. That is true of every asset.</li>
+<li><strong>Selling during a drawdown locks in the loss.</strong> If you may need to raise cash from gold, read <a href="/articles/how-to-sell-gold-ira">how to sell a gold IRA</a> before you buy, so you know the steps and costs.</li>
 </ul>`,
   },
 ];

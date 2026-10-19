@@ -34,6 +34,8 @@ export const part5: ArticleSection[] = [
 <li><strong>Costs come off every result above.</strong> A gold IRA buyer pays a dealer markup plus yearly custodian and storage fees. Check them with our <a href="/gold-ira-fee-calculator">fee calculator</a> and read <a href="/articles/gold-ira-fees">gold IRA fees explained</a>.</li>
 <li><strong>Beware sales pitches timed to headlines.</strong> Records bring advertising and pressure. Read our <a href="/articles/gold-ira-scams-red-flags">gold IRA scams and red flags</a> guide first.</li>
 </ol>
+<h3>A simple rebalancing illustration</h3>
+<p>Suppose a $200,000 portfolio held a 5% gold target ($10,000) at the end of 2024, with gold at about $2,617. By the end of 2025 (about $4,316), that gold would be worth about $16,500 ($10,000 x $4,316 / $2,617), before costs. If the rest of the portfolio were unchanged, gold would now be about 8% of a $206,500 total. Trimming back to 5% would have meant selling roughly $6,200 of gold near the year-end price - before the 2026 drop. The same rule would have meant buying after the 2013 crash. This is an illustration of how rebalancing works, not a recommendation or a prediction; real results depend on costs, taxes and what the rest of your portfolio does.</p>
 <p>If you decide to proceed, our <a href="/articles/gold-ira">complete gold IRA guide</a>, <a href="/articles/gold-ira-rollover">rollover guide</a> and <a href="/articles/best-gold-coins-for-ira">best gold coins for an IRA</a> explain the steps, and <a href="/articles/how-to-sell-gold-ira">how to sell a gold IRA</a> covers the exit. A fee-only adviser can help you decide whether gold fits at all.</p>`,
   },
   {

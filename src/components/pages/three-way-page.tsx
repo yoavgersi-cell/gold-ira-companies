@@ -7,19 +7,18 @@ import { type SiteContext, canonicalUrl, hubLink } from "@/lib/site-context";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProviderCta } from "@/components/provider-cta";
 import { TrustpilotRating } from "@/components/trustpilot-rating";
-import { LicensedTelehealthBadge } from "@/components/licensed-badge";
 import { LastUpdated } from "@/components/last-updated";
 import { MedicalSources, TrustDisclosure } from "@/components/medical-sources";
 import { TRIO_FACTS, type ThreeWayComparison } from "@/lib/three-way";
 
 // Matrix rows rendered for every trio - one place to add a row site-wide.
-// Three-way pages are not used on this single-vertical web hosting site (the registry is
-// empty), so this component never renders; the rows are kept generic.
+// Three-way pages are not used on this single-vertical gold IRA site (the registry is
+// empty), so this component never renders.
 const MATRIX_ROWS: { label: string; key: keyof typeof TRIO_FACTS[string] }[] = [
-  { label: "Billing & commitment", key: "billing" },
-  { label: "Shipping", key: "shipping" },
-  { label: "Support", key: "support" },
-  { label: "Guarantee / refund", key: "guarantee" },
+  { label: "Minimum investment", key: "minimum" },
+  { label: "Setup & yearly fees", key: "fees" },
+  { label: "Storage", key: "storage" },
+  { label: "Buyback", key: "buyback" },
   { label: "Standout", key: "standout" },
 ];
 
@@ -29,7 +28,7 @@ export function threeWayMetadata(trio: ThreeWayComparison, ctx: SiteContext): Me
   // bloat on the young hub, so they're noindex,follow (see NOINDEX_WL_BATTLE_SLUGS).
   const isThinNoindex = NOINDEX_WL_BATTLE_SLUGS.has(trio.slug);
   return {
-    title: { absolute: `${trio.metaTitle} | TreatmentsHub` },
+    title: { absolute: `${trio.metaTitle} | Gold IRA Planet` },
     description: trio.description,
     robots: ctx.noindex
       ? { index: false, follow: false }
@@ -134,7 +133,6 @@ export async function ThreeWayPageView({ trio, ctx }: { trio: ThreeWayComparison
                 {p.trustpilotRating && (
                   <TrustpilotRating rating={p.trustpilotRating} reviewCount={p.trustpilotReviewCount} starSize={14} />
                 )}
-                <LicensedTelehealthBadge />
               </div>
               <p className="mb-4 flex-1 text-[13.5px] leading-relaxed text-gray-500">{p.tagline}</p>
               <ProviderCta
@@ -216,7 +214,7 @@ export async function ThreeWayPageView({ trio, ctx }: { trio: ThreeWayComparison
         {relatedBattles.length > 0 && (
           <div className="mb-4">
             <h2 className="mb-1.5 text-[20px] font-bold text-[#191919]">Break it down two at a time</h2>
-            <p className="mb-4 text-[14px] text-gray-500">The head-to-head comparisons between these providers.</p>
+            <p className="mb-4 text-[14px] text-gray-500">The head-to-head comparisons between these companies.</p>
             <div className="grid gap-2.5 sm:grid-cols-3">
               {relatedBattles.map((b) => (
                 <Link

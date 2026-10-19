@@ -5,16 +5,16 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { SITE_ORIGIN, REVIEWERS, reviewerDisplayName, reviewerPath, reviewerPersonSchema } from "@/data/reviewers";
 
 const CANONICAL = `${SITE_ORIGIN}/editorial-policy`;
-const TITLE = "Editorial Policy: How We Research Web Hosting";
+const TITLE = "Editorial Policy: How We Research Gold IRA Companies";
 const DESCRIPTION =
-  "How The Top Web Hosting researches web hosting providers, what we verify, what we do not, how update dates work, and how to report an error.";
-const UPDATED = "2026-10-12";
+  "How Gold IRA Planet researches gold IRA companies and IRA rules, what we verify, what we do not, how update dates work, and how to report an error.";
+const UPDATED = "2026-10-19";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: CANONICAL },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: CANONICAL, type: "article", images: [{ url: "https://www.thetopwebhosting.com/opengraph-image", width: 1200, height: 630 }], },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: CANONICAL, type: "article", images: [{ url: `${SITE_ORIGIN}/opengraph-image`, width: 1200, height: 630 }], },
 };
 
 export default function EditorialPolicyPage() {
@@ -26,8 +26,8 @@ export default function EditorialPolicyPage() {
     name: TITLE,
     description: DESCRIPTION,
     dateModified: UPDATED,
-    isPartOf: { "@type": "WebSite", name: "The Top Web Hosting", url: SITE_ORIGIN },
-    about: { "@type": "Organization", name: "The Top Web Hosting", url: SITE_ORIGIN, employee: REVIEWERS.map(reviewerPersonSchema) },
+    isPartOf: { "@type": "WebSite", name: "Gold IRA Planet", url: SITE_ORIGIN },
+    about: { "@type": "Organization", name: "Gold IRA Planet", url: SITE_ORIGIN, member: REVIEWERS.map(reviewerPersonSchema) },
   };
   const ext = "font-semibold text-[#1E3A5F] hover:underline";
 
@@ -39,9 +39,9 @@ export default function EditorialPolicyPage() {
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Editorial policy" }]} />
           <h1 className="text-[28px] font-extrabold leading-[1.15] text-[#191919] sm:text-[36px]">How we research and check our content</h1>
           <p className="mt-3 max-w-[720px] text-[16px] leading-relaxed text-gray-500">
-            The Top Web Hosting compares web hosting providers and publishes guides on how web hosting work, what
-            they cost and where they fall short. This page says exactly how that content is produced, what we verify,
-            and what we do not.
+            Gold IRA Planet compares gold IRA companies and publishes plain-English guides on how gold IRAs work,
+            what they cost and where buyers get hurt. This page says exactly how that content is produced, what we
+            verify, and what we do not.
           </p>
           <p className="mt-3 text-[13px] text-gray-500">Last updated {UPDATED}</p>
         </div>
@@ -55,7 +55,7 @@ export default function EditorialPolicyPage() {
               {REVIEWERS.map((r) => (
                 <Link key={r.slug} href={reviewerPath(r)} className="flex items-center gap-4 rounded-xl border border-[#E5E5E5] bg-white p-4 transition-colors hover:border-[#B8862B]/40">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={r.image.thumb} alt={r.name} width={56} height={56} className="h-14 w-14 rounded-full object-cover" />
+                  <img src={r.image.thumb} alt={r.name} width={56} height={56} className={`h-14 w-14 ${r.isTeam ? "rounded-lg object-contain" : "rounded-full object-cover"}`} />
                   <span>
                     <span className="block text-[15px] font-bold text-[#191919]">{reviewerDisplayName(r)}</span>
                     <span className="block text-[13px] text-gray-500">{r.jobTitle} · {r.headline}</span>
@@ -69,10 +69,10 @@ export default function EditorialPolicyPage() {
         <section className="mb-10">
           <h2 className="mb-3 text-[24px] font-bold text-[#191919]">What we verify</h2>
           <ul className="list-disc space-y-1.5 pl-5">
-            <li>Plan names, what each plan includes, and the optional add-ons each provider sells.</li>
-            <li>Published pricing: intro prices with the term they require, and renewal rates, as shown on each provider&rsquo;s own site or checkout at our last check.</li>
-            <li>Resource limits, backup schedules, control panels, uptime and money-back guarantees, from each provider&rsquo;s plan pages and terms of service.</li>
-            <li>Customer review figures (Trustpilot) as captured on the date we note next to them.</li>
+            <li>The same fact sheet for every company: minimum investment, setup and yearly fees, storage options, buyback terms, current promotion and years in business.</li>
+            <li>Ratings (BBB, BCA, Trustpilot with review count) as captured on the date we note next to them.</li>
+            <li>Regulator and court actions, only when there is a public record (CFTC, SEC, state attorneys general, court filings).</li>
+            <li>IRA rules - contribution limits, rollovers, eligible metals, storage and RMDs - against IRS publications and the tax code.</li>
             <li>Whether a statement is supported by the source it cites, and whether the source is current.</li>
           </ul>
         </section>
@@ -80,14 +80,16 @@ export default function EditorialPolicyPage() {
         <section className="mb-10">
           <h2 className="mb-3 text-[24px] font-bold text-[#191919]">What we do not verify</h2>
           <p className="mb-3">
-            Web hosting pricing depends on the plan, term length, region and current promotion, and providers change
-            prices often. Every price on this site is an approximate starting point, never a quote. The provider&rsquo;s
-            checkout and terms of service, not our summary, decide what you pay and what you get.
+            Gold IRA companies rarely publish full fee schedules, so many figures come from third-party reviews that
+            often disagree. Every fee and minimum on this site is an approximate snapshot, never a quote, and we cannot
+            see the markup a company will charge on a specific coin or bar on a given day. The company&rsquo;s and
+            custodian&rsquo;s written terms, not our summary, decide what you pay.
           </p>
           <p>
-            Provider rankings and &ldquo;best for&rdquo; verdicts are editorial, produced under the method on{" "}
-            <Link href="/how-we-rank" className={ext}>how we rank</Link>. We may earn a commission from provider links;
-            that never changes a factual statement, a price or a limitation we report.
+            Rankings and &ldquo;best for&rdquo; verdicts are editorial: our editors set the order, under the method on{" "}
+            <Link href="/how-we-rank" className={ext}>how we rank</Link>. Some companies pay us when readers request a
+            kit or open an account through our links. That can affect which companies we list and where, but it never
+            changes a fact, fee, limitation or warning we report.
           </p>
         </section>
 
@@ -96,7 +98,7 @@ export default function EditorialPolicyPage() {
           <p>
             Each review, comparison and guide shows a &ldquo;last updated&rdquo; date. It changes only when the content
             was actually re-checked, never automatically on every page load. We re-check a page when a company changes its
-            plans, prices or terms, or when a reader reports something out of date.
+            fees, minimums or terms, when IRS limits change, or when a reader reports something out of date.
           </p>
         </section>
 
@@ -112,8 +114,9 @@ export default function EditorialPolicyPage() {
         </section>
 
         <p className="text-[13px] leading-relaxed text-gray-500">
-          Nothing on this site is professional advice. Hosting plans, prices and renewal terms vary by provider and
-          change often. Confirm current pricing on the provider&rsquo;s site before you buy.
+          Nothing on this site is financial, tax or legal advice, and Gold IRA Planet is not a broker, dealer or
+          custodian. Fees and minimums vary by account size and custodian and change often. Confirm current terms in
+          writing before you invest.
         </p>
       </div>
     </div>

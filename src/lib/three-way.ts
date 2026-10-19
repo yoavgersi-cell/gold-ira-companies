@@ -1,6 +1,6 @@
 // Three-way brand comparisons (/{a}-vs-{b}-vs-{c}).
 //
-// This standalone web hosting site does not use three-way comparison pages - all
+// This standalone gold IRA site does not use three-way comparison pages - all
 // matchups are two-way battles served at the root. The registry below is kept
 // EMPTY so the shared page templates that import these symbols still compile,
 // while nothing three-way ever renders. The type exports are preserved for the
@@ -10,16 +10,14 @@
 // type-checks against MATRIX_ROWS. TRIO_FACTS is empty, so none of these render.
 export interface TrioFacts {
   id: string;
-  semaglutide: string;
-  tirzepatide: string;
-  billing: string;
-  shipping: string;
-  support: string;
-  guarantee: string;
+  minimum: string;
+  fees: string;
+  storage: string;
+  buyback: string;
   standout: string;
 }
 
-// Empty on this single-vertical web hosting build - no three-way pages are generated.
+// Empty on this single-vertical gold IRA build - no three-way pages are generated.
 export const TRIO_FACTS: Record<string, TrioFacts> = {};
 
 export interface ThreeWayFaq {
@@ -38,7 +36,7 @@ export interface ThreeWayComparison {
   faqs: ThreeWayFaq[];
 }
 
-// Empty registry: no three-way comparisons on this web hosting site.
+// Empty registry: no three-way comparisons on this gold IRA site.
 export const THREE_WAY_COMPARISONS: ThreeWayComparison[] = [];
 
 export const threeWayBySlug = new Map<string, ThreeWayComparison>(

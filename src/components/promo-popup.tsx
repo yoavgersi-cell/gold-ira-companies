@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { trackProviderClick } from "@/lib/analytics";
-import type { PromoPopupSpec } from "@/lib/promo-popups";
+import { PROMO_POPUPS_ENABLED, type PromoPopupSpec } from "@/lib/promo-popups";
 
 const APPEAR_AFTER_MS = 15000;
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -13,15 +13,17 @@ const pad = (n: number) => String(n).padStart(2, "0");
 // the spec carries a timer - overlays a live countdown on its printed timer
 // boxes. Appears at most once per browser session, a few seconds after load.
 // The whole image is a tracked affiliate link; only the X closes it.
-export function PromoPopup({
-  spec,
-  href,
-  position,
-}: {
-  spec: PromoPopupSpec;
-  href: string;
-  position?: number;
-}) {
+//
+// Disabled site-wide on Gold IRA Planet (see PROMO_POPUPS_ENABLED): this
+// wrapper renders nothing, so no popup or countdown can ever appear.
+type PromoPopupProps = { spec: PromoPopupSpec; href: string; position?: number };
+
+export function PromoPopup(props: PromoPopupProps) {
+  if (!PROMO_POPUPS_ENABLED) return null;
+  return <PromoPopupInner {...props} />;
+}
+
+function PromoPopupInner({ spec, href, position }: PromoPopupProps) {
   // `open` mounts the DOM only when the popup is due - before that nothing
   // renders, so the creatives don't download during page load (an <img> that
   // is merely opacity-0 or display:none still downloads and hurts LCP).

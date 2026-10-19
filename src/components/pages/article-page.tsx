@@ -2,26 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock, ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { getConfig } from "@/lib/config-store";
-import { NOINDEX_ARTICLE_SLUGS, latestUpdate, AFFILIATE_PROVIDER_IDS } from "@/lib/config";
-import { PRODUCT_CATALOG } from "@/lib/product-catalog";
+import { NOINDEX_ARTICLE_SLUGS, latestUpdate } from "@/lib/config";
 import { enhanceArticleHtml } from "@/components/prose";
 import { type SiteContext, canonicalUrl, hubLink } from "@/lib/site-context";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { MedicalReviewBar } from "@/components/medical-review-bar";
 import { pageReviewSchema } from "@/data/reviewers";
 import { MedicalSources } from "@/components/medical-sources";
-import { ProductCarousel } from "@/components/product-carousel";
 import { TrustpilotCarousel } from "@/components/trustpilot-carousel";
-import { TopProvidersBlock } from "@/components/top-providers-block";
 import { TopProviderCards } from "@/components/top-provider-cards";
 import { RedditThreadCarousel, REDDIT_COMMUNITY_FEEDBACK } from "@/components/reddit-community";
 import { notFound, permanentRedirect } from "next/navigation";
 
-// Code-side CTR overrides and quick-answer boxes for high-impression articles
-// were a weight-loss-vertical feature (applied only when ctx.vertical ===
-// "weight-loss"). This single-vertical web hosting build keeps the maps empty so
-// the article pages render purely from the config (src/lib/seeds/web-hosting.ts);
-// add an entry here only with real, verified figures if CTR tuning is ever needed.
+// Code-side CTR overrides and quick-answer boxes for high-impression articles,
+// keyed by slug. Empty by default so article pages render purely from the
+// config (src/lib/seeds/gold-ira/articles*.ts); add an entry only with real,
+// verified figures if CTR tuning is ever needed.
 const ARTICLE_SEO_OVERRIDES: Record<string, { title: string; description: string }> = {};
 
 const ARTICLE_QUICK_ANSWERS: Record<string, string> = {};
@@ -34,13 +30,13 @@ export async function articleMetadata(slug: string, ctx: SiteContext): Promise<M
   const url = canonicalUrl(ctx, `/articles/${slug}`);
 
   // CTR override (code-controlled) wins over stored meta for target articles.
-  const override = ctx.vertical === "weight-loss" ? ARTICLE_SEO_OVERRIDES[slug] : undefined;
+  const override = ARTICLE_SEO_OVERRIDES[slug];
 
   const seoTitle = override?.title ?? article.title;
 
   return {
     // Long, query-led titles carry their own keywords; appending the
-    // " | The Top Web Hosting" template suffix would push them past the ~60-character
+    // " | Gold IRA Planet" template suffix would push them past the ~60-character
     // SERP cut-off, so those render as-is.
     title: seoTitle.length > 44 ? { absolute: seoTitle } : seoTitle,
     description: override?.description ?? article.description,
@@ -65,16 +61,12 @@ export async function articleMetadata(slug: string, ctx: SiteContext): Promise<M
 }
 
 const categoryColors: Record<string, string> = {
-  Science: "bg-blue-50 text-blue-700",
-  Guide: "bg-emerald-50 text-emerald-700",
-  Advice: "bg-amber-50 text-amber-700",
-  Wellness: "bg-purple-50 text-purple-700",
-  "Provider Guides": "bg-[#FBF5E6] text-[#1E3A5F]",
+  Guides: "bg-[#FBF5E6] text-[#0F2540]",
+  Rollovers: "bg-sky-50 text-sky-800",
+  "Fees & Costs": "bg-amber-50 text-amber-800",
+  "Rules & Taxes": "bg-emerald-50 text-emerald-800",
+  Safety: "bg-red-50 text-red-800",
 };
-
-// Article categories typed as MedicalWebPage in schema (see the note below).
-// Empty on this web hosting build - no article carries medical content.
-const MEDICAL_CATEGORIES = new Set<string>([]);
 
 function slugifyHeading(heading: string): string {
   return heading
@@ -95,14 +87,6 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
     permanentRedirect(hubLink(ctx, `/${slug}`));
   }
 
-  // Cannibalization consolidation: the generic "best telehealth providers"
-  // article competed with the ranking homepage for the exact query cluster the
-  // homepage should own ("best telehealth weight loss", "best online weight
-  // loss clinic"). Its equity 301s to the homepage instead.
-  if (slug === "best-weight-loss-telehealth-providers") {
-    permanentRedirect(hubLink(ctx, "/"));
-  }
-
   const article = articles.find((a) => a.slug === slug);
   if (!article) return notFound();
 
@@ -110,46 +94,20 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
   const nextArticle = articles[currentIndex + 1] || null;
   const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null;
 
-  // Brand-cluster articles (is-embody-legit, happyhead-cost, ...) carry the
-  // provider id as a slug segment. On those, surface the provider's real
-  // social proof - Trustpilot and Reddit carousels - high on the page.
-  // Exact segment match so "ro" never fires inside "sprout". Trustpilot data
-  // lives on the current vertical's own provider record, so it's safe on any
-  // vertical; the Reddit registry is weight-loss-researched and stays gated
-  // (a shared provider id like directmeds must not inherit those threads).
-  const slugParts = slug.split("-");
-  const subjectProvider = config.providers.find((p) => slugParts.includes(p.id));
-
-  // On a single-brand legitimacy article ("is-<brand>-legit"), the product
-  // carousel should showcase THAT brand only - competitors' products don't
-  // belong on a page about whether this one provider is legit. Guarded so we
-  // only restrict when the subject actually has affiliate catalog products
-  // (otherwise fall back to the full catalog rather than an empty carousel).
+  // Brand-cluster articles (is-goldco-legit, goldco-fees, ...) carry the
+  // company id as a slug prefix. On those, surface the company's real social
+  // proof - Trustpilot and Reddit carousels - high on the page. Verified data
+  // only; companies without it render nothing.
+  const subjectProvider = config.providers.find(
+    (p) => slug.startsWith(`${p.id}-`) || slug.startsWith(`is-${p.id}-`),
+  );
   const isLegitArticle = /^is-.+-legit$/.test(slug);
-  const restrictCarouselToSubject =
-    isLegitArticle &&
-    !!subjectProvider &&
-    PRODUCT_CATALOG.some(
-      (p) => p.providerId === subjectProvider.id && AFFILIATE_PROVIDER_IDS.includes(p.providerId),
-    );
   const subjectTrustpilot =
     subjectProvider?.trustpilotReviews?.length ? subjectProvider : undefined;
   const subjectReddit =
-    ctx.vertical === "weight-loss" && subjectProvider && REDDIT_COMMUNITY_FEEDBACK[subjectProvider.id]
+    subjectProvider && REDDIT_COMMUNITY_FEEDBACK[subjectProvider.id]
       ? subjectProvider
       : undefined;
-
-  // Conversion block: on select high-intent buyer guides that are otherwise all
-  // prose, surface the site's top-ranked providers with the same ranked cards +
-  // CTAs the comparison page uses, high on the page. Gated to specific slugs so
-  // it never leaks onto informational articles.
-  const TOP_PROVIDERS_CRO_SLUGS = new Set(["best-tirzepatide-online"]);
-  const isWeightLoss = ctx.vertical === "weight-loss";
-  const showTopProvidersCro = isWeightLoss && TOP_PROVIDERS_CRO_SLUGS.has(slug);
-  // Every provider-"alternatives" guide (altrx-alternatives, best-ozempic-
-  // alternatives, etc.) gets a CRO block featuring our three GLP-1 partners
-  // (embody, altRx, trimrx) with the same comparison-page cards.
-  const showPartnerCro = isWeightLoss && slug.endsWith("-alternatives");
 
   // Byline author: match the article's author to a team member, else the lead
   const author = experts.find((e) => e.name === article.author) ?? experts[0];
@@ -219,20 +177,18 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
         url: `${ctx.origin}/logo-mark.png`,
       },
     },
-    // Medical guides are typed as a MedicalWebPage so reviewedBy /
-    // lastReviewed sit on the page entity, where schema.org defines them
-    // (they are not Article properties). Provider-business pages (cost,
-    // legitimacy, comparisons) stay a plain WebPage.
+    // reviewedBy / lastReviewed sit on the page entity, where schema.org
+    // defines them (they are not Article properties).
     mainEntityOfPage: {
-      "@type": MEDICAL_CATEGORIES.has(article.category) ? "MedicalWebPage" : "WebPage",
+      "@type": "WebPage",
       "@id": canonicalUrl(ctx, `/articles/${slug}`),
       ...pageReviewSchema(`/articles/${slug}`),
     },
     keywords: [
-      "web hosting",
-      "web hosting providers",
-      "web hosting plans",
-      "web hosting cost",
+      "gold IRA",
+      "gold IRA companies",
+      "precious metals IRA",
+      "retirement savings",
       article.category.toLowerCase(),
       ...article.sections.map((s) => s.heading),
     ],
@@ -364,7 +320,7 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
           )}
           {/* Direct answer up top (featured-snippet target) - code-injected so
               it also covers articles whose body lives in the CMS blob. */}
-          {ctx.vertical === "weight-loss" && ARTICLE_QUICK_ANSWERS[slug] && (
+          {ARTICLE_QUICK_ANSWERS[slug] && (
             <div className="article-body mb-8 text-[16px] leading-[1.75] text-gray-800">
               <div className="qa">
                 <strong>The quick answer</strong>
@@ -422,36 +378,10 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
                   />
                 </section>
 
-                {/* Top-providers conversion block, right after the intro: the
-                    ranked comparison-page cards + CTAs on an otherwise-prose
-                    buyer guide. Gated per slug (see showTopProvidersCro). */}
-                {i === 0 && showTopProvidersCro && (
-                  <TopProvidersBlock
-                    config={config}
-                    linkPrefix={ctx.prefix}
-                    limit={3}
-                    title="Our top 3 tirzepatide providers"
-                    subtitle="Ranked by price, plans and verified reviews - the same cards from our full comparison."
-                  />
-                )}
-
-                {/* Provider-"alternatives" guides: CRO block of our three GLP-1
-                    partners with the comparison-page cards (see showPartnerCro). */}
-                {i === 0 && showPartnerCro && (
-                  <TopProvidersBlock
-                    config={config}
-                    linkPrefix={ctx.prefix}
-                    limit={3}
-                    providerIds={["embody", "altrx", "trimrx"]}
-                    title="Our top-rated GLP-1 providers"
-                    subtitle="Our recommended telehealth providers - the same cards from our full comparison."
-                  />
-                )}
-
-                {/* Subject-provider social proof, high on the page: Trustpilot
+                {/* Subject-company social proof, high on the page: Trustpilot
                     carousel after the first section, Reddit carousel after the
                     second (or first, on very short articles). Verified data
-                    only - providers without it simply render nothing. */}
+                    only - companies without it simply render nothing. */}
                 {i === 0 && subjectTrustpilot && (
                   <div className="my-10">
                     <TrustpilotCarousel
@@ -472,77 +402,25 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
                   </div>
                 )}
 
-                {/* Full-catalog product carousel mid-article (weight-loss only) -
-                    after roughly the halfway section, never at the bottom. */}
-                {ctx.vertical === "weight-loss" &&
-                  i === Math.max(0, Math.ceil(article.sections.length / 2) - 1) && (
-                    <div className="my-10">
-                      <ProductCarousel
-                        providers={config.providers}
-                        onlyProviderIds={
-                          restrictCarouselToSubject && subjectProvider ? [subjectProvider.id] : undefined
-                        }
-                        title={
-                          restrictCarouselToSubject && subjectProvider
-                            ? `Shop ${subjectProvider.name}'s GLP-1 plans`
-                            : "Shop GLP-1 plans by product"
-                        }
-                        subtitle={
-                          restrictCarouselToSubject && subjectProvider
-                            ? `${subjectProvider.name}'s published plans - conditions shown under each price.`
-                            : "Every provider's published plans - cheapest first, conditions under each price."
-                        }
-                        withSchema
-                        pageUrl={canonicalUrl(ctx, `/articles/${slug}`)}
-                      />
-                    </div>
-                  )}
-
-                {/* Editorial callout after 4th section - GLP-1 copy, so
-                    weight-loss articles only (it was leaking onto every
-                    vertical's articles before this gate). */}
-                {ctx.vertical === "weight-loss" && i === 3 && article.sections.length > 4 && (
-                  <div className="my-10 overflow-hidden rounded-xl bg-transparent">
-                    <div className="flex flex-col sm:flex-row">
-                      <div className="flex-1 py-6 pr-6 sm:py-8 sm:pr-8">
-                        <h3 className="mb-3 text-[18px] font-bold leading-tight text-[#1E3A5F] sm:text-[20px]">
-                          What To Know Before Starting GLP-1 Treatment
-                        </h3>
-                        <p className="mb-3 text-[16px] leading-[1.75] text-gray-800">
-                          Before starting GLP-1 treatment, it&apos;s important to understand a few key things. These medications require a prescription from a licensed clinician and aren&apos;t suitable for everyone. Some people may experience side effects, especially during the first few weeks as the body adjusts.
-                        </p>
-                        <p className="mb-3 text-[16px] leading-[1.75] text-gray-800">
-                          GLP-1s also tend to work best when combined with basic lifestyle habits like balanced nutrition and regular physical activity.
-                        </p>
-                        <p className="text-[16px] leading-[1.75] text-gray-800">
-                          That&apos;s why choosing a provider that offers proper medical screening and ongoing follow-up support is essential for both safety and long-term success.
-                        </p>
-                      </div>
-                      <div className="flex items-center justify-center sm:w-[260px] sm:shrink-0">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src="/editorial-injection.png"
-                          alt="Woman preparing GLP-1 weight loss injection"
-                          className="h-[200px] w-full object-cover sm:h-full sm:rounded-r-xl"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Inline provider CTA after 2nd section. Suppressed on
+                {/* Inline company CTA after 2nd section. Suppressed on
                     "is X legit" articles: a trust-check page advertising the
                     reviewed provider's competitors undermines the article's
                     credibility and cannibalizes its own conversion. */}
                 {i === 1 && !/^is-.+-legit$/.test(slug) && topProviders.length > 0 && (
-                  <TopProviderCards
-                    config={config}
-                    limit={3}
-                    linkPrefix=""
-                    pageType="listing"
-                    sourceFlow="main_comparison"
-                  />
+                  <>
+                    <TopProviderCards
+                      config={config}
+                      limit={3}
+                      linkPrefix=""
+                      pageType="listing"
+                      sourceFlow="main_comparison"
+                      title="Top-Rated Gold IRA Companies"
+                    />
+                    <p className="-mt-4 mb-2 text-[12px] text-gray-500">
+                      Some companies listed pay us when you request a kit or open an account through our links.{" "}
+                      <Link href={hubLink(ctx, "/disclaimer")} className="underline">Disclosure</Link>
+                    </p>
+                  </>
                 )}
               </div>
             ))}
@@ -551,18 +429,18 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
           {/* CTA box */}
           <div className="mt-12 rounded-xl border border-gray-200 bg-white p-6 text-center sm:p-8">
             <p className="text-[18px] font-bold text-[#191919]">
-              Ready to compare web hosting providers?
+              Ready to compare gold IRA companies?
             </p>
             <p className="mt-1 text-[14px] text-gray-500">
-              See how top providers stack up on price, performance, and
-              support.
+              See minimums, setup and yearly fees, storage and buyback terms
+              side by side.
             </p>
             <div className="mt-5 flex justify-center">
               <Link
                 href={hubLink(ctx, "/")}
                 className="inline-flex h-[44px] items-center justify-center rounded-lg bg-[#E6D3A3] px-6 text-[14px] font-bold text-[#0F2540] transition-colors hover:bg-[#D9BE7C]"
               >
-                Compare Providers
+                Compare Gold IRA Companies
               </Link>
             </div>
           </div>
@@ -635,28 +513,22 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
             )}
           </div>
 
-          {/* Contextual comparison hub (weight-loss): routes informational
-              readers into the highest-intent comparison pages. Code-injected,
-              so it also renders on articles whose bodies live in the CMS blob. */}
-          {ctx.vertical === "weight-loss" && (
+          {/* Contextual comparison hub: routes informational readers into the
+              head-to-head pages, built from the config's battles. */}
+          {(config.battles ?? []).length > 0 && (
             <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-6 sm:p-7">
-              <h2 className="mb-1 text-[17px] font-bold text-[#191919]">Compare providers head-to-head</h2>
+              <h2 className="mb-1 text-[17px] font-bold text-[#191919]">Compare gold IRA companies head-to-head</h2>
               <p className="mb-4 text-[13.5px] text-gray-500">
-                Real prices, real trade-offs - the comparisons readers use to decide.
+                Minimums, fees, buyback terms and track records, side by side.
               </p>
               <div className="grid gap-2.5 sm:grid-cols-2">
-                {[
-                  { href: "/weight-loss/embody-vs-wellmedr", label: "embody vs wellmedr - $69 vs $59" },
-                  { href: "/weight-loss/altrx-vs-embody", label: "altRx vs embody - $89 vs $69" },
-                  { href: "/weight-loss/healthrx-vs-medvi", label: "HealthRx vs Medvi - prepaid vs monthly" },
-                  { href: "/weight-loss/embody-vs-altrx-vs-wellmedr", label: "The budget trio: embody vs altRx vs wellmedr" },
-                ].map((c) => (
+                {(config.battles ?? []).slice(0, 6).map((b) => (
                   <Link
-                    key={c.href}
-                    href={c.href}
+                    key={b.slug}
+                    href={hubLink(ctx, `/${b.slug}`)}
                     className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-[14px] font-semibold text-[#1E3A5F] transition-colors hover:border-[#B8862B]/30 hover:bg-[#B8862B]/[0.02]"
                   >
-                    <span className="truncate">{c.label}</span>
+                    <span className="truncate">{b.matchupLabel ?? b.title}</span>
                     <ArrowRight className="ml-auto h-3.5 w-3.5 shrink-0" strokeWidth={2} />
                   </Link>
                 ))}

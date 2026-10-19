@@ -30,7 +30,6 @@ import { faqs } from "./gold-ira/faqs";
 //    your tracking links (admin > Providers).
 //  - Every fee, minimum and rating is a third-party snapshot. Confirm on the
 //    company's own site, BBB.org and Trustpilot.
-//  - Logos in /public/logos are text wordmarks. Swap in the official logos.
 //  - No Trustpilot review TEXT is included: none could be verified verbatim.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -82,8 +81,8 @@ export const goldIraConfig: SiteConfig = {
       foundingYear: "2015",
       name: "American Hartford Gold",
       tagline: "Easy 3-step tax-free, penalty-free gold IRA setup",
-      logo: "/logos/american-hartford-gold.svg",
-      smallLogo: "/logos/american-hartford-gold.svg",
+      logo: "/logos/americanhartfordlogo.avif",
+      smallLogo: "/logos/americanhartfordlogo.avif",
       highlights: [
         "100% satisfaction guarantee, 7-day full refund",
         "Lowest price guarantee & no buy-back fees",
@@ -109,8 +108,8 @@ export const goldIraConfig: SiteConfig = {
       foundingYear: "2006",
       name: "Goldco",
       tagline: "Highly-rated specialists have placed over $3.5 billion in gold and silver",
-      logo: "/logos/goldco.svg",
-      smallLogo: "/logos/goldco.svg",
+      logo: "/logos/goldcologo.webp",
+      smallLogo: "/logos/goldcologo.webp",
       highlights: [
         "Limited time: Get up to 10% in bonus silver",
         "Over 8,000 5-star customer reviews",
@@ -133,8 +132,8 @@ export const goldIraConfig: SiteConfig = {
       foundingYear: "2012",
       name: "Augusta Precious Metals",
       tagline: "Ideal for investors with retirement savings of $100K+",
-      logo: "/logos/augusta-precious-metals.svg",
-      smallLogo: "/logos/augusta-precious-metals.svg",
+      logo: "/logos/augustalogo.png",
+      smallLogo: "/logos/augustalogo.png",
       highlights: [
         "Personalized service from start to finish",
         "Rated \u201cMost Transparent Pricing\u201d by Investopedia",
@@ -153,8 +152,8 @@ export const goldIraConfig: SiteConfig = {
       id: "american-gold-and-silver-group",
       name: "American Gold and Silver Group",
       tagline: "Effortless tax & penalty-free gold IRA setup",
-      logo: "/logos/american-gold-and-silver-group.svg",
-      smallLogo: "/logos/american-gold-and-silver-group.svg",
+      logo: "/logos/americangoldgrouplogo.jpeg",
+      smallLogo: "/logos/americangoldgrouplogo.jpeg",
       highlights: [
         "100% satisfaction guarantee & 7 day full refund",
         "Up to $15,000 in free silver",

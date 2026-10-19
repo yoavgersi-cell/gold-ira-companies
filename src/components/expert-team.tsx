@@ -15,7 +15,7 @@ export function ExpertTeam({ experts }: { experts: Expert[] }) {
     <section className="mb-12">
       <h2 className="mb-2 text-[22px] font-bold text-[#191919]">Meet Our Editorial Team</h2>
       <p className="mb-6 max-w-[640px] text-[15px] leading-relaxed text-gray-500">
-        The independent researchers and editors behind our provider comparisons and
+        The researchers and editors behind our gold IRA company comparisons and
         reviews. Every ranking and review is produced and checked by this team.
       </p>
 

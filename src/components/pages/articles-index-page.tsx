@@ -8,11 +8,11 @@ import { VERTICALS } from "@/lib/config";
 import { type SiteContext, canonicalUrl, hubLink } from "@/lib/site-context";
 
 function verticalName(id: string): string {
-  return VERTICALS.find((v) => v.id === id)?.name ?? "Web Hosting";
+  return VERTICALS.find((v) => v.id === id)?.name ?? "Gold IRA";
 }
 
 // Lowercase a vertical name for mid-sentence use while keeping acronyms
-// ("Web Hosting" -> "web hosting").
+// ("Gold IRA" -> "gold IRA").
 function lowerKeepAcronyms(name: string): string {
   return name
     .split(" ")
@@ -24,10 +24,7 @@ export async function articlesIndexMetadata(ctx: SiteContext): Promise<Metadata>
   const url = canonicalUrl(ctx, "/articles");
   const vName = verticalName(ctx.vertical);
   const title = `${vName} Guides & Articles (2026)`;
-  const description =
-    ctx.vertical === "weight-loss"
-      ? `Evidence-based weight loss guides for 2026 - GLP-1 treatment options, verified costs, what to expect, and how to choose the right online provider.`
-      : `Practical ${lowerKeepAcronyms(vName)} guides for 2026 - how hosting works, real costs after renewal, which type you need, and how to choose the right provider.`;
+  const description = `Plain-English ${lowerKeepAcronyms(vName)} guides for 2026 - how gold IRAs work, rollovers, fees and markups, IRS rules, taxes and how to avoid scams.`;
   return {
     title,
     description,
@@ -39,17 +36,17 @@ export async function articlesIndexMetadata(ctx: SiteContext): Promise<Metadata>
       title,
       description,
       url,
-      images: [{ url: "https://www.thetopwebhosting.com/opengraph-image", width: 1200, height: 630 }],
+      images: [{ url: "https://www.goldiraplanet.com/opengraph-image", width: 1200, height: 630 }],
     },
   };
 }
 
 const categoryColors: Record<string, string> = {
-  Science: "bg-blue-50 text-blue-700",
-  Guide: "bg-emerald-50 text-emerald-700",
-  Advice: "bg-amber-50 text-amber-700",
-  Wellness: "bg-purple-50 text-purple-700",
-  "Provider Guides": "bg-[#FBF5E6] text-[#1E3A5F]",
+  Guides: "bg-[#FBF5E6] text-[#0F2540]",
+  Rollovers: "bg-sky-50 text-sky-800",
+  "Fees & Costs": "bg-amber-50 text-amber-800",
+  "Rules & Taxes": "bg-emerald-50 text-emerald-800",
+  Safety: "bg-red-50 text-red-800",
 };
 
 export async function ArticlesIndexView({ ctx }: { ctx: SiteContext }) {
@@ -57,18 +54,9 @@ export async function ArticlesIndexView({ ctx }: { ctx: SiteContext }) {
   const articles = config.articles ?? [];
   const vName = verticalName(ctx.vertical);
 
-  // Standalone in-depth guide pages (custom weight-loss landing pages, not CMS
-  // articles). These only exist for weight-loss, so other verticals show none.
-  const guides =
-    ctx.vertical === "weight-loss"
-      ? [
-          { title: "Weight Loss Pills", href: "/weight-loss-pills", category: "Guide", description: "Oral GLP-1s and FDA-approved prescription pills - and how they compare to injections." },
-          { title: "GLP-1 Pills vs Injections", href: "/glp1-pills-vs-injections", category: "Guide", description: "Results, cost, and convenience compared - which is right for you?" },
-          { title: "Ozempic, Wegovy & Mounjaro Alternatives", href: "/ozempic-alternatives", category: "Guide", description: "The same active ingredients as the big brands - as affordable compounded options through telehealth." },
-          { title: "Retatrutide for Weight Loss", href: "/retatrutide-weight-loss", category: "Science", description: "The triple-agonist drug that hit ~24% in trials - and whether you can get it yet." },
-          { title: "GLP-1 Weight Loss Statistics", href: "/glp1-weight-loss-statistics", category: "Science", description: "Key clinical trial data on how much weight GLP-1 medications produce." },
-        ]
-      : [];
+  // Standalone in-depth guide pages (custom landing pages outside the CMS
+  // articles). None on this site yet; the fee calculator is linked separately.
+  const guides: { title: string; href: string; category: string; description: string }[] = [];
 
   // Head-to-head comparison (battle) pages, with both providers resolved
   const comparisons = (config.battles ?? [])
@@ -96,8 +84,8 @@ export async function ArticlesIndexView({ ctx }: { ctx: SiteContext }) {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     ...pageReviewSchema("/articles"),
-    name: `${vName} Articles - Research, Guides & Expert Insights`,
-    description: `Practical ${lowerKeepAcronyms(vName)} guides - what plans cover, what they cost, and choosing the right company.`,
+    name: `${vName} Guides - Rollovers, Fees, Rules & Scams`,
+    description: `Plain-English ${lowerKeepAcronyms(vName)} guides - how gold IRAs work, what they cost, the IRS rules and how to choose a company.`,
     url: canonicalUrl(ctx, "/articles"),
     mainEntity: {
       "@type": "ItemList",
@@ -132,11 +120,15 @@ export async function ArticlesIndexView({ ctx }: { ctx: SiteContext }) {
         {/* Page header */}
         <div className="mb-10">
           <h1 className="text-[28px] font-bold text-[#191919] sm:text-[36px]">
-            Articles
+            Gold IRA Guides
           </h1>
-          <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-gray-500">
-            Practical {lowerKeepAcronyms(vName)} guides - how hosting works, what it really
-            costs, and how to choose the right provider for your website.
+          <p className="mt-2 max-w-2xl text-[16px] leading-relaxed text-gray-600">
+            Plain-English {lowerKeepAcronyms(vName)} guides - how a gold IRA works, rollovers, what it
+            really costs, the IRS rules and how to spot a scam. Prefer numbers? Try our{" "}
+            <Link href={hubLink(ctx, "/gold-ira-fee-calculator")} className="font-semibold text-[#1E3A5F] underline underline-offset-2">
+              gold IRA fee calculator
+            </Link>
+            .
           </p>
           <MedicalReviewBar path="/articles" className="mt-4 max-w-[760px]" compact />
         </div>
@@ -254,7 +246,7 @@ export async function ArticlesIndexView({ ctx }: { ctx: SiteContext }) {
                 In-Depth Guides
               </h2>
               <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-gray-500">
-                Deeper explainers on medications and options - with side-by-side data.
+                Deeper explainers with side-by-side data.
               </p>
             </div>
 
@@ -294,8 +286,8 @@ export async function ArticlesIndexView({ ctx }: { ctx: SiteContext }) {
                 Head-to-Head Comparisons
               </h2>
               <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-gray-500">
-                Can&apos;t decide between two providers? See how they stack up
-                side by side on pricing, medications, and support - and which one we&apos;d pick.
+                Can&apos;t decide between two companies? See how they stack up side by side on
+                minimums, fees, buyback terms and track record - and which one we&apos;d pick.
               </p>
             </div>
 

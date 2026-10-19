@@ -8,11 +8,11 @@ import { type SiteContext, canonicalUrl, hubLink } from "@/lib/site-context";
 import { RatingBadge } from "@/components/rating-badge";
 
 function verticalName(id: string): string {
-  return VERTICALS.find((v) => v.id === id)?.name ?? "Web Hosting";
+  return VERTICALS.find((v) => v.id === id)?.name ?? "Gold IRA";
 }
 
 // Lowercase a vertical name for mid-sentence use while keeping acronyms
-// ("Web Hosting" -> "web hosting").
+// ("Gold IRA" -> "gold IRA").
 function lowerKeepAcronyms(name: string): string {
   return name
     .split(" ")
@@ -23,7 +23,7 @@ function lowerKeepAcronyms(name: string): string {
 export async function reviewsIndexMetadata(ctx: SiteContext): Promise<Metadata> {
   const url = canonicalUrl(ctx, "/reviews");
   const vName = verticalName(ctx.vertical);
-  // Lead with the vertical's top provider names - generic "Provider Reviews"
+  // Lead with the vertical's top company names - generic "Company Reviews"
   // titles earn no clicks, brand names do.
   const config = await getConfig(ctx.vertical);
   const topNames = config.ranking.providerOrder
@@ -36,11 +36,9 @@ export async function reviewsIndexMetadata(ctx: SiteContext): Promise<Metadata> 
       ? full
       : topNames.length
         ? `${vName} Reviews 2026: ${topNames[0]} & More`
-        : `${vName} Reviews 2026 - Every Provider Tested`;
-  // Weight-loss names the category searchers actually use (GLP-1); other
-  // verticals keep the vertical name.
-  const categoryLabel = ctx.vertical === "weight-loss" ? "GLP-1 weight loss" : lowerKeepAcronyms(vName);
-  const description = `Independent 2026 reviews of ${config.reviews?.length ?? "the top"} ${categoryLabel} companies${topNames.length ? ` - ${topNames.join(", ")} and more` : ""} - with verified ratings, pricing, pros and cons.`;
+        : `${vName} Company Reviews 2026`;
+  const categoryLabel = lowerKeepAcronyms(vName);
+  const description = `Independent 2026 reviews of ${config.reviews?.length ?? "the top"} ${categoryLabel} companies${topNames.length ? ` - ${topNames.join(", ")} and more` : ""} - minimums, fees, buyback terms, ratings, pros and cons.`;
   return {
     title: { absolute: title },
     description,
@@ -52,7 +50,7 @@ export async function reviewsIndexMetadata(ctx: SiteContext): Promise<Metadata> 
       title,
       description,
       url,
-      images: [{ url: "https://www.thetopwebhosting.com/opengraph-image", width: 1200, height: 630 }],
+      images: [{ url: "https://www.goldiraplanet.com/opengraph-image", width: 1200, height: 630 }],
     },
   };
 }
@@ -62,8 +60,8 @@ export async function ReviewsIndexView({ ctx }: { ctx: SiteContext }) {
   const vName = verticalName(ctx.vertical);
   const { providerOrder, positions } = config.ranking;
 
-  // Every review in the CMS is listed. Providers in the homepage ranking come
-  // first (in ranking order, with their score); unranked providers follow.
+  // Every review in the CMS is listed. Companies in the homepage ranking come
+  // first (in ranking order, with their score); unranked companies follow.
   const items = (config.reviews ?? [])
     .map((review) => {
       const provider = config.providers.find((p) => p.id === review.providerId);
@@ -85,7 +83,7 @@ export async function ReviewsIndexView({ ctx }: { ctx: SiteContext }) {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `${vName} Provider Reviews`,
+    name: `${vName} Company Reviews`,
     description: `Expert reviews of top ${lowerKeepAcronyms(vName)} companies.`,
     numberOfItems: items.length,
     itemListElement: items.map(({ review, provider }, i) => ({
@@ -110,7 +108,7 @@ export async function ReviewsIndexView({ ctx }: { ctx: SiteContext }) {
     "@type": "CollectionPage",
     "@id": canonicalUrl(ctx, "/reviews"),
     url: canonicalUrl(ctx, "/reviews"),
-    name: `${vName} Provider Reviews`,
+    name: `${vName} Company Reviews`,
     ...pageReviewSchema("/reviews"),
   };
 
@@ -122,12 +120,12 @@ export async function ReviewsIndexView({ ctx }: { ctx: SiteContext }) {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
         <div className="mb-10 text-center">
           <h1 className="text-3xl font-bold text-[#191919] sm:text-4xl">
-            {vName} Provider Reviews
+            {vName} Company Reviews
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-gray-600">
-            In-depth reviews of the top {lowerKeepAcronyms(vName)} providers.
-            Read our expert analysis of each to find the best fit for your website,
-            budget, and lifestyle.
+            In-depth reviews of {lowerKeepAcronyms(vName)} companies - minimums, setup and yearly
+            fees, storage, buyback terms and complaint history, with the same facts for every
+            company.
           </p>
           <div className="mx-auto mt-5 max-w-[640px] text-left">
             <MedicalReviewBar path="/reviews" compact />
@@ -163,7 +161,7 @@ export async function ReviewsIndexView({ ctx }: { ctx: SiteContext }) {
                   <RatingBadge rating={rating} label={ratingLabel} />
                 ) : (
                   <span className="rounded-full bg-gray-100 px-2.5 py-1 text-[11px] font-semibold text-gray-500">
-                    Expert Review
+                    Editorial Review
                   </span>
                 )}
                 <span className="text-sm font-semibold text-[#191919] group-hover:underline">

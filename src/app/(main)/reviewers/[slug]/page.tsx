@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const r = getReviewer(slug);
   if (!r) return {};
-  const title = `${reviewerDisplayName(r)} - ${r.jobTitle} | The Top Web Hosting`;
+  const title = r.isTeam ? `${r.name} | Gold IRA Planet` : `${reviewerDisplayName(r)} - ${r.jobTitle} | Gold IRA Planet`;
   const description = r.shortBio;
   return {
     title: { absolute: title },
@@ -58,10 +58,10 @@ export default async function ReviewerProfilePage({ params }: { params: Promise<
     "@type": "ProfilePage",
     "@id": reviewerUrl(r),
     url: reviewerUrl(r),
-    name: `${reviewerDisplayName(r)} - ${r.jobTitle}`,
+    name: r.isTeam ? r.name : `${reviewerDisplayName(r)} - ${r.jobTitle}`,
     dateCreated: `${r.since}-01`,
     mainEntity: person,
-    isPartOf: { "@type": "WebSite", name: "The Top Web Hosting", url: SITE_ORIGIN },
+    isPartOf: { "@type": "WebSite", name: "Gold IRA Planet", url: SITE_ORIGIN },
   };
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -92,19 +92,21 @@ export default async function ReviewerProfilePage({ params }: { params: Promise<
                 alt={`${r.name}, ${r.jobTitle}`}
                 width={160}
                 height={160}
-                className="h-[120px] w-[120px] rounded-2xl object-cover sm:h-[160px] sm:w-[160px]"
+                className={`h-[120px] w-[120px] rounded-2xl sm:h-[160px] sm:w-[160px] ${r.isTeam ? "object-contain" : "object-cover"}`}
               />
             </picture>
             <div className="min-w-0">
               <p className="mb-1 flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.06em] text-[#1E3A5F]">
                 <ShieldCheck className="h-4 w-4" strokeWidth={2.25} />
-                Expert reviewer
+                {r.isTeam ? "Editorial team" : "Reviewer"}
               </p>
               <h1 className="text-[28px] font-extrabold leading-[1.15] text-[#191919] sm:text-[34px]">
                 {r.name}
-                <span className="font-semibold text-gray-500">, {r.credentials.join(", ")}</span>
+                {r.credentials.length > 0 && (
+                  <span className="font-semibold text-gray-500">, {r.credentials.join(", ")}</span>
+                )}
               </h1>
-              <p className="mt-1 text-[16px] font-semibold text-[#191919]">{r.jobTitle}, The Top Web Hosting</p>
+              {!r.isTeam && <p className="mt-1 text-[16px] font-semibold text-[#191919]">{r.jobTitle}, Gold IRA Planet</p>}
               <p className="mt-1 text-[15px] leading-relaxed text-gray-500">{r.headline}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {r.licensure.map((c) => (
@@ -139,11 +141,13 @@ export default async function ReviewerProfilePage({ params }: { params: Promise<
       <div className="mx-auto max-w-[900px] px-4 py-10 text-[16px] leading-[1.75] text-gray-800 sm:px-6">
         {/* Scope */}
         <section className="mb-10 rounded-2xl border border-[#FBF5E6] bg-[#FBF5E6]/50 p-6">
-          <h2 className="mb-2 text-[18px] font-bold text-[#191919]">What {r.name.split(" ")[0]} reviews on this site</h2>
+          <h2 className="mb-2 text-[18px] font-bold text-[#191919]">
+            What {r.isTeam ? "the team" : r.name.split(" ")[0]} reviews on this site
+          </h2>
           <p className="text-[15px] leading-[1.75] text-gray-600">{r.scope}</p>
           <p className="mt-2 text-[14px] text-gray-500">
-            Pages she has reviewed carry a dated &ldquo;Reviewed for accuracy&rdquo; line; pages she has not yet
-            reviewed name her as the site&rsquo;s expert reviewer without a review date. The full policy is in{" "}
+            Pages with a logged review carry a dated &ldquo;Editorially reviewed&rdquo; line; other pages name
+            the editor without a review date. The full policy is in{" "}
             <Link href="/editorial-policy" className={ext}>how we review</Link>.
           </p>
         </section>
@@ -157,6 +161,7 @@ export default async function ReviewerProfilePage({ params }: { params: Promise<
         </section>
 
         {/* Credentials and education */}
+        {(r.licensure.length > 0 || r.education.length > 0) && (
         <section className="mb-10">
           <h2 className="mb-4 text-[24px] font-bold text-[#191919]">Credentials and education</h2>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -185,10 +190,12 @@ export default async function ReviewerProfilePage({ params }: { params: Promise<
             ))}
           </div>
         </section>
+        )}
 
         {/* Experience */}
+        {(r.experience.length > 0 || r.specialties.length > 0) && (
         <section className="mb-10">
-          <h2 className="mb-4 text-[24px] font-bold text-[#191919]">Experience</h2>
+          <h2 className="mb-4 text-[24px] font-bold text-[#191919]">{r.experience.length > 0 ? "Experience" : "Focus areas"}</h2>
           <div className="space-y-3">
             {r.experience.map((g) => (
               <div key={g.area} className="rounded-xl border border-[#E5E5E5] bg-white p-4">
@@ -207,10 +214,12 @@ export default async function ReviewerProfilePage({ params }: { params: Promise<
             ))}
           </div>
         </section>
+        )}
 
         <p className="text-[13px] leading-relaxed text-gray-500">
-          Reviewers check factual statements for accuracy. They do not choose providers, set prices or rankings, or
-          take part in commercial partnerships. Nothing on this site is legal, insurance or financial advice.
+          Our editors check factual statements for accuracy and set the ranking order; some companies we list pay us
+          when readers request a kit or open an account. Facts and warnings are the same for every company. Nothing on
+          this site is financial, tax or legal advice, and Gold IRA Planet is not a broker, dealer or custodian.
         </p>
       </div>
     </div>

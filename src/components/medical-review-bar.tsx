@@ -2,13 +2,14 @@ import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
 import { getPageReview, getReviewer, reviewerPath, reviewerPersonJsonLd, type Reviewer } from "@/data/reviewers";
 
-// ───── Expert review bar ─────
-// The one byline that sits under the H1/intro on every content page. Light
-// by design: no card, a 32px portrait, two short lines. Two honest modes,
-// decided by the review log:
-//   - logged:   "Reviewed for accuracy by <name>" + the review date
-//   - unlogged: "Expert reviewer: <name>" - names the site's reviewer as
-//               staff without claiming this page was reviewed.
+// ───── Editorial review bar ─────
+// (File and component names are kept from the template to avoid churn; there
+// is nothing medical here.) The one byline that sits under the H1/intro on
+// every content page. Light by design: no card, a 32px mark, two short lines.
+// Two honest modes, decided by the review log:
+//   - logged:   "Editorially reviewed by <name>" + the review date
+//   - unlogged: "Edited by <name>" - names the site's editorial team without
+//               claiming this page had a dated review.
 // Always links to the reviewer profile and the review policy, and to LinkedIn
 // when a URL is on file. Renders nothing if no reviewer exists.
 //
@@ -32,12 +33,12 @@ function LinkedInMark({ className }: { className?: string }) {
 
 export function MedicalReviewBar({
   path,
-  writer = "The Top Web Hosting Editorial Team",
+  writer = "Gold IRA Planet Editorial Team",
   className = "",
   compact = false,
   schema = true,
 }: {
-  /** Site path used for the review-log lookup, e.g. "/reviews/hostinger". */
+  /** Site path used for the review-log lookup, e.g. "/reviews/goldco". */
   path: string;
   /** Author credit shown alongside the reviewer. */
   writer?: string;
@@ -90,7 +91,7 @@ export function MedicalReviewBar({
           width={size}
           height={size}
           style={{ width: size, height: size }}
-          className="rounded-full object-cover ring-1 ring-[#E5E5E5]"
+          className={`${reviewer.isTeam ? "rounded-md object-contain" : "rounded-full object-cover"} ring-1 ring-[#E5E5E5]`}
           loading="lazy"
           decoding="async"
         />
@@ -99,10 +100,10 @@ export function MedicalReviewBar({
         <p className="text-gray-700">
           <span className={compact ? "" : "block sm:inline"}>
             <ShieldCheck className="mr-1 inline h-[14px] w-[14px] align-[-2px] text-[#B8862B]" strokeWidth={2.25} />
-            {review ? "Reviewed for accuracy by " : "Expert reviewer: "}
+            {review ? "Editorially reviewed by " : "Edited by "}
           </span>
           {nameLink}
-          {!compact && <span className="hidden text-gray-500 sm:inline"> · {reviewer.jobTitle}</span>}
+          {!compact && !reviewer.isTeam && <span className="hidden text-gray-500 sm:inline"> · {reviewer.jobTitle}</span>}
           {linkedin}
           {compact && (
             <span className="text-gray-500">
@@ -125,12 +126,14 @@ export function MedicalReviewBar({
                 {" · "}
               </>
             ) : (
-              <>Reviews this site&rsquo;s content for accuracy · </>
+              <>Fact-checks this site&rsquo;s content · </>
             )}
-            <span className="hidden sm:inline">
-              Written by {writer}
-              {" · "}
-            </span>
+            {writer !== reviewer.name && (
+              <span className="hidden sm:inline">
+                Written by {writer}
+                {" · "}
+              </span>
+            )}
             {policy}
           </p>
         )}

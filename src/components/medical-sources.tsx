@@ -1,10 +1,10 @@
 import { BookOpen } from "lucide-react";
 
 // Authoritative outgoing citations, per vertical. Every entry is a real,
-// verifiable source (company announcements, filings, the providers' own
-// plan and pricing pages) - never invent or approximate a citation. Newest
-// regulatory sources are listed first. Rendered as a "Sources" section on
-// articles, reviews and comparisons so pages visibly ground their claims.
+// stable government or legal-reference page - never invent or approximate a
+// citation. Rendered as a "Sources" section on articles, reviews and
+// comparisons so pages visibly ground their claims. (File and type names are
+// kept from the template to avoid churn; nothing here is medical.)
 export interface MedicalSource {
   label: string;
   publisher: string;
@@ -12,41 +12,46 @@ export interface MedicalSource {
 }
 
 export const SOURCES_BY_VERTICAL: Record<string, MedicalSource[]> = {
-  "web-hosting": [
+  "gold-ira": [
     {
-      label: "Hostinger hosting plans",
-      publisher: "Hostinger",
-      href: "https://www.hostinger.com/web-hosting",
+      label: "Retirement topics - IRA contribution limits",
+      publisher: "Internal Revenue Service",
+      href: "https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-ira-contribution-limits",
     },
     {
-      label: "Bluehost shared hosting plans",
-      publisher: "Bluehost",
-      href: "https://www.bluehost.com/hosting/shared",
+      label: "Publication 590-A: Contributions to Individual Retirement Arrangements (IRAs)",
+      publisher: "Internal Revenue Service",
+      href: "https://www.irs.gov/publications/p590a",
     },
     {
-      label: "Hosting.com web hosting",
-      publisher: "Hosting.com",
-      href: "https://hosting.com/",
+      label: "Publication 590-B: Distributions from Individual Retirement Arrangements (IRAs)",
+      publisher: "Internal Revenue Service",
+      href: "https://www.irs.gov/publications/p590b",
     },
     {
-      label: "Domain.com web hosting",
-      publisher: "Domain.com",
-      href: "https://www.domain.com/hosting",
+      label: "26 U.S. Code § 408 - Individual retirement accounts",
+      publisher: "Legal Information Institute, Cornell Law School",
+      href: "https://www.law.cornell.edu/uscode/text/26/408",
     },
     {
-      label: "BigRock web hosting",
-      publisher: "BigRock",
-      href: "https://www.bigrock.in/web-hosting",
+      label: "10 Things to Ask Before Buying Physical Gold, Silver, or Other Metals",
+      publisher: "Commodity Futures Trading Commission (CFTC)",
+      href: "https://www.cftc.gov/LearnAndProtect/AdvisoriesAndArticles/Metals10Things.html",
     },
     {
-      label: "Network Solutions web hosting",
-      publisher: "Network Solutions",
-      href: "https://www.networksolutions.com/",
+      label: "CFTC, SEC and states charge Red Rock Secured in precious metals fraud",
+      publisher: "Commodity Futures Trading Commission (CFTC)",
+      href: "https://www.cftc.gov/PressRoom/PressReleases/8704-23",
     },
     {
-      label: "UltaHost shared hosting",
-      publisher: "UltaHost",
-      href: "https://ultahost.com/",
+      label: "Investor Alert: Self-Directed IRAs and the Risk of Fraud",
+      publisher: "U.S. Securities and Exchange Commission (Investor.gov)",
+      href: "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-alerts/investor-27",
+    },
+    {
+      label: "FTC's Endorsement Guides: What People Are Asking",
+      publisher: "Federal Trade Commission",
+      href: "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
     },
   ],
 };
@@ -66,9 +71,10 @@ export function MedicalSources({ vertical }: { vertical: string }) {
         </h2>
       </div>
       <p className="mb-4 text-[13px] leading-relaxed text-gray-500">
-        Ownership facts on this page come from public records and company announcements. Pricing,
-        plan and policy details come from each provider&apos;s published information. This content is
-        for information only - always confirm current pricing and renewal terms before buying a plan.
+        IRA rules and limits on this page come from the IRS and the tax code; scam warnings come from
+        federal regulators. Company fees and terms are approximate third-party snapshots. This content
+        is general information, not financial, tax or legal advice - always confirm current fees and
+        terms in writing with the company and your custodian before you invest.
       </p>
       <ol className="space-y-2">
         {sources.map((s, i) => (
@@ -94,17 +100,18 @@ export function MedicalSources({ vertical }: { vertical: string }) {
 
 // One-line affiliate disclosure under the byline, above the first affiliate
 // link (FTC: clear, conspicuous, before the links). Deliberately compact - the
-// "not medical advice" disclaimer lives once at the bottom of these pages
+// "not financial advice" disclaimer lives once at the bottom of these pages
 // (SourcesMethodology footer, or the MedicalSources intro below) instead of
 // being repeated here.
 export function TrustDisclosure({ disclaimerHref }: { disclaimerHref: string }) {
   return (
     <p className="mt-2.5 max-w-[720px] text-[11.5px] leading-[1.55] text-gray-500 sm:mt-3 sm:text-[12px]">
-      We may earn a commission from links on this page - it never affects our rankings (
+      Some companies on this page pay us when you request a kit or open an account through our
+      links. This can affect which companies we list and where, but not the facts we publish (
       <a href={disclaimerHref} className="font-medium text-[#1E3A5F] hover:underline">
-        how we stay objective
+        our disclosure
       </a>
-      ).
+      ). Not financial advice.
     </p>
   );
 }

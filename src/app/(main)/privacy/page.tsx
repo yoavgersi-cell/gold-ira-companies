@@ -4,11 +4,11 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How The Top Web Hosting (thetopwebhosting.com) collects, uses, and protects your information, including analytics, cookies, and affiliate tracking.",
-  alternates: { canonical: "https://www.thetopwebhosting.com/privacy" },
+    "How Gold IRA Planet (goldiraplanet.com) collects, uses, and protects your information, including analytics, cookies, and affiliate tracking.",
+  alternates: { canonical: "https://www.goldiraplanet.com/privacy" },
 };
 
-const UPDATED = "September 2026";
+const UPDATED = "October 2026";
 
 export default function PrivacyPage() {
   return (
@@ -17,11 +17,12 @@ export default function PrivacyPage() {
       <p className="mb-6 text-sm text-gray-500">Last updated: {UPDATED}</p>
       <div className="space-y-4 text-gray-600 leading-relaxed">
         <p>
-          This Privacy Policy explains how The Top Web Hosting (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;),
-          operating the website thetopwebhosting.com, collects, uses, and shares information when you
-          visit our site. The Top Web Hosting is an independent publisher that compares web
-          hosting providers; we are not a web hosting provider and do not sell
-          hosting directly.
+          This Privacy Policy explains how Gold IRA Planet (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;),
+          operating the website goldiraplanet.com, collects, uses, and shares information when you
+          visit our site. Gold IRA Planet is an independent publisher that compares gold IRA
+          companies; we are not a broker, dealer or custodian, and we do not sell precious metals or
+          open accounts. We never ask for your account numbers, Social Security number or retirement
+          account login.
         </p>
 
         <h2 className="pt-4 text-xl font-semibold text-[#191919]">Information We Collect</h2>
@@ -51,7 +52,7 @@ export default function PrivacyPage() {
             include the Meta Pixel) to understand the effectiveness of our content.
           </li>
           <li>
-            <strong>Affiliate tracking</strong> - when you click an outbound link to a provider, our
+            <strong>Affiliate tracking</strong> - when you click an outbound link to a company, our
             affiliate partners may set cookies to attribute a referral to us.
           </li>
         </ul>
@@ -71,15 +72,17 @@ export default function PrivacyPage() {
         <h2 className="pt-4 text-xl font-semibold text-[#191919]">How Information Is Shared</h2>
         <p>
           We do not sell your personal information. We may share information with service providers who
-          help us operate the site (such as analytics and hosting providers), and with affiliate
+          help us operate the site (such as analytics and website infrastructure providers), and with affiliate
           networks that attribute referrals. These third parties process data under their own privacy
           policies. We may also disclose information if required by law.
         </p>
 
         <h2 className="pt-4 text-xl font-semibold text-[#191919]">Affiliate Links</h2>
         <p>
-          This site contains affiliate links. When you click a link to a provider and take a qualifying
-          action, we may earn a commission at no additional cost to you. See our{" "}
+          This site contains affiliate links. When you click a link to a gold IRA company and take a
+          qualifying action (such as requesting a kit, scheduling a call or opening an account), we may
+          earn a commission at no additional cost to you. Information you give that company is collected
+          by the company under its own privacy policy, not ours. See our{" "}
           <Link href="/disclaimer" className="font-semibold text-[#1E3A5F] hover:underline">disclosure</Link>{" "}
           for details. We do not control, and are not responsible for, the privacy practices of the
           third-party sites you visit through these links - please review their policies.
@@ -116,8 +119,8 @@ export default function PrivacyPage() {
         <h2 className="pt-4 text-xl font-semibold text-[#191919]">Contact Us</h2>
         <p>
           Questions about this policy or your data? Email us at{" "}
-          <a href="mailto:privacy@thetopwebhosting.com" className="font-semibold text-[#1E3A5F] hover:underline">
-            privacy@thetopwebhosting.com
+          <a href="mailto:contact@goldiraplanet.com" className="font-semibold text-[#1E3A5F] hover:underline">
+            contact@goldiraplanet.com
           </a>{" "}
           or visit our{" "}
           <Link href="/contact" className="font-semibold text-[#1E3A5F] hover:underline">contact page</Link>.

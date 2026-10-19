@@ -2,7 +2,7 @@ import { MedicalReviewBar } from "@/components/medical-review-bar";
 import { pageReviewSchema } from "@/data/reviewers";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ClipboardCheck, Database, ShieldCheck, Scale, Trophy, RefreshCw, Check, X } from "lucide-react";
+import { ClipboardCheck, Database, ShieldCheck, Scale, Trophy, RefreshCw, Check, X, HandCoins } from "lucide-react";
 import { getConfig } from "@/lib/config-store";
 import { ExpertTeam } from "@/components/expert-team";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -11,60 +11,65 @@ import { CONTENT_LAST_UPDATED } from "@/lib/config";
 
 export const revalidate = 60;
 
-const CANONICAL = "https://www.thetopwebhosting.com/how-we-rank";
+const ORIGIN = "https://www.goldiraplanet.com";
+const CANONICAL = `${ORIGIN}/how-we-rank`;
 
 export const metadata: Metadata = {
-  title: { absolute: "How We Rank Web Hosting Providers | The Top Web Hosting" },
+  title: { absolute: "How We Rank Gold IRA Companies | Gold IRA Planet" },
   description:
-    "How we rank web hosting providers: the 6 factors we score, where our data comes from, how we verify intro and renewal prices, and how we pick comparison winners.",
+    "How we compare gold IRA companies: minimums, setup and yearly fees, price transparency, buyback terms, storage, track record and regulator actions - and how we make money.",
   alternates: { canonical: CANONICAL },
   openGraph: {
-    title: "How We Rank & Review Web Hosting Providers - Our Methodology",
+    title: "How We Rank & Review Gold IRA Companies - Our Methodology",
     description:
-      "The factors we score, where our data comes from, how we verify accuracy, and how we pick winners in our web hosting comparisons.",
+      "The facts we collect for every gold IRA company, where they come from, who sets the ranking order and how we are paid.",
     url: CANONICAL,
     type: "article",
-    images: [{ url: "https://www.thetopwebhosting.com/opengraph-image", width: 1200, height: 630 }],
+    images: [{ url: `${ORIGIN}/opengraph-image`, width: 1200, height: 630 }],
   },
 };
 
+// The fact sheet collected for every company - identical fields for partners
+// and non-partners (see src/lib/seeds/gold-ira/shared.ts).
 const FACTORS = [
-  { category: "Pricing & Value", weight: "25%", desc: "Intro prices and the term they require, renewal rates, add-on costs and how transparent pricing is before checkout - measured against what each plan actually includes." },
-  { category: "Performance & Reliability", weight: "20%", desc: "Storage type (NVMe vs SSD), web server and caching technology, data center locations, uptime guarantees and any public outage history." },
-  { category: "Features & Inclusions", weight: "20%", desc: "Free domain, SSL, email and backups, number of websites, storage allowances, control panel and one-click WordPress tools." },
-  { category: "Customer Reputation", weight: "15%", desc: "Trustpilot ratings and volume, recurring complaint patterns, ownership and years in business." },
-  { category: "Support", weight: "10%", desc: "24/7 live chat and phone availability, response quality, knowledge base depth and free migration help." },
-  { category: "Flexibility & Terms", weight: "10%", desc: "Range of hosting types to grow into (cloud, VPS, dedicated), monthly vs multi-year billing, and money-back and cancellation terms." },
+  { category: "Minimum investment", desc: "The smallest IRA balance or purchase the company accepts. It is the first filter for most readers, so it sits at the top of every comparison." },
+  { category: "Setup and yearly fees", desc: "One-time setup or application fees, yearly custodian or admin fees and storage fees - and whether they are charged by the company or the custodian." },
+  { category: "Fee and price transparency", desc: "Whether the company publishes its fees and metal prices online, or will state its markup in writing before you pay." },
+  { category: "Buyback terms", desc: "What the company says about buying your metal back - a written guarantee, a program, or \"in practice\" only - and any liquidation fee." },
+  { category: "Storage options", desc: "Which approved depositories the company works with, and whether segregated storage is offered." },
+  { category: "Years in business", desc: "How long the company has been operating, as reported." },
+  { category: "BBB, BCA and Trustpilot ratings", desc: "Better Business Bureau and Business Consumer Alliance ratings, and Trustpilot score with its review count - always as a dated snapshot." },
+  { category: "Regulator and court actions", desc: "Actions by the CFTC, SEC, state attorneys general or courts that we can find in public records. Rumors without a record are not reported as fact." },
 ];
 
 const METHOD_FAQS = [
   {
-    question: "How often are prices updated?",
+    question: "Who decides the ranking order?",
     answer:
-      "Whenever a provider changes its published rates or plans. Hosting prices depend on the plan, term length, region and current promotion, so every figure on this site is an approximate starting point taken at our last check - always shown with its term and, where known, its renewal rate.",
+      "Our editors. We weigh the facts above, but the final order is an editorial judgment, not the output of a formula. Some companies we list pay us, and that can affect which companies appear and where. We say so on every page with affiliate links.",
   },
   {
-    question: "Does affiliate status affect scores or rankings?",
+    question: "Does being a paying partner change the facts you publish?",
     answer:
-      "Partnerships can affect how companies are displayed, but never the facts we report - renewal prices, limits, upsells and ratings are stated the same way for partners and non-partners, including mixed or poor customer records.",
+      "No. Minimums, fees, buyback terms, ratings and regulator actions are stated the same way for every company, paying or not - including complaints, high minimums and fees a company does not publish.",
   },
   {
-    question: "Why do some companies show no customer rating on your pages?",
+    question: "How current are the fees and minimums?",
     answer:
-      "Because we could not confirm one, and we never invent or estimate a score. Where no reliable aggregate exists, our pages say so and rely on the provider's published plan details instead.",
+      "They are dated snapshots, mostly from third-party reviews, because gold IRA companies rarely publish full fee schedules. Sources often disagree, so we show ranges and label figures as approximate. Always confirm current fees, minimums and the markup on your metals in writing before you invest.",
   },
   {
-    question: "How do you compare pricing between companies?",
+    question: "Why don't you show the markup for each company?",
     answer:
-      "On the same basis wherever possible: a comparable plan tier, the term length the price requires, and the renewal rate that follows. A plan that is cheapest for the first term can be the most expensive over three or four years, so we always show both.",
+      "Because almost no company publishes it, and it varies by product and by day. We explain how markups work and what to ask in our fee guide instead of guessing a number.",
   },
 ];
 
 const SOURCES = [
-  { icon: Database, title: "The companies' own materials", desc: "Plans, intro and renewal pricing, resource limits and policies come from each provider's website, checkout flow and terms of service - so what you read here matches what you'll see when you buy." },
-  { icon: ClipboardCheck, title: "Customer reviews and complaints", desc: "We read Trustpilot and other review platforms to gauge real-world experience - speed, uptime, billing and support quality - not just marketing claims." },
-  { icon: Scale, title: "In-house research", desc: "Our editors walk each provider's checkout, compare plans side by side at the same term length, and track how offers and renewal prices change over time." },
-  { icon: ShieldCheck, title: "Public records and industry news", desc: "Hosting brands change hands often. We track acquisitions, rebrands, data incidents and policy changes - and report only what we can verify." },
+  { icon: Database, title: "Company materials", desc: "Published fees, minimums, promotions, buyback and storage policies from each company's own site and disclosures, where available." },
+  { icon: ClipboardCheck, title: "Third-party reviews and ratings", desc: "Fee and minimum snapshots from established review sites, plus BBB, BCA and Trustpilot profiles. Where sources disagree, we show the range." },
+  { icon: Scale, title: "Government and legal sources", desc: "IRS publications and the tax code for IRA rules, and CFTC, SEC and state regulator releases for enforcement actions and investor alerts." },
+  { icon: ShieldCheck, title: "Public records", desc: "Court filings and settlements that we can verify. We do not repeat lawsuit rumors that have no record behind them." },
 ];
 
 export default async function HowWeRankPage() {
@@ -74,19 +79,19 @@ export default async function HowWeRankPage() {
   const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "How We Rank & Review Web Hosting Providers - Our Methodology",
+    name: "How We Rank & Review Gold IRA Companies - Our Methodology",
     description:
-      "Our full methodology for ranking and reviewing web hosting providers: the factors we score, where our data comes from, how we verify accuracy, and how we pick winners.",
+      "The facts we collect for every gold IRA company, where they come from, who sets the ranking order and how we are paid.",
     url: CANONICAL,
     ...pageReviewSchema("/how-we-rank"),
-    publisher: { "@type": "Organization", name: "thetopwebhosting.com", url: "https://www.thetopwebhosting.com" },
+    publisher: { "@type": "Organization", name: "Gold IRA Planet", url: ORIGIN },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.thetopwebhosting.com" },
+      { "@type": "ListItem", position: 1, name: "Home", item: ORIGIN },
       { "@type": "ListItem", position: 2, name: "How We Rank", item: CANONICAL },
     ],
   };
@@ -112,12 +117,11 @@ export default async function HowWeRankPage() {
         <div className="mx-auto max-w-[900px] px-4 py-12 sm:px-6 sm:py-16">
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "How We Rank" }]} />
           <h1 className="text-[28px] font-extrabold text-[#191919] sm:text-[36px]">
-            How We Rank &amp; Review Providers
+            How We Rank &amp; Review Gold IRA Companies
           </h1>
-          <p className="mt-3 max-w-[640px] text-[16px] leading-relaxed text-gray-500">
-            Every review and head-to-head comparison on this site is built on the same
-            repeatable, price-and-terms-first process. Here&rsquo;s exactly how we evaluate each
-            web hosting provider, where our information comes from, and how we keep it accurate.
+          <p className="mt-3 max-w-[640px] text-[17px] leading-relaxed text-gray-600">
+            Every review and comparison on this site uses the same fact sheet for every company. Here is
+            what we collect, where it comes from, who decides the order - and how we get paid.
           </p>
           <LastUpdated date={CONTENT_LAST_UPDATED} className="mt-4" />
           <MedicalReviewBar path="/how-we-rank" className="mt-4 max-w-[760px]" />
@@ -125,100 +129,94 @@ export default async function HowWeRankPage() {
       </div>
 
       <div className="mx-auto max-w-[900px] px-4 py-10 sm:px-6">
+        {/* Honest summary up top */}
+        <section className="mb-12 rounded-2xl border border-[#B8862B]/30 bg-[#FBF5E6] p-6">
+          <div className="flex items-start gap-4">
+            <HandCoins className="mt-0.5 h-6 w-6 shrink-0 text-[#B8862B]" strokeWidth={2} />
+            <div className="space-y-3 text-[16px] leading-[1.75] text-gray-700">
+              <p>
+                <strong className="text-[#191919]">The ranking order is set by our editors, and some
+                companies pay us.</strong> When you request a kit or open an account through our links, a
+                company may pay us. That can affect which companies we list and where they appear.
+              </p>
+              <p>
+                <strong className="text-[#191919]">The facts are the same for every company.</strong>{" "}
+                Minimums, fees, buyback terms, ratings and regulator actions are reported identically for
+                companies that pay us and companies that do not.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Factors */}
         <section className="mb-12">
-          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">The 6 factors we score</h2>
-          <p className="mb-6 text-[16px] leading-[1.75] text-gray-600">
-            We rate every provider on a weighted evaluation across six core categories. The
-            weighting reflects what matters most over the life of your website, not just on day one.
+          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">What we compare</h2>
+          <p className="mb-6 text-[17px] leading-[1.75] text-gray-600">
+            For every company we collect the same eight things and date them:
           </p>
-          <div className="space-y-4">
-            {FACTORS.map(({ category, weight, desc }) => (
+          <div className="space-y-3">
+            {FACTORS.map(({ category, desc }) => (
               <div key={category} className="flex gap-4 rounded-lg border border-gray-200 bg-white p-4">
-                <span className="shrink-0 rounded bg-[#E6D3A3] px-2.5 py-1 text-[12px] font-bold text-[#0F2540]">{weight}</span>
+                <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#B8862B]" strokeWidth={2.5} />
                 <div>
-                  <p className="text-[14px] font-bold text-[#191919]">{category}</p>
-                  <p className="mt-0.5 text-[13px] text-gray-500">{desc}</p>
+                  <p className="text-[15px] font-bold text-[#191919]">{category}</p>
+                  <p className="mt-0.5 text-[14px] leading-relaxed text-gray-600">{desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Price verification protocol */}
+        {/* What moves our view */}
         <section className="mb-12">
-          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">How we verify prices</h2>
-          <p className="mb-4 text-[16px] leading-[1.75] text-gray-600">
-            Every price on this site comes from each provider&rsquo;s own published rates or checkout,
-            and we record four things for each one: the plan tier, the term length the price requires,
-            the renewal rate that follows, and the currency or region used. A number is never published
-            without its condition.
-          </p>
-          <p className="text-[16px] leading-[1.75] text-gray-600">
-            When a provider changes its published pricing, we re-verify against its site and every
-            affected page - reviews, head-to-heads and cost guides - is revised, with the
-            &ldquo;last updated&rdquo; date refreshed so you always know how current a figure is.
-          </p>
-        </section>
-
-        {/* What moves a score - the published rubric */}
-        <section className="mb-12">
-          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">What earns points - and what costs them</h2>
-          <p className="mb-4 text-[16px] leading-[1.75] text-gray-600">
-            Within the six weighted factors, these are the specific signals that consistently move a
-            provider up or down in our evaluations:
-          </p>
+          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">What counts in a company&rsquo;s favor - and against it</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50/40 p-5">
               <p className="mb-3 flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.06em] text-emerald-700">
-                <Check className="h-4 w-4" strokeWidth={2.5} /> Earns points
+                <Check className="h-4 w-4" strokeWidth={2.5} /> In its favor
               </p>
-              <ul className="space-y-2 text-[14px] leading-relaxed text-gray-800">
-                <li>Renewal prices shown clearly before checkout</li>
-                <li>A large, public customer record (review volume + score)</li>
-                <li>Automatic backups and free SSL included on entry plans</li>
-                <li>NVMe storage, modern caching and a choice of data centers</li>
-                <li>24/7 live support and free site migration</li>
-                <li>Clean exit terms: a 30-day+ money-back guarantee and easy cancellation</li>
+              <ul className="space-y-2 text-[15px] leading-relaxed text-gray-800">
+                <li>Fees and prices published online</li>
+                <li>Willingness to state the markup in writing</li>
+                <li>A clear buyback policy</li>
+                <li>A long track record and strong, high-volume ratings</li>
+                <li>A clean regulator and court record</li>
+                <li>No-pressure sales and real education</li>
               </ul>
             </div>
             <div className="rounded-2xl border border-amber-200 bg-amber-50/40 p-5">
               <p className="mb-3 flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.06em] text-amber-700">
-                <X className="h-4 w-4" strokeWidth={2.5} /> Costs points
+                <X className="h-4 w-4" strokeWidth={2.5} /> Against it
               </p>
-              <ul className="space-y-2 text-[14px] leading-relaxed text-gray-800">
-                <li>Promotions with conditions buried in the fine print - we publish the condition next to every promo</li>
-                <li>No published review aggregate - noted plainly in the review</li>
-                <li>Renewal jumps that are hard to find before you pay</li>
-                <li>Pre-ticked paid add-ons and aggressive upsells at checkout</li>
-                <li>Backups or SSL sold as extras on entry plans</li>
-                <li>A weak or mixed published review record - we cite the real number even for partners</li>
+              <ul className="space-y-2 text-[15px] leading-relaxed text-gray-800">
+                <li>Fees available only on a sales call</li>
+                <li>Pushing &quot;premium&quot;, proof or numismatic coins</li>
+                <li>&quot;Free silver&quot; or &quot;no fee&quot; offers paid for through higher coin prices</li>
+                <li>Recurring complaints about pricing or buybacks</li>
+                <li>Regulator actions or court judgments</li>
+                <li>Claims of being &quot;IRS-approved&quot; or promises of returns</li>
               </ul>
             </div>
           </div>
         </section>
 
-        {/* Integrity rules - the house rules the content actually runs on */}
+        {/* Integrity rules */}
         <section className="mb-12">
-          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">Our review-integrity rules</h2>
+          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">Our integrity rules</h2>
           <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
-            <div className="divide-y divide-gray-100 text-[14.5px] leading-[1.75] text-gray-600">
-              <p className="p-5"><strong className="text-[#191919]">No invented ratings, ever.</strong> If a provider has no published customer-rating aggregate, our pages say exactly that - we never estimate or fabricate a score. Partner status doesn&rsquo;t change this: we openly discuss a partner&rsquo;s mixed reviews when that&rsquo;s the record.</p>
-              <p className="p-5"><strong className="text-[#191919]">Every promo carries its regular rate.</strong> Promotional prices are always published alongside the regular rate and the condition (&ldquo;annual plan only&rdquo;, &ldquo;first year&rdquo;, &ldquo;48-month term&rdquo;), so a discounted headline never hides what you&rsquo;ll actually pay.</p>
-              <p className="p-5"><strong className="text-[#191919]">Customer quotes are verified, not scraped.</strong> We quote customer reviews only when we have the real text, name and date as published - never paraphrases presented as quotes, and complaints included alongside praise.</p>
-              <p className="p-5"><strong className="text-[#191919]">Feature claims cite the provider.</strong> Resource limits, backup schedules, guarantees and refund terms come from each provider&rsquo;s published plan pages or terms of service - never from ad copy.</p>
-              <p className="p-5"><strong className="text-[#191919]">We don&rsquo;t republish what we can&rsquo;t verify.</strong> Claims circulating about providers - regulatory actions, corporate relationships - appear on our pages only after independent verification, no matter who they help or hurt.</p>
+            <div className="divide-y divide-gray-100 text-[15px] leading-[1.75] text-gray-600">
+              <p className="p-5"><strong className="text-[#191919]">No invented figures.</strong> If we cannot find a fee or rating, the page says so. Where sources disagree, we show the range and label it approximate.</p>
+              <p className="p-5"><strong className="text-[#191919]">No fake reviews or social proof.</strong> We quote customer reviews only verbatim and linked to the source, and we never publish invented testimonials, &quot;people viewing now&quot; counters or countdown timers.</p>
+              <p className="p-5"><strong className="text-[#191919]">Every promotion carries its condition.</strong> Fee waivers and free-metal offers are shown with the account size they require.</p>
+              <p className="p-5"><strong className="text-[#191919]">Rules come from the source.</strong> Contribution limits, rollover rules, eligible metals, storage rules and RMDs are checked against IRS publications and the tax code.</p>
+              <p className="p-5"><strong className="text-[#191919]">We don&rsquo;t repeat what we can&rsquo;t verify.</strong> Lawsuits and regulator actions appear only when there is a public record, no matter who they help or hurt.</p>
             </div>
           </div>
         </section>
 
         {/* Data sources */}
         <section className="mb-12">
-          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">Where our data comes from</h2>
-          <p className="mb-6 text-[16px] leading-[1.75] text-gray-600">
-            Our evaluations only carry weight if the underlying information is real. We draw
-            on four sources for every company:
-          </p>
+          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">Where our information comes from</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {SOURCES.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="rounded-xl border border-gray-200 bg-white p-5">
@@ -226,63 +224,34 @@ export default async function HowWeRankPage() {
                   <Icon className="h-5 w-5 text-[#1E3A5F]" strokeWidth={1.5} />
                 </div>
                 <h3 className="mb-1 text-[15px] font-bold text-[#191919]">{title}</h3>
-                <p className="text-[13px] leading-relaxed text-gray-500">{desc}</p>
+                <p className="text-[14px] leading-relaxed text-gray-600">{desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Accuracy commitment */}
+        {/* Scores */}
         <section className="mb-12">
-          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">How we keep it accurate</h2>
-          <div className="rounded-xl border border-gray-200 bg-white p-6">
-            <div className="space-y-4 text-[15px] leading-[1.75] text-gray-600">
-              <p>
-                <strong className="text-[#191919]">We don&rsquo;t make things up.</strong> Prices,
-                plans, limits and policies are taken from each company&rsquo;s own official sources.
-                We don&rsquo;t invent figures, name features a provider doesn&rsquo;t offer, or
-                attach claims that aren&rsquo;t supported.
-              </p>
-              <p>
-                <strong className="text-[#191919]">We update when providers change.</strong> Pricing
-                and offerings in this space move quickly. When a provider changes its plans, we revise
-                the affected reviews and comparisons and refresh their &ldquo;last updated&rdquo; date.
-              </p>
-              <p>
-                <strong className="text-[#191919]">We separate fact from experience.</strong> Objective
-                details (price, renewal, features) are reported as fact; customer sentiment is
-                clearly attributed to reviews; and our own take is presented as editorial analysis.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Scoring */}
-        <section className="mb-12">
-          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">How scoring works</h2>
-          <p className="text-[16px] leading-[1.75] text-gray-600">
-            Each provider earns an overall score on a 10-point scale, translated into a plain-English
-            label - from <strong className="text-[#191919]">Exceptional</strong> at the top through{" "}
-            <strong className="text-[#191919]">Excellent</strong> and{" "}
-            <strong className="text-[#191919]">Very Good</strong>. A score reflects the weighted result
-            across the six factors above. Transparent pricing, generous included features, and
-            consistently positive recent customer feedback move a score up; hidden renewal jumps, paid-only backups,
-            or recurring billing and support complaints move it down.
+          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">What our ratings mean</h2>
+          <p className="text-[17px] leading-[1.75] text-gray-600">
+            The score out of 10 next to each company is our editorial rating, tied to its position in our
+            ranking. It summarizes our view of the facts above; it is not a customer rating, a measure of
+            investment performance or a recommendation to buy. Customer ratings (BBB, BCA, Trustpilot) are
+            always shown separately and attributed to their source.
           </p>
         </section>
 
         {/* Head-to-head winners */}
         <section className="mb-12">
           <div className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-6">
-            <Trophy className="mt-0.5 h-6 w-6 shrink-0 text-amber-500" strokeWidth={2} />
+            <Trophy className="mt-0.5 h-6 w-6 shrink-0 text-[#B8862B]" strokeWidth={2} />
             <div>
-              <h2 className="mb-2 text-[22px] font-bold text-[#191919]">How we pick a winner</h2>
-              <p className="text-[15px] leading-[1.75] text-gray-600">
-                In a head-to-head comparison we score the two providers category by category -
-                pricing, performance, features, support, and customer reputation. The
-                provider that wins the majority of categories takes the matchup, and the advantage
-                meter reflects how decisive that edge is. We always name the runner-up&rsquo;s genuine
-                strengths, because the &ldquo;better&rdquo; provider still depends on what you value most.
+              <h2 className="mb-2 text-[22px] font-bold text-[#191919]">How we pick a head-to-head winner</h2>
+              <p className="text-[16px] leading-[1.75] text-gray-600">
+                In a head-to-head comparison we go category by category - minimum, fees and transparency,
+                buyback and promotions, and track record - and name the company that comes out ahead for
+                most readers. We always say where the other company wins, because the better choice depends
+                on your amount and what you value.
               </p>
             </div>
           </div>
@@ -293,32 +262,12 @@ export default async function HowWeRankPage() {
           <div className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-6">
             <RefreshCw className="mt-0.5 h-6 w-6 shrink-0 text-[#1E3A5F]" strokeWidth={2} />
             <div>
-              <h2 className="mb-2 text-[22px] font-bold text-[#191919]">Keeping reviews current</h2>
-              <p className="text-[15px] leading-[1.75] text-gray-600">
-                We continuously monitor provider pricing, plans, policy changes, and recent
-                customer reviews, and revise our rankings, reviews, and comparisons as things change.
-                Each review and comparison shows when it was last updated.
+              <h2 className="mb-2 text-[22px] font-bold text-[#191919]">Keeping pages current</h2>
+              <p className="text-[16px] leading-[1.75] text-gray-600">
+                Fees, minimums and promotions change often. We re-check them on a regular cycle and when we
+                learn of a change, and every review and comparison shows when it was last updated.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* Independence */}
-        <section className="mb-12">
-          <h2 className="mb-4 text-[22px] font-bold text-[#191919]">Editorial independence</h2>
-          <div className="space-y-4 text-[16px] leading-[1.75] text-gray-600">
-            <p>
-              <strong className="text-[#191919]">Independent rankings.</strong> Our rankings and
-              reviews are determined by the evaluation criteria on this page - not by commercial
-              relationships.
-            </p>
-            <p>
-              <strong className="text-[#191919]">Transparent about affiliates.</strong> Some providers
-              compensate us through affiliate partnerships when you click through and sign up. This may
-              affect how providers are displayed, but it does not influence our scores or the content of
-              our reviews. See our{" "}
-              <Link href="/disclaimer" className="font-semibold text-[#1E3A5F] hover:underline">full disclaimer</Link>.
-            </p>
           </div>
         </section>
 
@@ -329,12 +278,11 @@ export default async function HowWeRankPage() {
         <section className="mb-12">
           <h2 className="mb-4 text-[22px] font-bold text-[#191919]">Disclaimer</h2>
           <div className="rounded-xl border border-gray-200 bg-white p-6">
-            <p className="text-[15px] leading-[1.75] text-gray-600">
-              thetopwebhosting.com is not a web hosting provider and does not sell hosting directly. The
-              information on this site is for general information and comparison purposes only. Prices,
-              features, resource limits and renewal terms vary by provider, plan, term length and region, and
-              change often. The provider&rsquo;s terms of service determine what you get - confirm current
-              pricing before you buy.
+            <p className="text-[16px] leading-[1.75] text-gray-600">
+              Gold IRA Planet is not a broker, dealer or custodian and does not sell precious metals. Nothing
+              on this site is financial, tax or legal advice. Fees and minimums are approximate and change
+              often - the company&rsquo;s and custodian&rsquo;s written terms determine what you pay. See our{" "}
+              <Link href="/disclaimer" className="font-semibold text-[#1E3A5F] hover:underline">full disclaimer</Link>.
             </p>
           </div>
         </section>
@@ -345,8 +293,8 @@ export default async function HowWeRankPage() {
           <div className="divide-y divide-gray-100 overflow-hidden rounded-2xl border border-gray-200 bg-white">
             {METHOD_FAQS.map((f, i) => (
               <div key={i} className="p-6">
-                <h3 className="mb-2 text-[15.5px] font-bold text-[#191919]">{f.question}</h3>
-                <p className="text-[14px] leading-[1.75] text-gray-600">{f.answer}</p>
+                <h3 className="mb-2 text-[16px] font-bold text-[#191919]">{f.question}</h3>
+                <p className="text-[15px] leading-[1.75] text-gray-600">{f.answer}</p>
               </div>
             ))}
           </div>
@@ -354,17 +302,17 @@ export default async function HowWeRankPage() {
 
         {/* CTA */}
         <section className="text-center">
-          <p className="mb-4 text-[16px] font-bold text-[#191919]">See the rankings in action</p>
+          <p className="mb-4 text-[17px] font-bold text-[#191919]">See the comparison</p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/"
-              className="inline-flex h-[44px] items-center justify-center rounded-lg bg-[#E6D3A3] px-6 text-[14px] font-bold text-[#0F2540] transition-colors hover:bg-[#D9BE7C]"
+              className="inline-flex h-[48px] items-center justify-center rounded-lg bg-[#E6D3A3] px-6 text-[15px] font-bold text-[#0F2540] transition-colors hover:bg-[#D9BE7C]"
             >
-              Compare Providers
+              Compare Gold IRA Companies
             </Link>
             <Link
               href="/reviews"
-              className="inline-flex h-[44px] items-center justify-center rounded-lg border border-gray-200 bg-white px-6 text-[14px] font-semibold text-[#191919] transition-colors hover:bg-gray-50"
+              className="inline-flex h-[48px] items-center justify-center rounded-lg border border-gray-200 bg-white px-6 text-[15px] font-semibold text-[#191919] transition-colors hover:bg-gray-50"
             >
               Read Our Reviews
             </Link>

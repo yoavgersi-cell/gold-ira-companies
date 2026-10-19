@@ -21,6 +21,9 @@ export function Sidebar({ config, providers, linkPrefix = "" }: { config: Sideba
   const renderBlock = (blockId: string) => {
     switch (blockId) {
       case "socialProof":
+        // Renders nothing unless the operator sets a real, verifiable figure -
+        // never a fake "X people compared this month" counter.
+        if (!config.socialProofNumber?.trim()) return null;
         return (
           <SidebarCard key="socialProof">
             <div className="flex items-center gap-4">
@@ -59,7 +62,7 @@ export function Sidebar({ config, providers, linkPrefix = "" }: { config: Sideba
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imgSrc}
-              alt={featured ? `${featured.name} - Editor's Featured Provider` : config.featuredImageAlt}
+              alt={featured ? `${featured.name} - Editor's featured company` : config.featuredImageAlt}
               className="w-full h-auto"
               loading="lazy"
             />
@@ -100,24 +103,18 @@ export function Sidebar({ config, providers, linkPrefix = "" }: { config: Sideba
               </div>
               <div>
                 <p className="text-[15px] font-bold text-[#191919]">Our Ranking Methodology</p>
-                <p className="mt-0.5 text-[13px] text-gray-500">Provider scores are based on:</p>
+                <p className="mt-0.5 text-[13px] text-gray-500">The same facts for every company:</p>
               </div>
             </div>
-            <div className="space-y-3">
-              {[
-                { label: "Pricing & renewal terms", pct: 92 },
-                { label: "Customer satisfaction", pct: 85 },
-                { label: "Performance & features", pct: 78 },
-              ].map(({ label, pct }) => (
-                <div key={label} className="flex items-center justify-between">
-                  <span className="text-[13px] font-semibold text-[#191919]">{label}</span>
-                  <div className="h-1.5 w-24 rounded-full bg-gray-100 overflow-hidden">
-                    <div className="h-full rounded-full bg-amber-400" style={{ width: `${pct}%` }} />
-                  </div>
-                </div>
+            <ul className="list-disc space-y-1.5 pl-5 text-[13px] font-semibold text-[#191919]">
+              {["Minimum investment", "Setup & yearly fees", "Buyback & storage terms", "Ratings & regulator record"].map((label) => (
+                <li key={label}>{label}</li>
               ))}
-            </div>
-            <p className="mt-4 text-[11px] text-gray-500">Scores are updated regularly by our editorial team.</p>
+            </ul>
+            <p className="mt-4 text-[11px] text-gray-500">
+              Our editors set the order.{" "}
+              <Link href={`${linkPrefix}/how-we-rank`} className="underline">How we rank</Link>
+            </p>
           </SidebarCard>
         );
 
@@ -127,7 +124,7 @@ export function Sidebar({ config, providers, linkPrefix = "" }: { config: Sideba
             <div className="flex items-start gap-2">
               <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-500" strokeWidth={1.5} />
               <p className="text-xs leading-relaxed text-gray-500">
-                We may earn compensation from some providers featured on this page. Rankings and reviews are determined independently by our editorial team.
+                Some companies on this page pay us when you request a kit or open an account through our links. This can affect which companies appear and where, but not the facts we publish. Not financial advice.
               </p>
             </div>
           </SidebarCard>

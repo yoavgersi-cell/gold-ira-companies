@@ -22,32 +22,24 @@ import { PromoPopup } from "@/components/promo-popup";
 import { resolvePromoPopup } from "@/lib/promo-popups";
 import { TrustDisclosure } from "@/components/medical-sources";
 import { SourcesMethodology } from "@/components/sources-methodology";
-import { ProductCarousel } from "@/components/product-carousel";
 import { RedditThreadCarousel, REDDIT_COMMUNITY_FEEDBACK } from "@/components/reddit-community";
 import { threeWayBySlug, THREE_WAY_COMPARISONS } from "@/lib/three-way";
 import { ThreeWayPageView, threeWayMetadata } from "@/components/pages/three-way-page";
 import { providerEntity } from "@/lib/schema";
 
-// Per-battle 12-month cost math and code-side CTR overrides were a weight-loss-
-// vertical feature (all keyed by WL matchup slugs and gated to ctx.vertical ===
-// "weight-loss"). This single-vertical web hosting build keeps the maps empty and
-// renders battles from the config (src/lib/seeds/web-hosting.ts). Seed a battle here only with
-// real, current published rates.
-const BATTLE_COST_MATH: Record<
-  string,
-  { rows: [string, string, string][]; note: string }
-> = {};
-
+// Code-side CTR overrides keyed by battle slug. Battles render from the config
+// (src/lib/seeds/gold-ira/battles.ts); add an override only for a matchup
+// whose title or description needs a hand-tuned SERP version.
 const BATTLE_SEO_OVERRIDES: Record<string, { title: string; description: string }> = {};
 
 // Category word used in the uniform battle SERP title, per vertical. Verticals
 // not listed fall back to a category-free title.
 const BATTLE_CATEGORY_BY_VERTICAL: Record<string, string> = {
-  "web-hosting": "Web Hosting",
+  "gold-ira": "Gold IRA",
 };
 
 // Title-case a "{a} vs {b}" matchup so no SERP title starts lowercase, while
-// preserving any internal brand capitals (altRx -> AltRx, TrimRX -> TrimRX).
+// preserving any internal brand capitals.
 function titleCaseMatchup(label: string): string {
   return label
     .split(/\s+vs\s+/i)
@@ -64,15 +56,14 @@ function titleCaseOverrideTitle(title: string): string {
   return `${titleCaseMatchup(title.slice(0, idx))}${title.slice(idx)}`;
 }
 
-// Desc-only meta overrides for CMS landing pages were a weight-loss-vertical
-// feature (gated to ctx.vertical === "weight-loss"). Empty on this web hosting build.
+// Desc-only meta overrides for CMS landing pages, keyed by landing slug.
 const LANDING_META_DESCRIPTION: Record<string, string> = {};
 
 // Metadata for a landing page or head-to-head battle at /<slug> (root) or
 // /<vertical>/<slug> (hub). Returns { title: "Not Found" } for an unknown slug.
 export async function battleMetadata(slug: string, ctx: SiteContext): Promise<Metadata> {
   // Curated 3-way comparisons (/{a}-vs-{b}-vs-{c}) resolve before 2-way battles.
-  const trio = ctx.vertical === "weight-loss" ? threeWayBySlug.get(slug) : undefined;
+  const trio = threeWayBySlug.get(slug);
   if (trio) return threeWayMetadata(trio, ctx);
 
   const config = await getConfig(ctx.vertical);
@@ -82,7 +73,7 @@ export async function battleMetadata(slug: string, ctx: SiteContext): Promise<Me
   if (landing) {
     const url = canonicalUrl(ctx, `/${landing.slug}`);
     const landingDesc =
-      (ctx.vertical === "weight-loss" && LANDING_META_DESCRIPTION[landing.slug]) ||
+      LANDING_META_DESCRIPTION[landing.slug] ||
       landing.seoDescription;
     return {
       title: landing.seoTitle,
@@ -101,7 +92,7 @@ export async function battleMetadata(slug: string, ctx: SiteContext): Promise<Me
   if (!battle) return { title: "Not Found" };
 
   // Reverse-pair canonicalization: if another battle compares the same two
-  // providers in the opposite order (e.g. altrx-vs-noom and noom-vs-altrx),
+  // providers in the opposite order (e.g. goldco-vs-augusta and augusta-vs-goldco),
   // both target the same query intent and split ranking signals. Point every
   // page for a given provider pair at one deterministic canonical - the
   // alphabetically-first slug - so Google consolidates them into one result.
@@ -116,33 +107,30 @@ export async function battleMetadata(slug: string, ctx: SiteContext): Promise<Me
   const canonicalSlug = samePairSlugs[0] ?? battle.slug;
   const url = canonicalUrl(ctx, `/${canonicalSlug}`);
 
-  // SERP title: a curated per-matchup override title wins when one exists (these
-  // carry tested CTR hooks/prices - e.g. the question format on altrx-vs-embody
-  // measured 18.2% vs 6.7% for the price format, and embody-vs-ro keeps its
-  // "Big Brand?" hook because the price rewrite tanked its clicks). The override
-  // is title-cased at the matchup so it never starts lowercase. Battles without
-  // an override fall back to the uniform, competitor-style neutral pattern
-  // "{A} vs {B} (2026): Price, Speed & Features Compared". DESCRIPTIONS
-  // are always the bespoke override (real prices) when present.
-  const override = ctx.vertical === "weight-loss" ? BATTLE_SEO_OVERRIDES[slug] : undefined;
+  // SERP title: a curated per-matchup override title wins when one exists. The
+  // override is title-cased at the matchup so it never starts lowercase.
+  // Battles without an override fall back to the uniform, neutral pattern
+  // "{A} vs {B} (2026): Fees, Minimums & Buyback Compared". DESCRIPTIONS are
+  // always the bespoke override when present.
+  const override = BATTLE_SEO_OVERRIDES[slug];
   const baseLabel = (battle.matchupLabel ?? battle.title.split(":")[0]).trim();
   const battleCategory = BATTLE_CATEGORY_BY_VERTICAL[ctx.vertical];
   const metaTitle = override?.title
     ? titleCaseOverrideTitle(override.title)
     : (() => {
-        const long = `${titleCaseMatchup(baseLabel)} (2026): Price, Speed & Features Compared`;
+        const long = `${titleCaseMatchup(baseLabel)} (2026): Fees, Minimums & Buyback Compared`;
         // Long matchups drop the tail so the title stays inside the ~65-char SERP cut-off.
         return long.length <= 65 ? long : `${titleCaseMatchup(baseLabel)} (2026) Compared`;
       })();
   const metaDescription = override?.description ?? battle.description;
 
-  // Thin, low-demand matchups (Tier-2-brand pairs) are noindex,follow so crawl
-  // budget concentrates on the money battles - see NOINDEX_WL_BATTLE_SLUGS.
-  const isThinNoindex = ctx.vertical === "weight-loss" && NOINDEX_WL_BATTLE_SLUGS.has(slug);
+  // Thin, low-demand matchups are noindex,follow so crawl budget concentrates
+  // on the main battles - see NOINDEX_WL_BATTLE_SLUGS (empty by default).
+  const isThinNoindex = NOINDEX_WL_BATTLE_SLUGS.has(slug);
 
   void battleCategory;
   return {
-    // Titles are sized for the SERP already; the " | The Top Web Hosting"
+    // Titles are sized for the SERP already; the " | Gold IRA Planet"
     // template suffix would push them past the cut-off.
     title: { absolute: metaTitle },
     description: metaDescription,
@@ -193,7 +181,7 @@ function ReadMoreProse({ text, label, visibleSentences = 2 }: { text: string; la
 
 export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteContext }) {
   // Curated 3-way comparisons render their own template.
-  const trio = ctx.vertical === "weight-loss" ? threeWayBySlug.get(slug) : undefined;
+  const trio = threeWayBySlug.get(slug);
   if (trio) return ThreeWayPageView({ trio, ctx });
 
   const config = await getConfig(ctx.vertical);
@@ -359,18 +347,18 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
   const shortAnswerReason = winnerPts[0] ?? runnerUpPts[0] ?? "";
 
   // Above-the-fold quick-comparison rows: the decisions searchers care about
-  // first (price, renewal, storage, backups), pulled from this battle's own
-  // feature data so every value is real.
+  // first (minimum, setup fee, yearly fees, buyback), pulled from this battle's
+  // own feature data so every value is real.
   const findFeature = (re: RegExp) => (battle.features ?? []).find((f) => re.test(f.feature));
-  const priceRow = findFeature(/price|cost/i);
-  const feeRow = findFeature(/renewal/i);
-  const plansRow = findFeature(/storage/i);
-  const capsRow = findFeature(/backup/i);
+  const minimumRow = findFeature(/minimum/i);
+  const setupRow = findFeature(/setup/i);
+  const annualRow = findFeature(/yearly|annual/i);
+  const buybackRow = findFeature(/buyback/i);
   const quickRows = [
-    priceRow && { label: "Starting price", v1: priceRow.provider1Value, v2: priceRow.provider2Value },
-    feeRow && { label: "Renewal price", v1: feeRow.provider1Value, v2: feeRow.provider2Value },
-    plansRow && { label: "Storage", v1: plansRow.provider1Value, v2: plansRow.provider2Value },
-    capsRow && { label: "Backups", v1: capsRow.provider1Value, v2: capsRow.provider2Value },
+    minimumRow && { label: "Minimum", v1: minimumRow.provider1Value, v2: minimumRow.provider2Value },
+    setupRow && { label: "Setup fee", v1: setupRow.provider1Value, v2: setupRow.provider2Value },
+    annualRow && { label: "Yearly fees", v1: annualRow.provider1Value, v2: annualRow.provider2Value },
+    buybackRow && { label: "Buyback", v1: buybackRow.provider1Value, v2: buybackRow.provider2Value },
   ].filter(Boolean) as { label: string; v1: string; v2: string }[];
 
   // Related comparisons - other battles featuring either provider (internal links).
@@ -398,37 +386,26 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
 
   // Curated 3-way comparisons featuring BOTH of this battle's providers - the
   // only internal path into the trio pages, so every trio gets inbound links
-  // from its three constituent head-to-heads. Weight-loss only (the registry
-  // is a WL registry).
-  const relatedTrios =
-    ctx.vertical === "weight-loss"
-      ? THREE_WAY_COMPARISONS.filter(
-          (t) => t.providerIds.includes(p1.id) && t.providerIds.includes(p2.id)
-        ).map((t) => ({
-          slug: t.slug,
-          names: t.providerIds.map(
-            (id) => config.providers.find((p) => p.id === id)?.name ?? id
-          ),
-        }))
-      : [];
+  // from its three constituent head-to-heads. The registry is empty by default.
+  const relatedTrios = THREE_WAY_COMPARISONS.filter(
+    (t) => t.providerIds.includes(p1.id) && t.providerIds.includes(p2.id)
+  ).map((t) => ({
+    slug: t.slug,
+    names: t.providerIds.map((id) => config.providers.find((p) => p.id === id)?.name ?? id),
+  }));
 
   // FAQ - real, query-shaped questions answered from grounded battle content.
   // Expands the queries the page can rank for (long-tail + People Also Ask) and
   // powers both the visible FAQ section and the FAQPage schema.
   const catToQuestion = (name: string) => {
     const n = name.toLowerCase();
-    if (n.includes("pric") || n.includes("value")) return `Is ${p1.name} cheaper than ${p2.name}?`;
-    if (n.includes("speed") || n.includes("perform") || n.includes("storage")) return `Which is faster, ${p1.name} or ${p2.name}?`;
-    if (n.includes("backup")) return `Which has better backups, ${p1.name} or ${p2.name}?`;
-    if (n.includes("panel") || n.includes("ease") || n.includes("beginner")) return `Which is easier to use, ${p1.name} or ${p2.name}?`;
-    if (n.includes("data center")) return `Which has more data center locations, ${p1.name} or ${p2.name}?`;
-    if (n.includes("refund")) return `Which has the better refund policy, ${p1.name} or ${p2.name}?`;
-    if (n.includes("customer") || n.includes("experience") || n.includes("service") || n.includes("personal")) return `Which has better customer reviews, ${p1.name} or ${p2.name}?`;
-    if (n.includes("flexib")) return `Which offers more flexible plans, ${p1.name} or ${p2.name}?`;
-    if (n.includes("simplic")) return `Which has simpler plans, ${p1.name} or ${p2.name}?`;
-    if (n.includes("add-on") || n.includes("range")) return `Which offers more add-ons, ${p1.name} or ${p2.name}?`;
-    if (n.includes("brand") || n.includes("track") || n.includes("reputation")) return `Which has the better reputation, ${p1.name} or ${p2.name}?`;
-    if (n.includes("transparen") || n.includes("certif")) return `Which is more transparent about pricing, ${p1.name} or ${p2.name}?`;
+    if (n.includes("minimum")) return `Which has the lower minimum, ${p1.name} or ${p2.name}?`;
+    if (n.includes("fee") || n.includes("transparen") || n.includes("pric")) return `Which has lower or clearer fees, ${p1.name} or ${p2.name}?`;
+    if (n.includes("buyback") || n.includes("guarantee")) return `Which has better buyback terms, ${p1.name} or ${p2.name}?`;
+    if (n.includes("promo")) return `Which has the better promotion, ${p1.name} or ${p2.name}?`;
+    if (n.includes("education") || n.includes("support")) return `Which offers better education and support, ${p1.name} or ${p2.name}?`;
+    if (n.includes("storage")) return `Which has better storage options, ${p1.name} or ${p2.name}?`;
+    if (n.includes("track") || n.includes("review") || n.includes("reputation")) return `Which has the better track record, ${p1.name} or ${p2.name}?`;
     return `${name}: ${p1.name} or ${p2.name}?`;
   };
 
@@ -500,7 +477,7 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
             <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-gray-700 sm:mt-3 sm:text-[15px]">
               {battle.subtitle || battle.description}
             </p>
-            {/* One quiet credibility line - byline, medical review and date read
+            {/* One quiet credibility line - byline, editorial review and date read
                 as a single strand of muted metadata, so nothing here competes
                 with the H1 above or the value block below. No bold-dark names,
                 no uppercase pseudo-labels: this is a caption, not a headline. */}
@@ -525,7 +502,7 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
           {/* ───── THE VERDICT ─────
               The answer a searcher came for, above the fold, before any prose -
               in the site's editorial verdict-card style (matches the review
-              "bottom line" and cheapest-glp1 "short answer" cards). Winner logos
+              "bottom line" card). Winner logos
               anchor it; the score pill shows only when our rubric agrees with the
               named winner. Renders only when a winner is named. */}
           {verdictWinner && verdictRunnerUp && shortAnswerReason && (
@@ -553,26 +530,24 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
                 <p className="text-[15.5px] leading-[1.8] text-gray-800 sm:text-[16px]">
                   <span className="font-bold text-[#191919]">{verdictWinner.name}</span> is the
                   stronger pick for most people - <BoldKeyFacts text={shortAnswerReason.replace(/\.$/, "")} />.{" "}
-                  Full reasoning, pricing and the cases where {verdictRunnerUp.name} wins are below.
+                  Full reasoning, fees and the cases where {verdictRunnerUp.name} wins are below.
                 </p>
               </div>
             </div>
           )}
 
-          {/* ───── REDDIT COMMUNITY CAROUSEL (verified threads only) ───── */}
-          {ctx.vertical === "weight-loss" && (
-            <RedditThreadCarousel
-              providers={[p1, p2]}
-              reviewHrefFor={(id) => hubLink(ctx, `/reviews/${id}`)}
-            />
-          )}
+          {/* ───── REDDIT COMMUNITY CAROUSEL (verified threads only) ─────
+              Renders nothing unless the registry has real threads. */}
+          <RedditThreadCarousel
+            providers={[p1, p2]}
+            reviewHrefFor={(id) => hubLink(ctx, `/reviews/${id}`)}
+          />
 
           {/* ───── EVIDENCE -> CONCLUSION SYNTHESIS ─────
               Reads the threads shown directly above and says what keeps coming
               up - one written summary per provider, from the same registry as
               the threads themselves, so it only renders on verified material. */}
-          {ctx.vertical === "weight-loss" &&
-            [p1, p2].some((p) => REDDIT_COMMUNITY_FEEDBACK[p.id]?.themes) && (
+          {[p1, p2].some((p) => REDDIT_COMMUNITY_FEEDBACK[p.id]?.themes) && (
               <div className="mb-14 max-w-[820px] rounded-2xl border border-gray-200 bg-gray-50/60 p-5 sm:p-6">
                 <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.07em] text-[#1E3A5F]">
                   What we found
@@ -591,8 +566,8 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
             )}
 
           {/* ───── ABOVE-THE-FOLD QUICK COMPARISON ─────
-              The decisions searchers came for - price, renewal, storage,
-              backups - answered before any scrolling, from real feature data. */}
+              The decisions searchers came for - minimum, setup fee, yearly
+              fees, buyback - answered before any scrolling, from real feature data. */}
           {quickRows.length > 0 && (
             <div className="mb-12 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
               <table className="w-full table-fixed border-collapse text-left">
@@ -611,7 +586,7 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
                       <td className="py-3 pl-4 pr-2 text-[12.5px] font-semibold leading-snug text-gray-500 sm:py-3.5 sm:text-[13.5px]">
                         {row.label}
                       </td>
-                      {/* break-words: slash-joined values (e.g. medication lists)
+                      {/* break-words: slash-joined values (e.g. depository lists)
                           have no natural break points and would clip on mobile */}
                       <td className="break-words py-3 px-2 text-[12.5px] leading-snug text-[#191919] sm:py-3.5 sm:px-3 sm:text-[14px]">{row.v1}</td>
                       <td className="break-words py-3 px-2 pr-4 text-[12.5px] leading-snug text-[#191919] sm:py-3.5 sm:px-3 sm:text-[14px]">{row.v2}</td>
@@ -619,13 +594,13 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
                   ))}
                 </tbody>
               </table>
-              {/* Freshness line - SERP winners date-stamp their prices; ours
-                  are verified against published rates on every content pass. */}
+              {/* Freshness line - fees are approximate third-party snapshots;
+                  say so right next to them. */}
               <p className="border-t border-gray-100 px-4 py-2.5 text-[11.5px] text-gray-500">
-                Prices are the providers&rsquo; published rates at our last verification - confirm the
-                final figure at checkout, as offers change.{" "}
+                Fees and minimums are approximate snapshots and change often - confirm current terms
+                and the markup on your metals in writing before you invest.{" "}
                 <Link href={hubLink(ctx, "/how-we-rank")} className="font-medium text-gray-500 underline underline-offset-2 hover:text-[#1E3A5F]">
-                  How we verify prices
+                  How we compare companies
                 </Link>
               </p>
             </div>
@@ -709,9 +684,8 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
                 {p1.name} vs {p2.name}: a closer look at each
               </h2>
               <p className="mt-3 text-[15px] leading-[1.8] text-gray-600">
-                {ctx.vertical === "weight-loss"
-                  ? "Both are solid GLP-1 weight loss providers, and honestly you can’t go too wrong either way."
-                  : "Both are credible providers in this category, and the right pick comes down to fit."}{" "}
+                Both are established gold IRA companies, and the right pick comes down to your
+                amount, the fees you will pay and the terms you are comfortable with.{" "}
                 So instead of crowning a &ldquo;winner,&rdquo; here&rsquo;s the
                 real rundown on each - what you get, what it actually costs, and what
                 real customers are saying - so you can pick the one that fits <em>you</em>.
@@ -827,13 +801,13 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
                       {plans.length > 0 ? (
                         <div className="mb-8">
                           <h4 className="mb-1.5 text-[17px] font-bold text-[#191919]">
-                            How much does {provider.name} cost?
+                            What are {provider.name}&rsquo;s fees?
                           </h4>
                           {review?.pricingSummary && (
                             <div className="mb-4 [&>div]:mb-0 [&_p]:text-[14px] [&_p]:leading-[1.7] [&_p]:text-gray-500">
                               <ReadMoreProse
                                 text={review.pricingSummary}
-                                label="Full pricing details"
+                                label="Full fee details"
                                 visibleSentences={1}
                               />
                             </div>
@@ -872,7 +846,7 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
                       ) : review?.pricingSummary ? (
                         <div className="mb-8">
                           <h4 className="mb-1.5 text-[17px] font-bold text-[#191919]">
-                            How much does {provider.name} cost?
+                            What are {provider.name}&rsquo;s fees?
                           </h4>
                           <p className="max-w-[820px] text-[14px] leading-[1.7] text-gray-500">
                             {review.pricingSummary}
@@ -941,7 +915,7 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
                         sourceFlow="battle_page"
                         className="flex h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-[#E6D3A3] text-[15px] font-bold text-[#0F2540] transition-colors hover:bg-[#D9BE7C]"
                       >
-                        Get started with {provider.name}
+                        Visit {provider.name}
                         <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
                       </ProviderCta>
                     </div>
@@ -951,60 +925,6 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
             </div>
           </div>
 
-          {/* ───── 12-MONTH COST MATH ─────
-              What a realistic course of treatment costs at each provider -
-              the number searchers actually decide on, not the headline rate. */}
-          {ctx.vertical === "weight-loss" && BATTLE_COST_MATH[slug] && (
-            <div className="mb-12">
-              <h2 className="mb-1.5 text-[22px] font-bold text-[#191919]">
-                What you actually pay over 12 months
-              </h2>
-              <p className="mb-4 max-w-[680px] text-[14px] text-gray-500">
-                Headline prices are the least useful number in a comparison - this is the real math
-                over a course of treatment, promo conditions applied exactly as published.
-              </p>
-              <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
-                <table className="w-full min-w-[520px] border-collapse text-left">
-                  <thead>
-                    <tr className="border-b-2 border-gray-200 bg-gray-50/80">
-                      <th className="w-[34%] px-4 py-3.5 text-[11px] font-bold uppercase tracking-[0.07em] text-gray-500" />
-                      <th className="px-4 py-3.5 text-[14px] font-bold text-[#191919]">{p1.name}</th>
-                      <th className="px-4 py-3.5 text-[14px] font-bold text-[#191919]">{p2.name}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-[13.5px]">
-                    {BATTLE_COST_MATH[slug].rows.map(([label, v1, v2], i) => (
-                      <tr key={i} className="border-b border-gray-100 align-top last:border-0">
-                        <td className="px-4 py-3.5 text-[12.5px] font-semibold leading-snug text-gray-500">{label}</td>
-                        <td className="break-words px-4 py-3.5 font-semibold text-[#191919] [font-variant-numeric:tabular-nums]">{v1}</td>
-                        <td className="break-words px-4 py-3.5 font-semibold text-[#191919] [font-variant-numeric:tabular-nums]">{v2}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="mt-3 text-[12.5px] leading-relaxed text-gray-500">{BATTLE_COST_MATH[slug].note}</p>
-            </div>
-          )}
-
-          {/* ───── PRODUCT CAROUSEL ─────
-              Shopping-style product cards for THIS matchup's two providers
-              only - a battle page sells the contenders, not the whole market.
-              Weight-loss only (the catalog is a WL registry). */}
-          {ctx.vertical === "weight-loss" && (
-            <div className="mb-12">
-              <ProductCarousel
-                providers={config.providers}
-                title={`Shop ${p1.name} and ${p2.name} plans`}
-                subtitle="Both contenders' published plans, cheapest first - conditions under every price."
-                onlyProviderIds={[p1.id, p2.id]}
-                pageType="battle"
-                withSchema
-                pageUrl={canonicalUrl(ctx, `/${slug}`)}
-              />
-            </div>
-          )}
-
           {/* ───── FEATURE COMPARISON TABLE ───── */}
           {battle.features && battle.features.length > 0 && (
             <div className="mb-14">
@@ -1012,7 +932,7 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
                 {p1.name} vs. {p2.name}: What&rsquo;s the Difference?
               </h2>
               <p className="mt-2 mb-5 max-w-[640px] text-[15px] leading-relaxed text-gray-500">
-                The key differences to consider when comparing the two providers.
+                The key differences to consider when comparing the two companies.
               </p>
 
               <table className="w-full table-fixed border-collapse text-left">
@@ -1170,6 +1090,9 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
               </ProviderCta>
             ))}
           </div>
+          <p className="mb-6 text-center text-[12px] text-gray-500">
+            We may be paid if you request a kit or open an account through these links. Not financial advice.
+          </p>
 
           {/* ───── FAQ ───── */}
           {battleFaqs.length > 0 && (
@@ -1252,7 +1175,7 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
             </Link>
             <span className="text-gray-500">|</span>
             <Link href={hubLink(ctx, "/")} className="font-semibold text-[#1E3A5F] hover:underline">
-              Compare All Providers
+              Compare All Gold IRA Companies
             </Link>
           </div>
 

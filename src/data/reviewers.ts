@@ -1,4 +1,4 @@
-// ───── Expert reviewers ─────
+// ───── Editorial reviewers ─────
 // Code-authoritative reviewer profiles and the page review log. Lives in code,
 // not the CMS blob, so a CMS save can never blank a byline, and so the same
 // Person entity (same @id) is emitted on every page that names the reviewer.
@@ -13,7 +13,7 @@
 //   - The byline wording is "Reviewed for accuracy by" - it must never imply a
 //     credential or licence the reviewer does not hold.
 
-export const SITE_ORIGIN = "https://www.thetopwebhosting.com";
+export const SITE_ORIGIN = "https://www.goldiraplanet.com";
 
 export interface ReviewerCredential {
   title: string;
@@ -68,23 +68,51 @@ export interface Reviewer {
   verticals: string[];
   /** Month the reviewer joined, YYYY-MM. */
   since: string;
+  /** True for the in-house editorial team (an Organization, not a Person). */
+  isTeam?: boolean;
 }
 
-// Empty until a real, credentialed expert reviewer (for example a senior web
-// developer or systems administrator) joins. While empty, the review bar
-// renders nothing and no reviewedBy schema is emitted - never add a person here
-// who has not agreed to review, and never invent credentials.
-export const REVIEWERS: Reviewer[] = [];
+// The in-house editorial team only. Add a named, credentialed reviewer (for
+// example a CFP or CPA for rollover and tax pages) only once a real person has
+// agreed to review - never invent a person or a credential.
+export const REVIEWERS: Reviewer[] = [
+  {
+    slug: "editorial-team",
+    name: "Gold IRA Planet Editorial Team",
+    credentials: [],
+    jobTitle: "Editorial team",
+    headline: "The in-house team that researches, writes and fact-checks every page on Gold IRA Planet.",
+    shortBio:
+      "The Gold IRA Planet Editorial Team researches gold IRA companies, fees and IRA rules, and writes and fact-checks every page on the site. We compare the same facts for every company and cite the IRS, the tax code and federal regulators for rules and warnings.",
+    longBio: [
+      "The Gold IRA Planet Editorial Team writes and maintains every review, comparison and guide on the site. For each company we collect the same fact sheet - minimum investment, setup and yearly fees, storage options, buyback terms, years in business, BBB, BCA and Trustpilot ratings, and any regulator or court actions we can find - and date it.",
+      "Rules and limits (contribution limits, rollover rules, eligible metals, storage and RMDs) are checked against IRS publications and the tax code. Scam and red-flag content is based on published actions and advisories from the CFTC, SEC and state regulators.",
+      "The team is not made up of licensed financial advisers, and nothing on the site is financial, tax or legal advice. Company fees and minimums are approximate third-party snapshots; we ask readers to confirm current terms in writing before they invest.",
+    ],
+    image: { src: "/logo-mark.png", webp: "/logo-mark.png", thumb: "/logo-mark.png", width: 128, height: 128 },
+    licensure: [],
+    education: [],
+    experience: [],
+    specialties: ["Gold IRA fees", "401(k) and IRA rollovers", "IRS rules for precious metals IRAs", "Precious metals scams and red flags"],
+    selectedWork: [],
+    sameAs: [],
+    scope:
+      "Checks every factual statement on a page - fees, minimums, ratings, IRA rules and regulator actions - against the company's published information, third-party sources and government sources, and updates the page date when it changes.",
+    verticals: ["gold-ira"],
+    since: "2026-10",
+    isTeam: true,
+  },
+];
 
-/** The reviewer named sitewide as the site's expert reviewer. */
-export const SITE_REVIEWER_SLUG = "";
+/** The reviewer named sitewide on content pages. */
+export const SITE_REVIEWER_SLUG = "editorial-team";
 
 // ───── Review log ─────
-// Keyed by the site path (e.g. "/", "/reviews/american-home-shield").
+// Keyed by the site path (e.g. "/", "/reviews/goldco").
 // An entry means the named reviewer actually reviewed that page on that date.
-// Entries are added ONLY when the operator confirms she reviewed the page.
-// Never backfill dates. Until a page has an entry, its review bar names her as
-// the site's expert reviewer without claiming they reviewed that page, and no
+// Entries are added ONLY when the operator confirms the page was reviewed.
+// Never backfill dates. Until a page has an entry, its review bar names the
+// editorial team without claiming that page was reviewed, and no
 // `reviewedBy` / `lastReviewed` is emitted in its structured data.
 export interface PageReview {
   reviewer: string; // Reviewer.slug
@@ -92,7 +120,7 @@ export interface PageReview {
 }
 
 // Add entries only when the operator confirms the reviewer reviewed that page,
-// e.g. "/reviews/american-home-shield": { reviewer: "<slug>", reviewedAt: "2026-11-01" }.
+// e.g. "/reviews/goldco": { reviewer: "editorial-team", reviewedAt: "2026-11-01" }.
 export const REVIEW_LOG: Record<string, PageReview> = {};
 
 export function getReviewer(slug: string = SITE_REVIEWER_SLUG): Reviewer | undefined {
@@ -126,8 +154,21 @@ export function getPageReview(path: string): (PageReview & { reviewerProfile: Re
   return { ...entry, reviewerProfile };
 }
 
-/** Schema.org Person for a reviewer, with a stable @id reused on every page. */
+/** Schema.org Person (or Organization, for the editorial team) for a
+ *  reviewer, with a stable @id reused on every page. */
 export function reviewerPersonSchema(r: Reviewer) {
+  if (r.isTeam) {
+    return {
+      "@type": "Organization",
+      "@id": `${reviewerUrl(r)}#person`,
+      name: r.name,
+      description: r.shortBio,
+      url: reviewerUrl(r),
+      logo: `${SITE_ORIGIN}${r.image.src}`,
+      parentOrganization: { "@type": "Organization", name: "Gold IRA Planet", url: SITE_ORIGIN },
+      knowsAbout: r.specialties,
+    };
+  }
   const schema: Record<string, unknown> = {
     "@type": "Person",
     "@id": `${reviewerUrl(r)}#person`,
@@ -137,7 +178,7 @@ export function reviewerPersonSchema(r: Reviewer) {
     description: r.shortBio,
     url: reviewerUrl(r),
     image: `${SITE_ORIGIN}${r.image.src}`,
-    worksFor: { "@type": "Organization", name: "The Top Web Hosting", url: SITE_ORIGIN },
+    worksFor: { "@type": "Organization", name: "Gold IRA Planet", url: SITE_ORIGIN },
     knowsAbout: r.specialties,
     alumniOf: r.education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.school })),
     hasCredential: [

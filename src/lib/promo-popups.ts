@@ -1,12 +1,20 @@
+// ───── DISABLED on Gold IRA Planet ─────
+// Promo popups (and their countdown timers) are switched off site-wide: urgency
+// overlays and fake countdowns are pressure tactics this site does not use, and
+// the FTC Consumer Reviews and Testimonials Rule / Endorsement Guides make
+// manufactured urgency a compliance risk. PROMO_POPUPS_ENABLED gates both the
+// resolver below and the <PromoPopup> component, so a CMS entry cannot turn a
+// popup back on. The types are kept so the shared page templates compile.
+export const PROMO_POPUPS_ENABLED = false;
+
 // Mobile promo-popup registry. Each entry ties a provider to a full-bleed
 // creative that appears once per session on comparison pages where that
 // provider is featured. Kept in code (not the blob CMS) so it ships and
 // resolves without a config round-trip; the resolver below is the single place
 // that decides which popup wins when a page features more than one.
 //
-// `priority` breaks ties: when two featured providers both have a popup (e.g.
-// TrimRx vs. Embody), the higher priority shows and the other is suppressed -
-// so TrimRx's popup appears on every TrimRx comparison EXCEPT against Embody.
+// `priority` breaks ties: when two featured providers both have a popup, the
+// higher priority shows and the other is suppressed.
 export interface PromoPopupTimer {
   // Evergreen countdown seconds at load; ticks down live from here each session.
   startSeconds: number;
@@ -35,9 +43,7 @@ export interface PromoPopupSpec {
   desktop?: { image: string; timer?: PromoPopupTimer };
 }
 
-// Empty on this single-vertical web hosting build - no code-default promo creatives.
-// Each provider drives its own popup from config (provider.promoPopup) when
-// set; add a code default here only with a real, operator-supplied creative.
+// Empty on this site - no promo creatives (see PROMO_POPUPS_ENABLED above).
 export const PROMO_POPUPS: PromoPopupSpec[] = [];
 
 // Minimal provider shape the resolver needs - id, name, and the CMS popup
@@ -59,6 +65,7 @@ export interface PromoPopupProvider {
 // so a CMS entry can turn a popup on/off or swap its creative, while the timer
 // (an advanced, per-creative overlay) always stays code-defined by provider id.
 export function resolvePromoPopup(providers: PromoPopupProvider[]): PromoPopupSpec | null {
+  if (!PROMO_POPUPS_ENABLED) return null;
   const candidates: PromoPopupSpec[] = [];
 
   for (const p of providers) {

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" role="img" aria-label="Augusta Precious Metals">
+  <circle cx="54" cy="60" r="38" fill="none" stroke="#B8862B" stroke-width="5"/>
+  <text x="54" y="72" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" fill="#B8862B">APM</text>
+  <text x="104" y="58" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" fill="#1A2B44">AUGUSTA</text>
+  <text x="105" y="88" font-family="Georgia, 'Times New Roman', serif" font-size="19" letter-spacing="1.5" fill="#4B5563">Precious Metals</text>
+</svg>

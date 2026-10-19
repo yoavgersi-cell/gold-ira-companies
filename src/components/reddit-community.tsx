@@ -10,7 +10,7 @@ import { ArrowBigUp, MessageSquare } from "lucide-react";
 
 export type RedditReply = { author: string; body: string };
 export type RedditThread = {
-  subreddit?: string; // "r/telehealth" - omit if the screenshot didn't show it
+  subreddit?: string; // "r/Gold" - omit if the screenshot didn't show it
   author: string; // reddit username without the u/ prefix
   age?: string; // "6mo ago"
   title?: string; // post title; absent for standalone comments
@@ -27,7 +27,7 @@ export const REDDIT_COMMUNITY_FEEDBACK: Record<
   // pages. Write it from the displayed threads only, good and bad alike.
   // `vertical`: the vertical the threads were captured for; render sites match
   // it against the page's vertical so an id collision can never surface the
-  // wrong data. Empty on this web hosting build - add a provider only when real,
+  // wrong data. Empty on this gold IRA build - add a provider only when real,
   // verified source material exists (never estimated or fabricated).
   { intro: string; threads: RedditThread[]; takeaway: string; themes?: string; vertical?: string }
 > = {};

@@ -1,14 +1,14 @@
-// The The Top Web Hosting provider audit - the "what we verified" registry.
+// The Gold IRA Planet company audit - the "what we verified" registry.
 //
 // Every row is a fact the operator verified against the provider's own
-// published information (pricing pages, plan terms, certification pages).
+// published information (fee schedules, account terms, disclosures).
 // Rules, in order of importance:
 //   1. NEVER add a row that hasn't been verified. A missing row means "not
 //      verified" - the component simply doesn't show it. No TBD, no guesses.
 //   2. A provider with no entry renders no audit at all. That is the correct
 //      state for providers whose data is still incomplete.
 //   3. Values must agree with the same numbers shown elsewhere on the site
-//      (price index, review pricing plans, battle cost math). One source of
+//      (fact sheet in seeds/gold-ira/shared.ts, review fee lines). One source of
 //      truth in substance, even where the strings are hand-written.
 //   4. When pricing changes, update the row AND bump PROVIDER_DATA_CHECKED
 //      in @/lib/config only after actually re-checking.
@@ -18,7 +18,7 @@ export interface ProviderAuditEntry {
 }
 
 // Keyed "<vertical>:<providerId>" so a provider that exists in two verticals
-// (e.g. maximus in hair-loss and trt) can carry a separate audit per vertical.
-// Empty on this single-vertical web hosting build - add an "ed:<providerId>" entry only
+// can carry a separate audit per vertical.
+// Empty on this single-vertical gold IRA build - add a "gold-ira:<providerId>" entry only
 // when every row has been verified against the provider's own published data.
 export const PROVIDER_AUDITS: Record<string, ProviderAuditEntry> = {};

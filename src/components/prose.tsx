@@ -16,7 +16,7 @@ export function toSentences(text: string): string[] {
 }
 
 // Splits copy at sentence boundaries: the first `n` sentences and the rest.
-// Used for read-more treatments where all content must stay in the DOM.
+// Used for read-more blocks where all content must stay in the DOM.
 export function splitSentences(text: string, n: number): [string, string] {
   const parts = toSentences(text);
   if (parts.length <= n) return [text, ""];

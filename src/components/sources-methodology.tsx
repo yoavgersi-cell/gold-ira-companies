@@ -5,14 +5,14 @@ import { SOURCES_BY_VERTICAL } from "@/components/medical-sources";
 
 // "Sources & methodology" - the evidence/authority layer for comparison and
 // review pages. It does not introduce a single new claim: it names the sources
-// the page is already built on (provider-published data we verified, curated
-// regulatory/medical references, and third-party customer feedback) and states
+// the page is already built on (company and third-party fee data, curated
+// IRS/regulator references, and third-party customer feedback) and states
 // when the data was last checked. This is the "show your work" section Google's
 // review-content guidance asks for on YMYL pages.
 //
 // Everything here must stay true. Provider-source lines link to our own review
-// pages (where the full pricing/plan breakdown lives) rather than to a
-// fabricated policy URL, and the medical-references group renders only for
+// pages (where the full fee breakdown lives) rather than to a fabricated
+// policy URL, and the regulatory-references group renders only for
 // verticals that have a hand-verified source list - never invented citations.
 
 interface SourceProvider {
@@ -37,14 +37,14 @@ export function SourcesMethodology({
 }: {
   ctx: SiteContext;
   providers: SourceProvider[];
-  // What the page compares, e.g. "embody and Medvi" or "embody" - fills the
+  // What the page compares, e.g. "Goldco and Augusta Precious Metals" or "Goldco" - fills the
   // one-line "How we researched ___" opener.
   headingLabel: string;
   // On a provider's own review page the provider rows would just link back to
   // the page itself - "review" renders them as plain text instead.
   kind?: "comparison" | "review";
 }) {
-  const medicalSources = SOURCES_BY_VERTICAL[ctx.vertical] ?? [];
+  const regulatorySources = SOURCES_BY_VERTICAL[ctx.vertical] ?? [];
 
   return (
     <section className="mt-12 overflow-hidden rounded-2xl border border-gray-200 bg-white">
@@ -60,19 +60,18 @@ export function SourcesMethodology({
       <div className="px-6 py-6 sm:px-7">
         <p className="mb-6 max-w-[760px] text-[14px] leading-relaxed text-gray-700">
           We built this {kind} of {headingLabel} from{" "}
-          {kind === "review" ? "the provider's" : "each provider's"}{" "}own published pricing, plans
-          and terms of service, cross-checked against public records and company announcements, and
-          read alongside real customer feedback. Prices and plan details were verified against the
-          provider&apos;s published information; we do not take providers&apos; word for their own
-          claims without checking.
+          {kind === "review" ? "the company's" : "each company's"}{" "}published information and
+          third-party reviews of its fees and minimums, cross-checked against BBB and Trustpilot
+          records and regulator and court records. Fee figures are approximate - sources often
+          disagree, and we show ranges where they do. IRA rules come from the IRS and the tax code.
         </p>
 
         <div className="grid gap-x-10 gap-y-7 sm:grid-cols-2">
           {/* Provider-published data - links to our own detailed breakdowns */}
           <div>
-            <GroupLabel icon={FileText}>Provider information</GroupLabel>
+            <GroupLabel icon={FileText}>Company information</GroupLabel>
             <p className="mb-2.5 text-[13px] leading-relaxed text-gray-500">
-              Pricing, renewal rates, plans and terms, checked against each provider&apos;s own site.
+              Minimums, setup and yearly fees, storage and buyback terms - the same fields for every company.
             </p>
             <ul className="space-y-1.5">
               {providers.map((p) => (
@@ -82,7 +81,7 @@ export function SourcesMethodology({
                       <span className="font-semibold text-[#191919]">{p.name}</span>
                       <span className="text-gray-500">
                         {" "}
-                        - pricing, plans &amp; policies as published on its own site
+                        - fees, minimums &amp; policies (approximate; confirm in writing)
                       </span>
                     </>
                   ) : (
@@ -93,7 +92,7 @@ export function SourcesMethodology({
                       >
                         {p.name}
                       </a>
-                      <span className="text-gray-500"> - full pricing &amp; plan breakdown</span>
+                      <span className="text-gray-500"> - full fee &amp; minimum breakdown</span>
                     </>
                   )}
                 </li>
@@ -101,7 +100,7 @@ export function SourcesMethodology({
             </ul>
             <p className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-gray-50 px-2.5 py-1 text-[12px] font-semibold text-gray-500">
               <ClipboardCheck className="h-3.5 w-3.5 text-[#1E3A5F]" strokeWidth={2} />
-              Provider data checked {PROVIDER_DATA_CHECKED}
+              Company data checked {PROVIDER_DATA_CHECKED}
             </p>
           </div>
 
@@ -110,18 +109,18 @@ export function SourcesMethodology({
             <GroupLabel icon={MessagesSquare}>Customer &amp; community feedback</GroupLabel>
             <p className="text-[13px] leading-relaxed text-gray-500">
               Third-party signals shown on this page and in our full reviews: Trustpilot
-              ratings and Better Business Bureau records, as captured on the dates we note. We report what
+              ratings and BBB and BCA records, as captured on the dates we note. We report what
               these sources say - we never fold their ratings into our own scores.
             </p>
           </div>
 
           {/* Regulatory & public-record references - only where a hand-verified list
               exists for the vertical; never fabricated. */}
-          {medicalSources.length > 0 && (
+          {regulatorySources.length > 0 && (
             <div className="sm:col-span-2">
               <GroupLabel icon={Landmark}>Regulatory &amp; public-record references</GroupLabel>
               <ol className="grid gap-x-8 gap-y-2 sm:grid-cols-2">
-                {medicalSources.map((s, i) => (
+                {regulatorySources.map((s, i) => (
                   <li key={i} className="flex gap-2 text-[13px] leading-relaxed">
                     <span className="shrink-0 font-semibold text-gray-500">{i + 1}.</span>
                     <span className="text-gray-600">
@@ -144,9 +143,9 @@ export function SourcesMethodology({
         </div>
 
         <p className="mt-7 border-t border-gray-100 pt-4 text-[12.5px] leading-relaxed text-gray-500">
-          Last reviewed {PROVIDER_DATA_CHECKED}. We revisit comparisons when providers change their
-          pricing or policies. This page is information only - always confirm current pricing
-          and renewal terms before buying a plan.
+          Last reviewed {PROVIDER_DATA_CHECKED}. We revisit comparisons when companies change their
+          fees or policies. This page is general information, not financial, tax or legal advice -
+          always confirm current fees, minimums and the markup on your metals in writing before you invest.
         </p>
       </div>
     </section>

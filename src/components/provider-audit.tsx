@@ -3,7 +3,7 @@ import { PROVIDER_AUDITS } from "@/lib/provider-audit";
 import { PROVIDER_DATA_CHECKED } from "@/lib/config";
 import { BoldKeyFacts } from "@/components/prose";
 
-// "What we verified" - the The Top Web Hosting audit card for a provider's review
+// "What we verified" - the Gold IRA Planet audit card for a company's review
 // page. Renders the verified-facts registry for this provider and vertical;
 // providers without a complete, verified entry render nothing at all (an
 // audit full of gaps would undermine the very trust it exists to build).
@@ -35,9 +35,9 @@ export function ProviderAudit({
 
       <div className="px-6 py-5 sm:px-7">
         <p className="mb-5 max-w-[760px] text-[13.5px] leading-relaxed text-gray-500">
-          Every line below was checked against {providerName}&apos;s own published pricing and plan
-          information - not copied from other review sites. When we can&apos;t verify something, we
-          leave it out rather than guess.
+          Every line below was checked against {providerName}&apos;s own published fee, minimum and
+          policy information - not copied from other review sites. When we can&apos;t verify something,
+          we leave it out rather than guess.
         </p>
 
         <dl className="grid gap-x-10 gap-y-3.5 sm:grid-cols-2">

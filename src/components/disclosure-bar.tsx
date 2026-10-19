@@ -36,19 +36,19 @@ export function DisclosureBar() {
 
             <div className="space-y-4 text-[14px] leading-[1.7] text-gray-600">
               <p>
-                The Top Web Hosting is an independent comparison website designed to help consumers explore and evaluate web hosting providers. We research, review, and compare available plans, features, and pricing to make the decision process easier.
+                Gold IRA Planet is an independent comparison website that helps consumers compare gold IRA companies. We research and compare minimums, fees, storage, buyback terms and track records. We are not a broker, dealer or custodian, and nothing on this site is financial, tax or legal advice.
               </p>
               <p>
-                The information presented on this website is provided for general informational purposes only. While we strive to keep content accurate and up to date, we cannot guarantee the completeness, accuracy, or availability of every provider, offer, or plan currently available in the market.
+                The information presented on this website is provided for general informational purposes only. While we strive to keep content accurate and up to date, we cannot guarantee the completeness, accuracy, or availability of every company, fee or offer in the market. Fees and minimums are approximate - confirm them in writing before you invest.
               </p>
               <p>
-                Some of the companies featured on this website may compensate us when visitors click through to their websites or become customers. This compensation may influence how providers are displayed, ranked, or featured on our pages. However, our goal is to present useful, relevant, and transparent information that helps users make informed decisions.
+                Some of the companies featured on this website pay us when visitors click through and request a kit, schedule a call or open an account. This compensation may influence which companies are displayed and how they are ranked or featured. It does not change the facts, fees or warnings we publish, which are the same for every company.
               </p>
               <p>
-                Provider names, trademarks, logos, and brand assets remain the property of their respective owners. Their appearance on this website does not imply endorsement, partnership, or sponsorship unless explicitly stated.
+                Company names, trademarks, logos, and brand assets remain the property of their respective owners. Their appearance on this website does not imply endorsement, partnership, or sponsorship unless explicitly stated.
               </p>
               <p>
-                Our rankings, reviews, and recommendations are based on a combination of editorial research, publicly available information, pricing, performance, support, user experience factors, and other criteria determined by our team. Not every provider operating in this industry is included on our website.
+                Our ranking order is set by our editors, based on editorial research, publicly available information, fees and minimums, buyback and storage terms, ratings, regulator records and other criteria. Not every gold IRA company is included on our website.
               </p>
               <p>
                 By using this website, you agree to our Terms of Use and Privacy Policy.

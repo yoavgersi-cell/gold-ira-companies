@@ -1,35 +1,30 @@
 // ───── The product catalog ─────
-// Ecommerce-style product entries for the shopping carousel. Prices are the
-// same verified figures as the price index (one source of truth for numbers,
-// this file adds the product framing + images). Images are provider-published
-// product creatives supplied by the site operator - never generated. A null
-// image renders the provider-logo tile fallback; never invent a product shot.
+// Product entries (IRA-eligible coins and bars) for the optional product
+// carousel. Images must be company-published product creatives supplied by
+// the site operator - never generated. A null image renders the company-logo
+// tile fallback; never invent a product shot.
 
 export type CatalogProduct = {
   id: string;
   providerId: string;
-  /** Shopping-card product title, e.g. "Compounded Semaglutide Injection". */
+  /** Card title, e.g. "American Gold Eagle, 1 oz". */
   name: string;
-  medication: "semaglutide" | "tirzepatide";
-  format: "injection" | "drops" | "tablet";
-  /** Headline monthly price, digits only after $ (used for sorting + schema). */
+  metal: "gold" | "silver" | "platinum" | "palladium";
+  form: "coin" | "bar";
+  /** Headline price as published by the company, e.g. "$4,350". */
   price: string;
-  /** Struck-through regular price when the headline is promotional. */
-  regularPrice?: string;
-  /** The honest condition attached to the price. */
+  /** The honest condition attached to the price (date, quantity, payment method). */
   priceNote: string;
-  shipping: string;
   image: string | null;
 };
 
-// Empty on this single-vertical web hosting build. The shopping carousel renders only
-// from real, operator-supplied product creatives with verified prices; there
-// are none to fabricate for web hosting, so the catalog is empty and every ProductCarousel
-// renders nothing (items.length === 0 -> null). Add an entry here only with a
-// real product image and a verified price.
+// Empty on this site. Gold IRA companies rarely publish live product prices,
+// and a stale metal price is worse than none, so every ProductCarousel renders
+// nothing (items.length === 0 -> null). Add an entry only with a real product
+// image and a published, dated price.
 export const PRODUCT_CATALOG: CatalogProduct[] = [];
 
-/** Numeric value for sorting ("from $179" → 179). */
+/** Numeric value for sorting ("$4,350" → 4350). */
 export function productPriceValue(p: CatalogProduct): number {
-  return Number(p.price.replace(/[^0-9]/g, "")) || 9999;
+  return Number(p.price.replace(/[^0-9.]/g, "")) || Number.MAX_SAFE_INTEGER;
 }

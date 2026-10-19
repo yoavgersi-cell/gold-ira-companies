@@ -3,7 +3,7 @@ import type { SiteConfig } from "@/lib/config";
 
 // Conversion block for editorial/article pages: the site's top-ranked providers
 // rendered with the SAME card used on the comparison page (RichComparisonCard) -
-// logo, score, trust pill, treatments, transparent pricing and a live CTA - so
+// logo, score, trust pill, products, fees and a live CTA - so
 // a guide that was otherwise all prose gets the real ranked cards + CTAs.
 //
 // Everything is pulled from the vertical's ranking config; nothing is invented,
@@ -13,7 +13,7 @@ export function TopProvidersBlock({
   config,
   linkPrefix = "",
   limit = 3,
-  title = "Our top-rated providers",
+  title = "Our top-rated gold IRA companies",
   subtitle,
   providerIds,
 }: {

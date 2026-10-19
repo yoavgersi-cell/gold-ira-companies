@@ -30,7 +30,8 @@ export default function AdminPage() {
       const data = await res.json();
       setConfig(data);
     } else {
-      setMessage("Failed to load config");
+      const body = (await res.json().catch(() => null)) as { error?: string } | null;
+      setMessage(`Failed to load config (${res.status})${body?.error ? `: ${body.error}` : ""}`);
     }
   }
 
@@ -64,20 +65,29 @@ export default function AdminPage() {
     setSaving(true);
     setMessage("");
     const pw = sessionStorage.getItem("admin_token") || password;
-    const res = await fetch(`/api/config?vertical=${vertical}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${pw}`,
-      },
-      body: JSON.stringify(config),
-    });
-    setSaving(false);
-    if (res.ok) {
-      setMessage("Saved successfully!");
-      setTimeout(() => setMessage(""), 3000);
-    } else {
-      setMessage("Failed to save");
+    try {
+      const res = await fetch(`/api/config?vertical=${vertical}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${pw}`,
+        },
+        body: JSON.stringify(config),
+      });
+      if (res.ok) {
+        setMessage("Saved successfully!");
+        setTimeout(() => setMessage(""), 3000);
+      } else {
+        // Surface the API's error (e.g. a missing BLOB_READ_WRITE_TOKEN or an
+        // expired password) instead of a generic failure.
+        const body = (await res.json().catch(() => null)) as { error?: string } | null;
+        const detail = body?.error || res.statusText || `HTTP ${res.status}`;
+        setMessage(`Save failed (${res.status}): ${detail}`);
+      }
+    } catch (err) {
+      setMessage(`Save failed: ${err instanceof Error ? err.message : String(err)}`);
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -111,13 +121,13 @@ export default function AdminPage() {
     const newId = `provider-${Date.now()}`;
     const newProvider: Provider = {
       id: newId,
-      name: "New Provider",
-      tagline: "Provider tagline",
+      name: "New Company",
+      tagline: "Company tagline",
       logo: "/logos/placeholder.svg",
       smallLogo: "",
       highlights: ["Highlight 1", "Highlight 2", "Highlight 3"],
       affiliateUrl: "#",
-      ctaText: "View Plan",
+      ctaText: "Visit Site",
     };
     // Also add to ranking order at the end
     const ranking = config.ranking || { providerOrder: [], positions: [] };
@@ -260,7 +270,7 @@ export default function AdminPage() {
       {/* Top bar */}
       <div className="sticky top-0 z-50 flex items-center justify-between border-b bg-white px-6 py-3 shadow-sm">
         <div className="flex items-center gap-4">
-          <h1 className="text-lg font-bold text-[#191919]">The Top Web Hosting CMS</h1>
+          <h1 className="text-lg font-bold text-[#191919]">Gold IRA Planet CMS</h1>
           <div className="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 py-1 pl-3 pr-1">
             <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">Vertical</span>
             <select
@@ -356,7 +366,11 @@ export default function AdminPage() {
                   </div>
 
                   <div className="mt-6 rounded-lg border border-gray-200 bg-gray-50/50 p-4">
-                    <label className="mb-1 block text-xs font-semibold text-gray-500 uppercase tracking-wider">Promo Popup (mobile)</label>
+                    <label className="mb-1 block text-xs font-semibold text-gray-500 uppercase tracking-wider">Promo Popup (mobile) - disabled site-wide</label>
+                    <p className="mb-2 text-xs font-semibold text-amber-700">
+                      Popups and countdown timers are switched off in code (PROMO_POPUPS_ENABLED in src/lib/promo-popups.ts),
+                      so these settings have no effect on this site.
+                    </p>
                     <p className="mb-3 text-xs text-gray-400">
                       A full-screen mobile popup with this provider&apos;s creative, shown once per session on its comparison
                       and review pages. When two providers on a page both have a popup, the higher <strong>priority</strong> wins.
@@ -441,7 +455,7 @@ export default function AdminPage() {
                           <input
                             value={r.title}
                             onChange={(e) => updateTrustpilotReview(index, ri, "title", e.target.value)}
-                            placeholder="Review title (e.g. Lost 22 lbs in 3 months)"
+                            placeholder="Review title - verbatim from Trustpilot"
                             className="mb-2 w-full rounded border px-3 py-2 text-sm focus:border-[#B8862B] focus:outline-none"
                           />
                           <textarea
@@ -786,11 +800,11 @@ export default function AdminPage() {
                   />
 
                   <div className="mt-4">
-                    <Field label="Pricing Summary" value={review.pricingSummary} onChange={(v) => updateReview(index, "pricingSummary", v)} />
+                    <Field label="Fees Summary" value={review.pricingSummary} onChange={(v) => updateReview(index, "pricingSummary", v)} />
                   </div>
 
                   <ArrayField
-                    label="Treatment Options"
+                    label="Products & Services"
                     items={review.treatmentOptions}
                     onUpdate={(i, v) => updateReviewArrayItem(index, "treatmentOptions", i, v)}
                     onAdd={() => addReviewArrayItem(index, "treatmentOptions")}
@@ -1182,7 +1196,7 @@ export default function AdminPage() {
                   provider1Id: config.providers[0]?.id ?? "",
                   provider2Id: config.providers[1]?.id ?? "",
                   title: "Provider 1 vs Provider 2: Which Is Better?",
-                  subtitle: "Compare pricing, performance, and overall value side by side.",
+                  subtitle: "Compare minimums, fees, buyback terms and track record side by side.",
                   description: "",
                   intro: "",
                   verdict: "",
@@ -1190,14 +1204,16 @@ export default function AdminPage() {
                   verdictLoserPoints: [""],
                   winnerId: "",
                   categories: [
-                    { name: "Pricing & Value", winner: "tie" as const, explanation: "", supportingPoints: [] },
-                    { name: "Performance", winner: "tie" as const, explanation: "", supportingPoints: [] },
-                    { name: "Support", winner: "tie" as const, explanation: "", supportingPoints: [] },
+                    { name: "Minimum investment", winner: "tie" as const, explanation: "", supportingPoints: [] },
+                    { name: "Fees & transparency", winner: "tie" as const, explanation: "", supportingPoints: [] },
+                    { name: "Guarantees & buyback", winner: "tie" as const, explanation: "", supportingPoints: [] },
+                    { name: "Track record & reviews", winner: "tie" as const, explanation: "", supportingPoints: [] },
                   ],
                   features: [
-                    { feature: "Starting price", provider1Value: "", provider2Value: "" },
-                    { feature: "Renewal price", provider1Value: "", provider2Value: "" },
-                    { feature: "Storage", provider1Value: "", provider2Value: "" },
+                    { feature: "Minimum investment", provider1Value: "", provider2Value: "" },
+                    { feature: "Setup fee", provider1Value: "", provider2Value: "" },
+                    { feature: "Yearly fees", provider1Value: "", provider2Value: "" },
+                    { feature: "Buyback", provider1Value: "", provider2Value: "" },
                   ],
                 };
                 setConfig({ ...config, battles: [...(config.battles ?? []), newBattle] });
@@ -1212,7 +1228,7 @@ export default function AdminPage() {
         {/* Pages (Landing Pages) Tab */}
         {activeTab === "pages" && (
           <div className="space-y-4">
-            <p className="text-xs text-gray-400">Create comparison landing pages (e.g. /best-wordpress-hosting, /best-cheap-web-hosting). Same layout as the homepage but with custom hero text and provider ranking.</p>
+            <p className="text-xs text-gray-400">Create comparison landing pages (e.g. /best-gold-ira-for-small-accounts, /best-silver-ira-companies). Same layout as the homepage but with custom hero text and provider ranking.</p>
             {(config.landingPages ?? []).map((lp, index) => {
               const updateLP = (patch: Record<string, unknown>) => {
                 const landingPages = [...(config.landingPages ?? [])];
@@ -1981,10 +1997,12 @@ export default function AdminPage() {
               <p className="mb-4 text-xs text-gray-400">Drag providers to set the exact result order for each priority. When set, this overrides the algorithm. Leave empty to use automatic scoring.</p>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {[
-                  { key: "cost", label: "Lowest Monthly Cost" },
-                  { key: "medical", label: "Best Performance" },
-                  { key: "online", label: "Best Support" },
-                  { key: "personalized", label: "Flexible Plans" },
+                  // Keys are the template's quiz-priority ids (kept for config
+                  // compatibility); labels are the gold IRA meanings.
+                  { key: "cost", label: "Lowest Fees" },
+                  { key: "medical", label: "Best Track Record" },
+                  { key: "online", label: "Best Education & Support" },
+                  { key: "personalized", label: "Lowest Minimum" },
                 ].map(({ key, label }) => {
                   const overrides = config.quiz.resultOverrides ?? {};
                   const order = overrides[key] ?? [];
@@ -2228,6 +2246,9 @@ function ImageField({
     if (res.ok) {
       const data = await res.json();
       onChange(data.url);
+    } else {
+      const body = (await res.json().catch(() => null)) as { error?: string } | null;
+      alert(`Upload failed (${res.status})${body?.error ? `: ${body.error}` : ""}`);
     }
     setUploading(false);
   }

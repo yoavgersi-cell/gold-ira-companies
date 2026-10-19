@@ -3,7 +3,7 @@
  *
  * Usage:
  *   import { trackEvent, trackOnce } from "@/lib/analytics";
- *   trackEvent("ProviderClick", { provider: "altrx" });
+ *   trackEvent("ProviderClick", { provider: "goldco" });
  *   trackOnce("StartMatch");  // fires only once per session
  */
 

@@ -1,15 +1,8 @@
 // ───── Geo-region scaffold ─────
 //
-// The hub serves the US market at the root (treatmentshub.com/<vertical>/...).
-// A second market - the UK - lives under a "/uk" path prefix (a SUBDIRECTORY,
-// deliberately, so it inherits the domain's authority instead of starting a
-// separate .co.uk from zero).
-//
-// UK is UNPUBLISHED until (a) real, UK-verified provider/price data exists and
-// (b) a UK-compliant content model is in place - UK law bans advertising
-// prescription-only weight-loss medicines (and even naming them / "GLP-1") to
-// the public, so UK content cannot mirror the US price-comparison pages. Until
-// then, /uk/* renders a noindex placeholder and never serves US content.
+// The site serves the US market at the root. The template supports a second
+// market under a path prefix (e.g. "/uk"), but gold IRAs are a US-only
+// product (IRS rules), so only the US region is published.
 //
 // To go live for a region: add its id to PUBLISHED_REGIONS and build the
 // region-aware routing/config for it. Everything else keys off this file.
@@ -32,11 +25,7 @@ export const REGIONS: Region[] = [
 
 export const DEFAULT_REGION = "us";
 
-// Live, indexable regions. GB is published: its content is service-framed and
-// compliance-safe (no medicine names / "GLP-1" / injection / efficacy), and it
-// has its own UK chrome. Individual /uk paths still gate their own robots (only
-// built pages are indexable; placeholders stay noindex).
-// Single-vertical web hosting build serves the US market only - there are no /uk routes
+// Live, indexable regions. This gold IRA site serves the US market only - there are no /uk routes
 // on this site, so GB must stay out of PUBLISHED_REGIONS, or hreflang would
 // advertise en-GB alternates at /uk/* URLs that 404.
 export const PUBLISHED_REGIONS = ["us"];
@@ -48,7 +37,7 @@ const GB_REGION = regionById("gb")!;
 
 // The region a hub pathname belongs to, by its leading segment, plus the path
 // with the region prefix stripped so downstream vertical routing is unchanged.
-// "/uk/weight-loss" -> { region: gb, rest: "/weight-loss" }; anything else -> us.
+// "/uk/reviews" -> { region: gb, rest: "/reviews" }; anything else -> us.
 export function regionFromPathname(pathname: string): { region: Region; rest: string } {
   if (pathname === GB_REGION.pathPrefix || pathname.startsWith(`${GB_REGION.pathPrefix}/`)) {
     return { region: GB_REGION, rest: pathname.slice(GB_REGION.pathPrefix.length) || "/" };
@@ -56,7 +45,7 @@ export function regionFromPathname(pathname: string): { region: Region; rest: st
   return { region: US_REGION, rest: pathname };
 }
 
-// hreflang language map for a region-relative content path (e.g. "/weight-loss"
+// hreflang language map for a region-relative content path (e.g. "/reviews"
 // or "/" for the home). Only PUBLISHED regions are advertised, plus an
 // x-default pointing at the US version. When GB is published this map grows to
 // include en-GB automatically - no per-page changes needed.

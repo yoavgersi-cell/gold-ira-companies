@@ -23,11 +23,11 @@ export interface YoutubeReviewEntry {
   videoId: string;
   // The vertical the video was captured for - the section renders only when
   // the page's vertical matches, so a provider-id collision across verticals
-  // (e.g. maximus in hair-loss and trt) can't surface the wrong video.
+  // can't surface the wrong video.
   vertical: string;
 }
 
-// Empty on this web hosting build - add an entry only for a real, operator-supplied and
+// Empty on this gold IRA build - add an entry only for a real, operator-supplied and
 // watched video, keyed by provider id with the matching vertical.
 export const YOUTUBE_REVIEWS: Record<string, YoutubeReviewEntry> = {};
 

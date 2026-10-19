@@ -36,7 +36,7 @@ export function LandingEditorial({ sections }: LandingEditorialProps) {
           href="/articles"
           className="font-semibold text-[#1E3A5F] hover:underline"
         >
-          web hosting guides
+          gold IRA guides
         </Link>{" "}
         for more research and guides.
       </p>

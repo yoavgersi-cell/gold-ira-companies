@@ -18,7 +18,7 @@ interface StickyProvider {
 // The reassurance strip is deliberately provider-agnostic (no per-provider star
 // ratings): some providers carry mediocre Trustpilot scores, and surfacing those
 // at the point of action would suppress clicks rather than lift them. Instead it
-// leans on friction-reducers that are true for every web hosting provider we list.
+// carries one honest tip and the affiliate disclosure, true for every company.
 // `recommendedId` (optional, CRO prototype): marks one provider with a small
 // "Our pick" caption and keeps it solid while the other switches to an equally
 // tappable outlined style - a hierarchy, not a demotion. Both stay fully
@@ -53,14 +53,12 @@ export function BattleStickyCta({
         <div className="h-[3px] bg-gradient-to-r from-[#B8862B] via-[#EBDDB5] to-[#B8862B]" />
 
         <div className="px-3 pt-2.5 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
-          {/* Reassurance strip - evergreen, always-positive, provider-agnostic */}
+          {/* Tip + disclosure strip - evergreen and company-agnostic */}
           <div className="mb-2.5 flex items-center justify-center gap-1.5 text-[11px] font-medium text-gray-500">
             <Check className="h-3.5 w-3.5 shrink-0 text-emerald-500" strokeWidth={2.5} />
-            <span>Free SSL</span>
+            <span>Get fees and markups in writing</span>
             <span className="text-gray-500">·</span>
-            <span>24/7 support</span>
-            <span className="text-gray-500">·</span>
-            <span>Compare plans</span>
+            <span>We may be paid for referrals</span>
           </div>
 
           {/* Both providers - equal weight by default; subtle hierarchy when a

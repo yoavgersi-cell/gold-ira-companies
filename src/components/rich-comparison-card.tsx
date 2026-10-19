@@ -20,11 +20,11 @@ export interface RichCardProduct {
 }
 
 // Large, editorial-style ranking card modeled on the best affiliate comparison
-// pages: a prominent score, a trust pill, the treatments offered, transparent
-// starting price, a scannable key-facts grid, a strong CTA rail, and an intro
-// that links through to the full review. Every value is grounded in real config
-// data - scores, prices, treatments, features and trust signals all come from
-// the per-provider research. Nothing here is fabricated.
+// pages: a prominent score, a trust pill, the products and services offered,
+// the first fee line, a scannable key-facts grid, a strong CTA rail, and an
+// intro that links through to the full review. Every value is grounded in real
+// config data - scores, fees, products, features and trust signals all come
+// from the per-company research. Nothing here is fabricated.
 export function RichComparisonCard({
   product,
   review,
@@ -35,18 +35,14 @@ export function RichComparisonCard({
   linkPrefix?: string;
 }) {
   const stars = product.starRating ?? Math.round(product.rating / 2);
-  const treatments = review?.treatmentOptions ?? [];
+  // Legacy field name: treatmentOptions holds "Products & services".
+  const products = review?.treatmentOptions ?? [];
   const facts = (review?.keyFeatures ?? product.highlights).slice(0, 4);
   const pills = (review?.trustBadges ?? []).slice(0, 3);
   const startingPlan = review?.pricingPlans?.[0];
   const reviewHref = `${linkPrefix}/reviews/${review?.slug ?? product.id}`;
   const intro = review?.reviewIntro ?? review?.shortSummary ?? product.tagline;
 
-  // FDA disclaimer only where it's actually warranted - i.e. the offering
-  // includes compounded medication. Detected from real copy, never assumed.
-  const mentionsCompounded = /compounded/i.test(
-    `${review?.pricingSummary ?? ""} ${treatments.join(" ")}`,
-  );
 
   return (
     <article className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
@@ -120,18 +116,18 @@ export function RichComparisonCard({
         {/* ── Body: facts (left) + CTA rail (right) ── */}
         <div className="mt-4 flex flex-col gap-4 sm:mt-5 sm:gap-5 lg:flex-row lg:items-start">
           <div className="min-w-0 flex-1 space-y-3.5 sm:space-y-4">
-            {/* Info block: treatments + starting price */}
-            {(treatments.length > 0 || startingPlan?.price) && (
+            {/* Info block: products + first fee line (pricingPlans are fee lines) */}
+            {(products.length > 0 || startingPlan?.price) && (
               <div className="rounded-xl border border-gray-100 bg-[#F7F8FA] p-3.5 sm:p-4">
-                {treatments.length > 0 && (
+                {products.length > 0 && (
                   <div>
-                    <p className="text-[10.5px] font-bold uppercase tracking-wide text-gray-500 sm:text-[11px]">Treatments offered</p>
-                    <p className="mt-1 text-[12.5px] leading-snug text-gray-800 line-clamp-2 sm:line-clamp-none sm:text-[13.5px]">{treatments.slice(0, 4).join(" · ")}</p>
+                    <p className="text-[10.5px] font-bold uppercase tracking-wide text-gray-500 sm:text-[11px]">Products &amp; services</p>
+                    <p className="mt-1 text-[12.5px] leading-snug text-gray-800 line-clamp-2 sm:line-clamp-none sm:text-[13.5px]">{products.slice(0, 4).join(" · ")}</p>
                   </div>
                 )}
                 {startingPlan?.price && (
-                  <div className={treatments.length > 0 ? "mt-2.5 border-t border-gray-200 pt-2.5 sm:mt-3 sm:pt-3" : ""}>
-                    <p className="text-[10.5px] font-bold uppercase tracking-wide text-gray-500 sm:text-[11px]">Starting price</p>
+                  <div className={products.length > 0 ? "mt-2.5 border-t border-gray-200 pt-2.5 sm:mt-3 sm:pt-3" : ""}>
+                    <p className="text-[10.5px] font-bold uppercase tracking-wide text-gray-500 sm:text-[11px]">{startingPlan.name || "Fees"}</p>
                     <p className="mt-1 flex items-baseline gap-2 text-gray-900">
                       {startingPlan.regularPrice && (
                         <span className="text-[13px] font-medium text-gray-500 line-through sm:text-[14px]">{startingPlan.regularPrice}</span>
@@ -139,11 +135,9 @@ export function RichComparisonCard({
                       <span className="text-[19px] font-extrabold text-[#191919] sm:text-[20px]">{startingPlan.price}</span>
                       {startingPlan.unit && <span className="text-[12.5px] font-semibold text-gray-500 sm:text-[13px]">{startingPlan.unit}</span>}
                     </p>
-                    {mentionsCompounded && (
-                      <p className="mt-1.5 text-[10.5px] leading-snug text-gray-500 sm:text-[11px]">
-                        *Compounded medications are not FDA-approved.
-                      </p>
-                    )}
+                    <p className="mt-1.5 text-[10.5px] leading-snug text-gray-500 sm:text-[11px]">
+                      Approximate - confirm current fees in writing.
+                    </p>
                   </div>
                 )}
               </div>
@@ -168,9 +162,8 @@ export function RichComparisonCard({
           <div className="flex shrink-0 flex-row items-center gap-3 lg:w-[220px] lg:flex-col lg:items-stretch lg:gap-2.5 lg:rounded-xl lg:bg-[#F7F8FA] lg:p-4">
             {startingPlan?.price && (
               <div className="shrink-0 leading-tight lg:text-center">
-                <span className="hidden text-[12.5px] text-gray-500 lg:block">Pricing starts at</span>
+                <span className="hidden text-[12.5px] text-gray-500 lg:block">{startingPlan.name || "Fees"}</span>
                 <p className="whitespace-nowrap text-gray-900">
-                  <span className="text-[11px] font-semibold text-gray-500 lg:hidden">from </span>
                   <span className="text-[20px] font-extrabold text-[#191919] lg:text-[22px]">{startingPlan.price}</span>
                   {startingPlan.unit && <span className="text-[12px] font-semibold text-gray-500 lg:text-[13px]">{startingPlan.unit}</span>}
                 </p>

@@ -149,7 +149,7 @@ export async function battleMetadata(slug: string, ctx: SiteContext): Promise<Me
   };
 }
 
-/// Read-more treatment for long editorial copy: the first `n` sentences stay
+/// Read-more behavior for long editorial copy: the first `n` sentences stay
 // visible, the remainder renders inside a native <details> element - so ALL
 // content is in the initial HTML/DOM for search engines, and the toggle is
 // purely visual (no JS, no fetch). Sentence splitting and key-fact bolding
@@ -271,7 +271,7 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
   const battle = (config.battles ?? []).find((b) => b.slug === slug);
   if (!battle) return notFound();
 
-  // Collapse reverse-pair duplicates (e.g. embody-vs-altrx ↔ altrx-vs-embody):
+  // Collapse reverse-pair duplicates (e.g. goldco-vs-augusta-precious-metals ↔ augusta-precious-metals-vs-goldco):
   // both slugs render the same matchup and compete in search. 308-redirect any
   // non-canonical slug to the single canonical (alphabetically-first) slug for
   // this provider pair so only one URL is indexed and its authority is pooled.
@@ -321,7 +321,7 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
   // offer come from that provider's own real affiliate data.
   const promoPopup = resolvePromoPopup([p1, p2]);
 
-  // CRO layer (rolled out to all battles after the embody-vs-ro prototype):
+  // CRO layer (applied to all battles):
   // quick answer, fit finder, Reddit synthesis, read-more accordions (content
   // stays fully in the DOM via <details>) and sticky-CTA hierarchy. All
   // data-driven from each battle's own verdict fields - presentation only.
@@ -1194,9 +1194,8 @@ export async function BattlePageView({ slug, ctx }: { slug: string; ctx: SiteCon
         recommendedId={verdictWinner?.id}
       />
 
-      {/* Mobile-only promo popup - the highest-priority featured provider that
-          has a creative (e.g. Embody outranks TrimRx on an Embody-vs-TrimRx
-          page, so TrimRx shows on all its other comparisons but not that one) */}
+      {/* Promo popup - disabled site-wide (PROMO_POPUPS_ENABLED), so
+          resolvePromoPopup returns null and nothing renders. */}
       {promoPopup && (
         <PromoPopup
           spec={promoPopup}

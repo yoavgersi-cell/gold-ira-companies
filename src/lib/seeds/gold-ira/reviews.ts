@@ -185,6 +185,8 @@ export const reviews: ReviewData[] = [
   // ── American Gold and Silver Group ───────────────────────────────────────
   // Not covered in RESEARCH.md, and a web search (Oct 2026) found no
   // independent reviews, ratings or fee data for this exact company name.
+  // Its Trustpilot profile ("American Gold Group", claimed Jul 2026) showed
+  // 0 reviews / no score on Oct 19, 2026 (operator screenshot).
   // Everything below is either the company's advertised offer or a generic
   // caution. OPERATOR: fill in founding year, HQ, minimum and fees from the
   // partner brief and verify on BBB.org / Trustpilot before launch.
@@ -222,7 +224,8 @@ export const reviews: ReviewData[] = [
       "Offers both gold and silver IRAs",
     ],
     cons: [
-      "Little independent information - no third-party ratings or fee data found",
+      "No customer reviews yet - its Trustpilot profile (as American Gold Group, claimed July 2026) showed 0 reviews in October 2026",
+      "No third-party fee data found",
       "Fees, minimum and founding year are not published",
       "Markups on coins and bars are not disclosed upfront",
       "Free-silver offer likely depends on purchase size",

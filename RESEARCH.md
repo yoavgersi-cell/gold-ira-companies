@@ -65,6 +65,10 @@ Source material for the site content. Every company figure comes from search-sur
 - **Fees (Bankrate 2025):** $50 setup, $125/yr maintenance, plus $100 pooled or $150 segregated storage.
 - **Prices:** published online, so it works as a low-cost do-it-yourself alternative.
 
+### American Gold and Silver Group
+- **Trustpilot:** listed as "American Gold Group" (Gold Dealer), profile claimed July 2026, **0 reviews and no score** as of Oct 19, 2026 (operator screenshot).
+- **Everything else** (minimum, fees, founding year): not published; only the company's advertised offers are known.
+
 ### Not ranked: Lear Capital (1997 [K])
 - **NY AG:** sued in 2021 over undisclosed markups of up to 33% on $43M of sales; paid $5–6M.
 - **LA City Attorney:** $2.75M settlement (2022).

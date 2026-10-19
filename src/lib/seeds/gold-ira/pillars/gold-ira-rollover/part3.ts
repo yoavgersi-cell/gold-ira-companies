@@ -155,6 +155,6 @@ export const part3: ArticleSection[] = [
 <p class="small"><em>Sources: findbullionprices.com, SD Bullion and other retail price trackers; online retail prices, not phone-sales IRA pricing.</em></p>
 <p>Phone-based gold IRA dealers usually charge more than these online retail premiums, because they include sales and service costs. One dealer, American Bullion, disclosed spreads of 10% on bullion inside an IRA, 20% on collectible coins and 23% on proof coins. That gap - between a common bullion coin and a "premium" proof or semi-numismatic coin - is where most overpaying happens. If a salesperson steers you toward proof coins or exclusive "limited" products, ask for the spread in writing and compare it with a plain bullion Eagle or Maple Leaf.</p>
 <h3>Gold, silver or a mix?</h3>
-<p>Silver is more volatile than gold, and its storage costs more per dollar because it is bulkier. Silver hit a reported record of about $121.62 in January 2026 and was about $57.70 on October 19, 2026 - a gold-to-silver ratio of roughly 72 to 1. If you are considering silver, see our <a href="/articles/silver-ira-guide">silver IRA guide</a>.</p>`,
+<p>Silver is more volatile than gold, and its storage costs more per dollar because it is bulkier. Silver hit a reported record of about $121.62 in January 2026 and was about $57.70 on October 19, 2026 - a gold-to-silver ratio of roughly 72 to 1. If you are considering silver, see our <a href="/articles/silver-ira">silver IRA guide</a>.</p>`,
   },
 ];

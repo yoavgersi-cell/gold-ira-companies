@@ -27,7 +27,7 @@ export const part1: ArticleSection[] = [
 </table>
 <h3>Who these rules apply to</h3>
 <p>Everything in this guide applies to <strong>physical metal held inside an IRA</strong>. It does not apply to gold you buy with after-tax money and keep in your own safe, and it does not apply to gold exchange-traded funds held in an ordinary brokerage IRA. Those are different products with different rules - see our comparison of a <a href="/articles/gold-ira-vs-gold-etf">gold IRA vs a gold ETF</a> if you are weighing the two.</p>
-<p>The same rules also apply to silver, platinum and palladium. People say "gold IRA" as shorthand, but a precious metals IRA can hold any mix of the four eligible metals. If silver is your main interest, our <a href="/articles/silver-ira-guide">silver IRA guide</a> covers the silver-specific details.</p>
+<p>The same rules also apply to silver, platinum and palladium. People say "gold IRA" as shorthand, but a precious metals IRA can hold any mix of the four eligible metals. If silver is your main interest, our <a href="/articles/silver-ira">silver IRA guide</a> covers the silver-specific details.</p>
 <h3>A note on dates and numbers</h3>
 <p>All dollar limits in this guide are the 2026 figures the IRS published in Notice 2025-67. Gold prices are approximate and dated - gold traded around $4,170 an ounce on October 19, 2026, after a record of about $5,595 intraday on January 29, 2026. We use round prices in the worked examples to keep the arithmetic easy to follow. Tax rules change; check the current IRS publications before acting, and treat this guide as general information rather than advice for your situation.</p>`,
   },

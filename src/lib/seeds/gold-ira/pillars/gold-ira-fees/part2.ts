@@ -41,7 +41,7 @@ export const part2: ArticleSection[] = [
 </table>
 <p>The crossover in this illustration is at about $73,000 ($110 / 0.0015). Below it, percentage pricing is cheaper; above it, flat pricing wins. Percentage pricing also means your storage bill rises when gold rises. If gold went up 50%, a 0.15% storage fee would go up 50% too.</p>
 <h3>Silver needs more room - and sometimes costs more</h3>
-<p>With silver at about $57.70 an ounce and gold at about $4,170 in mid-October 2026, the same dollar amount of silver weighs about 72 times as much as gold. Flat-fee storage does not care, but some depositories and custodians charge more for large silver holdings or have separate silver pricing, and segregated silver can be expensive. One review reported a silver IRA quote of $225 plus $250 for Texas storage at one company. If you are considering silver, read our <a href="/articles/silver-ira-guide">silver IRA guide</a> and ask specifically about silver storage pricing.</p>`,
+<p>With silver at about $57.70 an ounce and gold at about $4,170 in mid-October 2026, the same dollar amount of silver weighs about 72 times as much as gold. Flat-fee storage does not care, but some depositories and custodians charge more for large silver holdings or have separate silver pricing, and segregated silver can be expensive. One review reported a silver IRA quote of $225 plus $250 for Texas storage at one company. If you are considering silver, read our <a href="/articles/silver-ira">silver IRA guide</a> and ask specifically about silver storage pricing.</p>`,
   },
   {
     heading: "Depository storage rates compared",

@@ -164,7 +164,7 @@ export const part5: ArticleSection[] = [
 <tr><td>Plan taxes and RMDs</td><td><a href="/articles/gold-ira-taxes-and-rmds">Gold IRA taxes and RMDs</a>, <a href="/articles/roth-gold-ira">Roth gold IRA</a></td></tr>
 <tr><td>Compare gold IRAs with ETFs</td><td><a href="/articles/gold-ira-vs-gold-etf">Gold IRA vs gold ETF</a></td></tr>
 <tr><td>Decide how much to hold</td><td><a href="/articles/how-much-gold-in-retirement-portfolio">How much gold in a retirement portfolio</a></td></tr>
-<tr><td>Consider silver</td><td><a href="/articles/silver-ira-guide">Silver IRA guide</a></td></tr>
+<tr><td>Consider silver</td><td><a href="/articles/silver-ira">Silver IRA guide</a></td></tr>
 <tr><td>Avoid scams and storage traps</td><td><a href="/articles/gold-ira-scams-red-flags">Gold IRA scams and red flags</a>, <a href="/articles/can-you-store-ira-gold-at-home">Can you store IRA gold at home?</a></td></tr>
 <tr><td>Compare companies</td><td><a href="/">Our rankings</a>, <a href="/how-we-rank">how we rank</a>, and our reviews of <a href="/reviews/augusta-precious-metals">Augusta</a>, <a href="/reviews/goldco">Goldco</a>, <a href="/reviews/american-hartford-gold">American Hartford Gold</a> and <a href="/reviews/american-gold-and-silver-group">American Gold and Silver Group</a></td></tr>
 </tbody>

@@ -208,7 +208,7 @@ export function EditorialContent({ midSlot }: { midSlot?: React.ReactNode }) {
         &quot;rare&quot; numismatic coins do not qualify. See{" "}
         <Link href="/articles/irs-approved-precious-metals" className={link}>IRS-approved precious metals</Link>{" "}
         and the{" "}
-        <Link href="/articles/silver-ira-guide" className={link}>silver IRA guide</Link>.
+        <Link href="/articles/silver-ira" className={link}>silver IRA guide</Link>.
       </p>
       <p className="mb-8">
         IRA metal must be held by a trustee or custodian in an approved depository.{" "}

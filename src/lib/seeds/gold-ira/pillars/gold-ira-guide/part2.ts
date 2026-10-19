@@ -164,7 +164,7 @@ export const part2: ArticleSection[] = [
 <tr><td>2025</td><td>$40.03</td></tr>
 </tbody>
 </table>
-<p>Silver closed 2025 at about $72, up roughly 145% for the year, and reportedly reached about $121.62 on January 29, 2026 (Metalcharts; we could not independently verify this peak). On October 19, 2026 it traded near <strong>$57.70</strong> - more than 50% below that reported high. The gold-to-silver ratio was about 72 to 1. Silver's bigger swings cut both ways; see our <a href="/articles/silver-ira-guide">silver IRA guide</a>.</p>
+<p>Silver closed 2025 at about $72, up roughly 145% for the year, and reportedly reached about $121.62 on January 29, 2026 (Metalcharts; we could not independently verify this peak). On October 19, 2026 it traded near <strong>$57.70</strong> - more than 50% below that reported high. The gold-to-silver ratio was about 72 to 1. Silver's bigger swings cut both ways; see our <a href="/articles/silver-ira">silver IRA guide</a>.</p>
 <h3>What drove the 2024-2026 run?</h3>
 <p>Analysts generally point to record central-bank buying, strong investment demand (total gold demand hit a record 1,231 tonnes in the first quarter of 2026, according to industry data), inflation worries and geopolitical tension. Forecasts for 2026 were scattered - ING expected an average around $4,325, Goldman Sachs $4,900 and Bank of America $5,000 in published notes. Forecasts are opinions, not promises, and the spread between them shows how uncertain the outlook is. Nobody can tell you whether today's price is high or low.</p>`,
   },

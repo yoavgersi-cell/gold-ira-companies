@@ -39,7 +39,7 @@ export function HeroSection({
       >
         <div className="max-w-[640px] lg:max-w-[900px]" style={{ maxWidth: maxTextWidth !== "640px" ? maxTextWidth : undefined }}>
           {updatedLabel && (
-            <span className="mb-1.5 sm:mb-2 inline-flex items-center gap-1.5 text-[12px] text-gray-600">
+            <span className="mb-2.5 sm:mb-3 inline-flex items-center gap-1.5 text-[12px] text-gray-600">
               <svg className="h-4 w-4 text-green-500" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
               {updatedLabel.includes(":") ? (
                 <>
@@ -57,18 +57,18 @@ export function HeroSection({
           </h1>
 
           {h2 && (
-            <h2 className="mt-1.5 text-[15px] sm:text-[18px] lg:text-[19px] leading-[1.3] font-semibold text-[#191919]">
+            <h2 className="mt-2.5 text-[15px] sm:text-[18px] lg:text-[19px] leading-[1.3] font-semibold text-[#191919]">
               {h2}
             </h2>
           )}
 
           {description && (
-            <p className="mt-2 sm:mt-2.5 text-[13px] sm:text-[14px] leading-[1.55] text-gray-700 max-w-[600px]">
+            <p className="mt-3 sm:mt-3.5 text-[13px] sm:text-[14px] leading-[1.55] text-gray-700 max-w-[600px]">
               {description}
             </p>
           )}
 
-          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-4">
+          <div className="mt-3.5 flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-4">
             {[
               { label: "Fees Compared Side by Side", icon: ShieldCheck },
               { label: "Top-Rated Companies", icon: Star },

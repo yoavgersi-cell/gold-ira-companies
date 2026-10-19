@@ -119,7 +119,7 @@ Source material for the site content. Every company figure comes from search-sur
 - **TSP:** in-service withdrawal at 59½, or after separation from service.
 
 ## Gold price context
-- **Peak:** record close of about $5,318/oz on Jan 29, 2026.
+- **Peak:** record of about $5,595/oz intraday spot on Jan 29, 2026 (Reuters; LBMA PM fix that day $5,405). An earlier note of "$5,318" was unsourced and is corrected.
 - **Now:** about $4,150–4,200/oz in mid-Oct 2026, roughly 20% below the peak.
 - **Demand:** record central-bank buying; total demand a record 1,231t in Q1 2026.
 - **Forecasts:** ING $4,325 average for 2026; Goldman $4,900; BofA $5,000.

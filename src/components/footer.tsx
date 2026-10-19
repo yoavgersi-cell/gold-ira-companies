@@ -20,7 +20,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "What Is a Gold IRA?", href: "/articles/what-is-a-gold-ira" },
       { label: "401(k) to Gold IRA Rollover", href: "/articles/401k-to-gold-ira-rollover" },
-      { label: "Gold IRA Fees Explained", href: "/articles/gold-ira-fees-explained" },
+      { label: "Gold IRA Fees Explained", href: "/articles/gold-ira-fees" },
       { label: "IRS-Approved Precious Metals", href: "/articles/irs-approved-precious-metals" },
       { label: "Gold IRA Scams & Red Flags", href: "/articles/gold-ira-scams-red-flags" },
       { label: "Can You Store IRA Gold at Home?", href: "/articles/can-you-store-ira-gold-at-home" },

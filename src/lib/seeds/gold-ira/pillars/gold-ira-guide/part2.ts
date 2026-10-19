@@ -7,7 +7,7 @@ import type { ArticleSection } from "@/lib/config";
 export const part2: ArticleSection[] = [
   {
     heading: "2026 contribution limits for gold IRAs",
-    body: `<p>A gold IRA follows exactly the same contribution limits as any other IRA. For 2026, the IRS raised most limits in <a href="https://www.irs.gov/pub/irs-drop/n-25-67.pdf" target="_blank" rel="noopener noreferrer">Notice 2025-67</a>. Most gold IRAs are funded by rollovers, which have <strong>no annual limit</strong>, but the numbers below matter if you plan to add new money each year or are still contributing to a workplace plan.</p>
+    body: `<p>A gold IRA follows exactly the same contribution limits as any other IRA. For 2026, the IRS raised most limits in <a href="https://www.irs.gov/retirement-plans/cola-increases-for-dollar-limitations-on-benefits-and-contributions" target="_blank" rel="noopener noreferrer">Notice 2025-67</a>. Most gold IRAs are funded by rollovers, which have <strong>no annual limit</strong>, but the numbers below matter if you plan to add new money each year or are still contributing to a workplace plan.</p>
 <table>
 <thead><tr><th>Account</th><th>Base limit (2026)</th><th>Catch-up</th><th>Total with catch-up</th></tr></thead>
 <tbody>

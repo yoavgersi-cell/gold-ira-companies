@@ -29,7 +29,7 @@ Source material for the site content. Every company figure comes from search-sur
 ### American Hartford Gold (2015 [K], family-owned, Los Angeles)
 - **Minimum:** $10k.
 - **Fees:** $230 application, plus $225/yr non-segregated or $275/yr segregated. Fees are not posted online.
-- **Ratings:** BBB A+ (4.88 customer score). Trustpilot 4.7–4.8 (1,300+ reviews).
+- **Ratings:** BBB A+ (4.88 customer score). Trustpilot 4.9 from 1,947 reviews (operator screenshot of the live profile, Oct 19, 2026).
 - **Promo:** storage free for 1 yr at $50k+ or 3 yrs at $100k+ (Yahoo); elsewhere "up to $10k/$15k/$25k in free silver".
 - **Buyback:** commitment with no liquidation fee (advertised [K]).
 - **Watch-outs:** BestGuide scores it 3.2/5, citing whistleblower complaints and advertising practices.

@@ -22,7 +22,7 @@ export const reviews: ReviewData[] = [
       "100% satisfaction guarantee with a 7-day full refund (company claim)",
       "Lowest price guarantee and no buy-back fees (company claim)",
       "Up to $25,000 in free silver on qualifying orders (promo)",
-      "A+ BBB and 4.7-4.8 on Trustpilot across 1,300+ reviews (reported)",
+      "A+ BBB (reported) and 4.9 on Trustpilot from 1,947 reviews (Oct 2026)",
     ],
     pricingSummary:
       "Approximate only - American Hartford Gold does not post its fees online. Third-party sources report a $230 application fee plus about $225 a year for non-segregated storage or $275 a year for segregated storage. Yahoo Finance has reported storage fees waived for 1 year on accounts of $50,000 or more, or 3 years at $100,000 or more, and the company currently advertises up to $25,000 in free silver on qualifying orders - promotions like these depend on how much you buy. The company does not publish its markups on coins and bars, which is usually the biggest cost. Ask for the full fee schedule, the spread on each product and the terms of the refund and price guarantees in writing before you fund the account.",

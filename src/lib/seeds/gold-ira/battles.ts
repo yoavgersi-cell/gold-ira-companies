@@ -65,7 +65,7 @@ export const battles: BattleData[] = [
         name: "Track record & reviews",
         winner: "provider2",
         explanation:
-          "Goldco has operated since 2006, shows Trustpilot 4.8 across 1,585 reviews (Mar 2025) and says it has placed over $3.5 billion. American Hartford Gold has a BBB A+ and Trustpilot 4.7-4.8, but BestGuide scores it 3.2/5, citing whistleblower complaints and advertising practices.",
+          "Goldco has operated since 2006, shows Trustpilot 4.8 across 1,585 reviews (Mar 2025) and says it has placed over $3.5 billion. American Hartford Gold has a BBB A+ and Trustpilot 4.9 (1,947 reviews, Oct 2026), but BestGuide scores it 3.2/5, citing whistleblower complaints and advertising practices.",
         supportingPoints: ["Goldco: since 2006, Trustpilot 4.8", "AHG: BBB A+, BestGuide 3.2/5"],
       },
     ],
@@ -129,7 +129,7 @@ export const battles: BattleData[] = [
         name: "Track record & reviews",
         winner: "provider1",
         explanation:
-          "Augusta reports BBB A+, BCA AAA and Trustpilot 4.8-4.9, and says it has 5,000+ five-star reviews. American Hartford Gold has a BBB A+ and Trustpilot 4.7-4.8, but BestGuide scores it 3.2/5, citing whistleblower complaints and advertising practices.",
+          "Augusta reports BBB A+, BCA AAA and Trustpilot 4.8-4.9, and says it has 5,000+ five-star reviews. American Hartford Gold has a BBB A+ and Trustpilot 4.9 (1,947 reviews, Oct 2026), but BestGuide scores it 3.2/5, citing whistleblower complaints and advertising practices.",
         supportingPoints: ["Augusta: Trustpilot 4.8-4.9", "AHG: BestGuide 3.2/5"],
       },
     ],
@@ -223,7 +223,7 @@ export const battles: BattleData[] = [
       "American Hartford Gold is our pick for most savers: it has a published $10,000 minimum, a BBB A+ rating and a larger advertised free-silver offer. American Gold and Silver Group advertises the same kind of guarantees, so it may be worth a quote if you want a second option - but ask for its minimum, fees and markup in writing, since we could not confirm them. Whichever you choose, read the written terms behind any guarantee.",
     verdictWinnerPoints: [
       "Published $10,000 minimum",
-      "BBB A+ and Trustpilot 4.7-4.8 (1,300+ reviews)",
+      "BBB A+ and Trustpilot 4.9 (1,947 reviews)",
       "Up to $25,000 in free silver on qualifying orders (advertised)",
     ],
     verdictLoserPoints: [
@@ -265,7 +265,7 @@ export const battles: BattleData[] = [
         name: "Track record & reviews",
         winner: "provider1",
         explanation:
-          "American Hartford Gold has operated since 2015, holds a BBB A+ and shows Trustpilot 4.7-4.8, though BestGuide scores it 3.2/5. We found little independent review history for American Gold and Silver Group - check BBB.org and Trustpilot yourself.",
+          "American Hartford Gold has operated since 2015, holds a BBB A+ and shows Trustpilot 4.9 from 1,947 reviews, though BestGuide scores it 3.2/5. We found little independent review history for American Gold and Silver Group - check BBB.org and Trustpilot yourself.",
         supportingPoints: ["AHG: since 2015, BBB A+", "AGSG: limited public reviews"],
       },
     ],

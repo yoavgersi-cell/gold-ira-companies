@@ -180,8 +180,28 @@ export const goldIraConfig: SiteConfig = {
       ],
       affiliateUrl: "https://www.augustapreciousmetals.com/",
       ctaText: "Visit Site",
-      // Third-party snapshot (2025-26): ~4.8-4.9. Refresh from the live profile.
-      trustpilotRating: "4.9",
+      // Trustpilot profile snapshot supplied by the operator (Oct 19, 2026):
+      // 4.8 from 376 reviews. Reviews below are copied verbatim (typos kept)
+      // from the public profile, including a 4-star one; dates are the
+      // posting dates.
+      trustpilotRating: "4.8",
+      trustpilotReviewCount: "376",
+      trustpilotReviews: [
+        { title: "My great experience with Autusta Precious Metals", text: "I've dealt with other precious metals companies but Augusta Precious Metals, by far, exceeds all expectations. They take the time to explain all aspects of the purchasing procedure.", name: "Al Norton", location: "US", rating: 5, date: "Oct 14, 2026" },
+        { title: "Interaction with Staff at Augusta Precious Metals", text: "The Augusta staff I interacted with were knowledgable and professional. No one exerted hard-sell tactics or other pressure in an attempt to get me to move forward with any purchase transaction with Augusta. Instead, they provided valuable educational information about purchasing and owning precious metals designed to support me in making my own decisions. They also welcomed my questions and answered all of them clearly and completely, making the overall process seemless.", name: "Z.", location: "US", rating: 5, date: "Oct 14, 2026" },
+        { title: "Augusta responds quickly and conducts...", text: "Augusta responds quickly and conducts business in a very professional way. My experience doing business with them has been excellent.", name: "Paul Dawes", location: "US", rating: 5, date: "Oct 12, 2026" },
+        { title: "The experience with Alan was good", text: "The experience with Alan was good. He explained the process concisely and I understood what to expect when the lady called to confirm my needs and what steps to take to complete the transaction.", name: "Fred Rogge", location: "US", rating: 4, date: "Oct 9, 2026" },
+        { title: "Augusta Precious Metals employees are...", text: "Augusta Precious Metals employees are always knowledgeable and very helpful", name: "Sara Kruer", location: "US", rating: 5, date: "Oct 8, 2026" },
+        { title: "Augusta Metals sets the standard", text: "I am new to opening a precious metals self directed IRA , but like most I was researching numerous metal companies out there and becoming more and more confused. The one thing that I noticed was that Augusta was almost always ranked or mentioned as the #1 in the industry. When I reached out to Augusta I could see why they are held in such high regard, and they are true to their business plan of wanting to educate a client before moving forward. If you call Augusta you will not regret it , you will rest easy and feel self assured that you made a great decision in your financial situation.", name: "Bill", location: "US", rating: 5, date: "Sep 28, 2026" },
+        { title: "Augusta Metals - Great Company for Coin Buyback", text: "Augusta Metals made buying back my gold and silver coins a very straightforward process. The team was extremely helpful and answered all questions I had. Once the process started, it took less than 10 days to receive a check.\n\nI would definitely recommend them if you need to sell your coins.", name: "Pete A", location: "US", rating: 5, date: "Sep 27, 2026" },
+        { title: "AMP help me all the way", text: "AMP help me all the way as this was the first time setting up a Metal IRA. They answered all of my questions and provided excellent training. Plus they stayed in contact throughout the entire process.", name: "James Seibert", location: "US", rating: 5, date: "Sep 25, 2026" },
+        { title: "My transaction was completed timely and...", text: "My transaction was completed timely and effeciently.", name: "Dennis Stone", location: "US", rating: 5, date: "Sep 15, 2026" },
+        { title: "The education before engaging is top...", text: "The education before engaging is top notch. I really learned a lot before deciding my purchases. There was absolutely no pressure to make purchases. The company made sure I was totally comfortable before switching me to the order desk, which itself was also a learning experience. Well done.", name: "Jack W", location: "HK", rating: 5, date: "Sep 15, 2026" },
+        { title: "Great experience with Augusta Precious Metals", text: "Great experience. Super easy. Zoom call is great. I get to see the prices for bid, ask, melt, with totals and get screenshots which makes the verification call even easier.", name: "Teddy Vaughan", location: "US", rating: 5, date: "Sep 9, 2026" },
+        { title: "No pressure presentation.", text: "Augusta precious metals, very professionally, presents logical information on why precious metals should be part of one’s investment portfolio. Never any pressure to invest. Very comfortable company to work with. Erika was especially easy to work with.", name: "Eric Peters", location: "US", rating: 5, date: "Sep 1, 2026" },
+        { title: "Great communication", text: "Great communication. All my emails and calls were promptly answered. I had a high level of confidence in my dealings with them. I felt they treated me like a valued client, not just another customer.", name: "Joe Schlenk", location: "US", rating: 5, date: "Aug 26, 2026" },
+        { title: "Very Professional", text: "They are very professional and very thorough. And also very patient. Some of these transactions can get fairly complex. Mr. Tedder is very knowledgeable and takes the time to meticulously explain things so that even an amateur like myself can understand the transactions involved. He's a true professional. I recommend him highly.", name: "John Ryan", location: "US", rating: 5, date: "Aug 26, 2026" },
+      ],
       minInvestment: 50000,
       setupFee: 50,
       annualFee: 225,

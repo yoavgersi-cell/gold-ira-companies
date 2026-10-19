@@ -10,7 +10,7 @@ Source material for the site content. Every company figure comes from search-sur
   - Yahoo: $275 application, plus $225/yr non-segregated or $275/yr segregated storage.
   - A paid PR page instead says $50 setup + $125 custodian + $100–150 storage. The two conflict.
 - **Custodian and storage:** Equity Trust; Delaware Depository [K].
-- **Ratings:** BBB A+ and BCA AAA (reported). Trustpilot 4.8–4.9.
+- **Ratings:** BBB A+ and BCA AAA (reported). Trustpilot 4.8 from 376 reviews (operator screenshot of the live profile, Oct 19, 2026).
 - **Buyback:** no guaranteed buyback, but buys back in practice, about 5% under its sell price (Fortune).
 - **Known for:** education, a one-on-one web conference, and "lifetime account support". Joe Montana is often cited as a brand ambassador [K].
 - **Lawsuits:** rumors circulate online; I found no court record.

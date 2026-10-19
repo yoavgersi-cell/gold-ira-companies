@@ -92,7 +92,7 @@ export const battles: BattleData[] = [
     ],
     verdictLoserPoints: [
       "Education-led process with a one-on-one web conference",
-      "BBB A+ and BCA AAA (reported), Trustpilot 4.8-4.9",
+      "BBB A+ and BCA AAA (reported), Trustpilot 4.8 (376 reviews)",
       "Lifetime account support",
     ],
     winnerId: "american-hartford-gold",
@@ -127,10 +127,10 @@ export const battles: BattleData[] = [
       },
       {
         name: "Track record & reviews",
-        winner: "provider1",
+        winner: "tie",
         explanation:
-          "Augusta reports BBB A+, BCA AAA and Trustpilot 4.8-4.9, and says it has 5,000+ five-star reviews. American Hartford Gold has a BBB A+ and Trustpilot 4.9 (1,947 reviews, Oct 2026), but BestGuide scores it 3.2/5, citing whistleblower complaints and advertising practices.",
-        supportingPoints: ["Augusta: Trustpilot 4.8-4.9", "AHG: BestGuide 3.2/5"],
+          "Augusta reports BBB A+, BCA AAA and Trustpilot 4.8 from 376 reviews (Oct 2026), and says it has 5,000+ five-star reviews. American Hartford Gold has a BBB A+ and Trustpilot 4.9 (1,947 reviews, Oct 2026), but BestGuide scores it 3.2/5, citing whistleblower complaints and advertising practices.",
+        supportingPoints: ["Augusta: Trustpilot 4.8 (376 reviews)", "AHG: BestGuide 3.2/5"],
       },
     ],
     features: features("augusta-precious-metals", "american-hartford-gold", {
@@ -160,7 +160,7 @@ export const battles: BattleData[] = [
     ],
     verdictLoserPoints: [
       "Strong focus on education, including a one-on-one web conference",
-      "BBB A+ and BCA AAA (reported), Trustpilot 4.8-4.9",
+      "BBB A+ and BCA AAA (reported), Trustpilot 4.8 (376 reviews)",
       "Lifetime account support",
     ],
     winnerId: "goldco",
@@ -197,8 +197,8 @@ export const battles: BattleData[] = [
         name: "Track record & reviews",
         winner: "tie",
         explanation:
-          "Goldco has operated since 2006, shows Trustpilot 4.4 from 1,791 reviews (Oct 2026) and says it has placed over $3.5 billion. Augusta reports BBB A+, BCA AAA and a higher Trustpilot score (4.8-4.9); Goldco has the longer track record.",
-        supportingPoints: ["Goldco: since 2006, Trustpilot 4.4", "Augusta: Trustpilot 4.8-4.9"],
+          "Goldco has operated since 2006, shows Trustpilot 4.4 from 1,791 reviews (Oct 2026) and says it has placed over $3.5 billion. Augusta reports BBB A+, BCA AAA and a higher Trustpilot score (4.8 from 376 reviews); Goldco has the longer track record and more reviews.",
+        supportingPoints: ["Goldco: since 2006, Trustpilot 4.4", "Augusta: Trustpilot 4.8 (376 reviews)"],
       },
     ],
     features: features("augusta-precious-metals", "goldco", {
@@ -358,7 +358,7 @@ export const battles: BattleData[] = [
       "Augusta is our pick if you have $50,000 or more and want an education-first process, lifetime account support and a well-documented record. American Gold and Silver Group may suit you if free silver or a 7-day refund window matters more - but ask for its minimum, fees and markup in writing, since we could not confirm them. If you have less than $50,000, Augusta is not an option.",
     verdictWinnerPoints: [
       "Education-led process with a one-on-one web conference",
-      "BBB A+ and BCA AAA (reported), Trustpilot 4.8-4.9",
+      "BBB A+ and BCA AAA (reported), Trustpilot 4.8 (376 reviews)",
       "Lifetime account support",
     ],
     verdictLoserPoints: [
@@ -400,8 +400,8 @@ export const battles: BattleData[] = [
         name: "Track record & reviews",
         winner: "provider1",
         explanation:
-          "Augusta has operated since around 2012 and reports BBB A+, BCA AAA and Trustpilot 4.8-4.9. We found little independent review history for American Gold and Silver Group - check BBB.org and Trustpilot yourself.",
-        supportingPoints: ["Augusta: Trustpilot 4.8-4.9", "AGSG: limited public reviews"],
+          "Augusta has operated since around 2012 and reports BBB A+, BCA AAA and Trustpilot 4.8 from 376 reviews. We found little independent review history for American Gold and Silver Group - check BBB.org and Trustpilot yourself.",
+        supportingPoints: ["Augusta: Trustpilot 4.8 (376 reviews)", "AGSG: limited public reviews"],
       },
     ],
     features: features("augusta-precious-metals", "american-gold-and-silver-group", {

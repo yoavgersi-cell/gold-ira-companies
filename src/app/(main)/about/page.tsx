@@ -197,7 +197,7 @@ export default async function AboutPage() {
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/"
-              className="inline-flex h-[48px] items-center justify-center rounded-lg bg-[#E6D3A3] px-6 text-[15px] font-bold text-[#0F2540] transition-colors hover:bg-[#D9BE7C]"
+              className="inline-flex h-[48px] items-center justify-center rounded-lg bg-[#1E4E79] px-6 text-[15px] font-bold text-white transition-colors hover:bg-[#163B5C]"
             >
               Compare Companies
             </Link>

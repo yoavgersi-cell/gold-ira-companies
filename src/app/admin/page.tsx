@@ -98,14 +98,6 @@ export default function AdminPage() {
     setConfig({ ...config, providers });
   }
 
-  function updateHighlight(providerIndex: number, bulletIndex: number, value: string) {
-    if (!config) return;
-    const providers = [...config.providers];
-    const highlights = [...providers[providerIndex].highlights];
-    highlights[bulletIndex] = value;
-    providers[providerIndex] = { ...providers[providerIndex], highlights };
-    setConfig({ ...config, providers });
-  }
 
   function updateTrustpilotReview(providerIndex: number, reviewIndex: number, field: keyof TrustpilotReview, value: string | number) {
     if (!config) return;
@@ -346,23 +338,23 @@ export default function AdminPage() {
                     <ImageField label="Sidebar Image (shown when #1)" value={provider.sidebarImage || ""} onChange={(v) => updateProvider(index, "sidebarImage", v)} />
                     <Field label="Affiliate URL" value={provider.affiliateUrl} onChange={(v) => updateProvider(index, "affiliateUrl", v)} />
                     <Field label="CTA Text" value={provider.ctaText} onChange={(v) => updateProvider(index, "ctaText", v)} />
-                    <div className="sm:col-span-2">
-                      <Field label="Excluded States (comma-separated codes, e.g. CA,NY,TX)" value={(provider.excludedStates ?? []).join(", ")} onChange={(v) => updateProvider(index, "excludedStates", v.split(",").map((s) => s.trim()).filter(Boolean))} />
-                    </div>
+                    <Field label="Card Pill (e.g. Safe & Secure)" value={provider.cardPill ?? ""} onChange={(v) => updateProvider(index, "cardPill", v || undefined)} />
+                    <Field label="Offer Tag (e.g. FREE silver offer)" value={provider.offerTag ?? ""} onChange={(v) => updateProvider(index, "offerTag", v || undefined)} />
+                    <Field label="Endorsement (under the button)" value={provider.endorsement ?? ""} onChange={(v) => updateProvider(index, "endorsement", v || undefined)} />
+                    <Field label="Minimum Investment ($, blank = not published)" value={provider.minInvestment?.toString() ?? ""} onChange={(v) => updateProvider(index, "minInvestment", v.trim() === "" ? undefined : Number(v))} type="number" />
+                    <Field label="Setup Fee ($, calculator)" value={provider.setupFee?.toString() ?? ""} onChange={(v) => updateProvider(index, "setupFee", v.trim() === "" ? undefined : Number(v))} type="number" />
+                    <Field label="Yearly Fees ($, calculator)" value={provider.annualFee?.toString() ?? ""} onChange={(v) => updateProvider(index, "annualFee", v.trim() === "" ? undefined : Number(v))} type="number" />
                   </div>
 
                   <div className="mt-4">
-                    <label className="mb-1 block text-xs font-semibold text-gray-500 uppercase tracking-wider">Highlights (3 bullets)</label>
-                    <div className="space-y-2">
-                      {provider.highlights.map((h, hi) => (
-                        <input
-                          key={hi}
-                          value={h}
-                          onChange={(e) => updateHighlight(index, hi, e.target.value)}
-                          className="w-full rounded border px-3 py-2 text-sm focus:border-[#B8862B] focus:outline-none"
-                        />
-                      ))}
-                    </div>
+                    <label className="mb-1 block text-xs font-semibold text-gray-500 uppercase tracking-wider">Card Bullets (one per line)</label>
+                    <textarea
+                      value={provider.highlights.join("\n")}
+                      onChange={(e) => updateProvider(index, "highlights", e.target.value.split("\n"))}
+                      onBlur={(e) => updateProvider(index, "highlights", e.target.value.split("\n").map((l) => l.trim()).filter(Boolean))}
+                      rows={5}
+                      className="w-full rounded border px-3 py-2 text-sm focus:border-[#B8862B] focus:outline-none"
+                    />
                   </div>
 
                   <div className="mt-6 rounded-lg border border-gray-200 bg-gray-50/50 p-4">
@@ -589,7 +581,17 @@ export default function AdminPage() {
                     <div className="flex h-8 w-8 items-center justify-center rounded bg-gray-200 text-xs font-bold text-gray-600 shrink-0">
                       #{index + 1}
                     </div>
-                    <div className="grid flex-1 gap-2 sm:grid-cols-3">
+                    <div className="grid flex-1 gap-2 sm:grid-cols-4">
+                      <Field
+                        label="Stars (0-5, halves ok)"
+                        value={String(pos.starRating)}
+                        onChange={(v) => {
+                          const positions = [...config.ranking.positions];
+                          positions[index] = { ...positions[index], starRating: parseFloat(v) || 0 };
+                          setConfig({ ...config, ranking: { ...config.ranking, positions } });
+                        }}
+                        type="number"
+                      />
                       <Field
                         label="Score"
                         value={String(pos.score)}

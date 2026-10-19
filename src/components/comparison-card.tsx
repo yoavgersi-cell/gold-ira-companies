@@ -83,12 +83,12 @@ export function ComparisonCard({
 
       <div className="flex flex-col gap-5 px-5 pb-5 pt-12 sm:flex-row sm:gap-6 sm:px-8 sm:pb-6 sm:pt-12">
         {/* Logo (+ score on mobile) */}
-        <div className="flex items-start justify-between sm:w-[220px] sm:shrink-0 sm:justify-center sm:pt-2">
+        <div className="flex items-center justify-between gap-3 sm:items-start sm:w-[260px] sm:shrink-0 sm:justify-center sm:pt-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={product.logo}
             alt={`${product.name} logo`}
-            className="block max-h-[72px] w-auto max-w-[170px] object-contain sm:max-h-[96px] sm:max-w-[210px]"
+            className="block max-h-[60px] w-auto max-w-[150px] object-contain sm:max-h-[110px] sm:max-w-[250px]"
           />
           <RatingBadge className="sm:hidden" rating={product.rating} label={product.ratingLabel} starRating={product.starRating} />
         </div>

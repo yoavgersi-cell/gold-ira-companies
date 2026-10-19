@@ -9,7 +9,7 @@ export function DisclosureBar() {
   return (
     <>
       <div className="bg-[#FAF6EC] border-b-[1.5px] border-[#E2D9FA] px-4 py-1.5 sm:py-2 text-center text-[10px] sm:text-[13px] leading-tight sm:leading-normal text-gray-600">
-        Some providers featured on this site may compensate us. This may affect the order and placement of listings but does not influence our editorial ratings or reviews.{" "}
+        Some companies featured on this site pay us when you request a kit or open an account through our links. This can affect which companies appear and where. Not financial advice.{" "}
         <button
           onClick={() => setIsOpen(true)}
           className="font-bold text-[#191919] underline underline-offset-2 hover:text-[#1E3A5F]"

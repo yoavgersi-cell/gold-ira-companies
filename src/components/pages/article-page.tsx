@@ -438,7 +438,7 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
             <div className="mt-5 flex justify-center">
               <Link
                 href={hubLink(ctx, "/")}
-                className="inline-flex h-[44px] items-center justify-center rounded-lg bg-[#E6D3A3] px-6 text-[14px] font-bold text-[#0F2540] transition-colors hover:bg-[#D9BE7C]"
+                className="inline-flex h-[44px] items-center justify-center rounded-lg bg-[#1E4E79] px-6 text-[14px] font-bold text-white transition-colors hover:bg-[#163B5C]"
               >
                 Compare Gold IRA Companies
               </Link>
@@ -526,9 +526,9 @@ export async function ArticlePageView({ slug, ctx }: { slug: string; ctx: SiteCo
                   <Link
                     key={b.slug}
                     href={hubLink(ctx, `/${b.slug}`)}
-                    className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-[14px] font-semibold text-[#1E3A5F] transition-colors hover:border-[#B8862B]/30 hover:bg-[#B8862B]/[0.02]"
+                    className="flex min-w-0 items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-[14px] font-semibold text-[#1E3A5F] transition-colors hover:border-[#B8862B]/30 hover:bg-[#B8862B]/[0.02]"
                   >
-                    <span className="truncate">{b.matchupLabel ?? b.title}</span>
+                    <span className="min-w-0">{b.matchupLabel ?? b.title}</span>
                     <ArrowRight className="ml-auto h-3.5 w-3.5 shrink-0" strokeWidth={2} />
                   </Link>
                 ))}

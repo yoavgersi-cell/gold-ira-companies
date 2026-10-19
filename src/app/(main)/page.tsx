@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { HeroSection } from "@/components/hero-section";
 import { RankedProviders } from "@/components/ranked-providers";
 import type { ComparisonCardProduct } from "@/components/comparison-card";
-import { Sidebar } from "@/components/sidebar";
 import { EditorialContent } from "@/components/editorial-content";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { ProviderFactsTable } from "@/components/provider-facts-table";
@@ -132,17 +131,12 @@ export default async function HomePage() {
       />
 
       {/* E-E-A-T byline strip - expert review status */}
-      <section className="mx-auto max-w-[1200px] px-4 pt-3">
+      <section className="mx-auto max-w-[1100px] px-4 pt-3">
         <MedicalReviewBar path="/" className="max-w-[760px]" />
       </section>
 
-      <section className="mx-auto max-w-[1200px] px-4 pt-4 pb-6">
-        <div className="flex gap-6 items-start">
-          <div className="min-w-0 flex-1">
-            <RankedProviders products={displayList} />
-          </div>
-          <Sidebar config={config.sidebar} providers={sidebarProviders} />
-        </div>
+      <section className="mx-auto max-w-[1100px] px-4 pt-4 pb-6">
+        <RankedProviders products={displayList} />
       </section>
 
       <ProviderFactsTable providers={sidebarProviders} />

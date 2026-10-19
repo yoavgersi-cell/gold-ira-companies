@@ -25,7 +25,7 @@ export function Header() {
             alt="GoldIRAPlanet.com - Compare. Learn. Invest smarter."
             width={640}
             height={298}
-            className="h-[52px] w-auto sm:h-[64px]"
+            className="h-[60px] w-auto sm:h-[84px]"
           />
         </Link>
 

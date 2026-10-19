@@ -39,8 +39,8 @@ export const goldIraConfig: SiteConfig = {
     "Gold IRA Planet is reader-supported. Some companies listed pay us when you request a kit or open an account through our links. This can affect which companies appear and where, but not the facts, fees or warnings we publish. Nothing here is financial advice.",
 
   hero: {
-    backgroundImageUrl: "/gold-ira-companies-comparison.svg",
-    imageAlt: "Best gold IRA companies compared - illustration of gold bars and coins stored in a secure IRA depository vault",
+    backgroundImageUrl: "/gold-ira-planet-globe.webp",
+    imageAlt: "Gold IRA Planet - gold bars in front of a navy and gold globe, illustrating gold IRA investing",
     updatedLabel: "Last updated: Oct 2026",
     h1: "Our Best Gold IRA Companies of 2026",
     h1Highlight: "Gold IRA",
@@ -81,8 +81,8 @@ export const goldIraConfig: SiteConfig = {
       foundingYear: "2015",
       name: "American Hartford Gold",
       tagline: "Easy 3-step tax-free, penalty-free gold IRA setup",
-      logo: "/logos/americanhartfordlogo.avif",
-      smallLogo: "/logos/americanhartfordlogo.avif",
+      logo: "/logos/americanhartfordlogo.webp",
+      smallLogo: "/logos/americanhartfordlogo.webp",
       highlights: [
         "100% satisfaction guarantee, 7-day full refund",
         "Lowest price guarantee & no buy-back fees",

@@ -34,7 +34,7 @@ export const part4: ArticleSection[] = [
 <tbody>
 <tr><td>Jan 1980</td><td>~$49-$50 (peak)</td><td>Hunt brothers' attempt to corner the market; commonly cited</td></tr>
 <tr><td>Apr 2011</td><td>~$48-$49 (peak)</td><td>Commonly cited; not verified in a primary series</td></tr>
-<tr><td>2015</td><td>$15.68 average</td><td rowspan="1">Our research notes</td></tr>
+<tr><td>2015</td><td>$15.68 average</td><td>Our research notes</td></tr>
 <tr><td>2019</td><td>$16.21 average</td><td>Our research notes</td></tr>
 <tr><td>2020</td><td>$20.55 average</td><td>Our research notes</td></tr>
 <tr><td>2022</td><td>$21.73 average</td><td>Our research notes</td></tr>
@@ -53,7 +53,7 @@ export const part4: ArticleSection[] = [
 <thead><tr><th>Force</th><th>Usual effect</th><th>When it worked</th><th>When it did not</th></tr></thead>
 <tbody>
 <tr><td><strong>Real interest rates</strong> (interest after inflation)</td><td>Falling real rates tend to help gold; rising ones tend to hurt</td><td>Negative real rates in the 1970s, 2001-2011 and 2020; Volcker's high real rates ended the 1980 boom; rising real rates in 2013 and 2022</td><td>Gold rose in 2023-2024 despite positive real rates</td></tr>
-<tr><td><strong>The US dollar</strong></td><td>A weaker dollar tends to help gold</td><td>Weak dollar 2002-2008; strong dollar hurt gold in 2014-2015, 2022 and mid-2026</td><td>Both gold and the dollar rose at times, for example in early 2025 crises</td></tr>
+<tr><td><strong>The US dollar</strong></td><td>A weaker dollar tends to help gold</td><td>Weak dollar 2002-2008; strong dollar hurt gold in 2014-2015, 2022 and mid-2026</td><td>Gold and the dollar rose together in 2024</td></tr>
 <tr><td><strong>Central bank buying and selling</strong></td><td>Net buying supports prices</td><td>European selling in the 1990s helped push gold to $252.80; buying above 1,000t a year in 2022-2024 supported prices</td><td>Buying of ~863t in 2025 did not prevent the 2026 drop</td></tr>
 <tr><td><strong>ETF and investor flows</strong></td><td>Inflows push prices up; outflows down</td><td>Record ETF inflows in 2020; ~801t in 2025; heavy selling in 2013 and May-June 2026</td><td>Flows often follow price rather than lead it</td></tr>
 <tr><td><strong>Crises and fear</strong></td><td>Fear often lifts gold</td><td>1979-1980, 2008-2011, 2020, 2022 bank and war shocks</td><td>Gold fell in the most acute weeks of late 2008 and March 2020 as investors raised cash</td></tr>

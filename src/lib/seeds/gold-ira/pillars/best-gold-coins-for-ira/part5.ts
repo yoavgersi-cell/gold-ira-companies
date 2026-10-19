@@ -105,7 +105,7 @@ export const part5: ArticleSection[] = [
 <tbody>
 <tr><td>1 oz bullion coins (Eagle, Maple, Buffalo, Philharmonic)</td><td>Commingled is usually fine</td><td>One bullion Eagle is as good as another; you get back the same product and quantity</td></tr>
 <tr><td>Branded bars with serial numbers</td><td>Either; segregated if you want your exact bars back</td><td>Some buyers prefer to receive the same serial-numbered bars, especially for in-kind distributions</td></tr>
-<tr><td>Kilo bars</td><td>Either</td><td>Value-based pricing makes them cost the same per dollar as coins</td></tr>
+<tr><td>Kilo bars</td><td>Either</td><td>With flat or value-based pricing, bar size makes little difference to storage cost</td></tr>
 <tr><td>Proof or graded coins</td><td>Segregated</td><td>Condition and packaging matter to their value - one more reason they are awkward in an IRA</td></tr>
 <tr><td>Silver</td><td>Check how your depository prices it</td><td>Silver is about 72 times bulkier per dollar than gold at today's ratio</td></tr>
 </tbody>

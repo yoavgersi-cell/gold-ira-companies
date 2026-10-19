@@ -1,4 +1,4 @@
-import { Check, Star, ThumbsUp } from "lucide-react";
+import { ArrowRight, Check, Star, ThumbsUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { RatingBadge } from "./rating-badge";
 import { ProviderCta } from "./provider-cta";
@@ -57,6 +57,7 @@ export function ComparisonCard({
       className={className}
     >
       Visit Site
+      <ArrowRight className="h-4 w-4 shrink-0" strokeWidth={2.5} aria-hidden="true" />
     </ProviderCta>
   );
 
@@ -130,7 +131,7 @@ export function ComparisonCard({
         <div className="flex flex-col items-stretch gap-3 sm:w-[190px] sm:shrink-0">
           <RatingBadge size="lg" className="hidden sm:flex" rating={product.rating} label={product.ratingLabel} starRating={product.starRating} />
           {cta(
-            "flex h-[42px] w-full items-center justify-center rounded-sm bg-[#1E4E79] text-[15px] font-semibold text-white transition-colors hover:bg-[#163B5C] sm:h-[44px] sm:text-[16px]",
+            "flex h-[42px] w-full items-center justify-center gap-2 rounded-sm bg-[#1E4E79] text-[15px] font-semibold text-white transition-colors hover:bg-[#163B5C] sm:h-[44px] sm:text-[16px]",
           )}
           {product.endorsement && (
             <p className="mx-auto border-y border-[#1E4E79] px-1 py-1 text-center text-[12px] text-[#1E4E79] sm:text-[13px]">

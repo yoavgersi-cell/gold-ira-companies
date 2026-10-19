@@ -23,11 +23,14 @@ export function ProviderCta({
   className,
   children,
 }: ProviderCtaProps) {
+  // No affiliate link yet ("" or "#"): send the visitor to our review of the
+  // company instead of a dead button. Swaps to the tracking link automatically
+  // once one is saved in /admin.
+  const hasLink = !!href && href !== "#";
   return (
     <a
-      href={href}
-      target="_blank"
-      rel="sponsored nofollow noopener noreferrer"
+      href={hasLink ? href : `/reviews/${providerSlug}`}
+      {...(hasLink ? { target: "_blank", rel: "sponsored nofollow noopener noreferrer" } : {})}
       className={className}
       onClick={() => {
         trackProviderClick({

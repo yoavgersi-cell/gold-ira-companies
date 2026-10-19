@@ -141,9 +141,25 @@ export const goldIraConfig: SiteConfig = {
       offerTag: "Bonus silver offer",
       affiliateUrl: "https://goldco.com/",
       ctaText: "Visit Site",
-      // Third-party snapshot (Mar 2025, Finder): 4.8 across ~1,585 reviews.
-      trustpilotRating: "4.8",
-      trustpilotReviewCount: "1,500+",
+      // Trustpilot profile snapshot supplied by the operator (Oct 19, 2026):
+      // 4.4 from 1,791 reviews. Reviews below are copied verbatim (typos kept)
+      // from the public profile, including a mixed 4-star one; dates are the
+      // posting dates.
+      trustpilotRating: "4.4",
+      trustpilotReviewCount: "1,791",
+      trustpilotReviews: [
+        { title: "I was treated on all levels with...Respect and patience", text: "I was treated on all levels with patience and respect. Especially Joshua Hoffman. Every time we spoke, he was clear and helped me get an understanding of all my options. This initially was a little overwhelming for me because I usually don't try to do things like this. He helped me gain an understanding of what my options were and didn't make me feel incompetent.", name: "Brenda Favorite", location: "US", rating: 5, date: "Oct 13, 2026" },
+        { title: "All the transactions with Joshua...", text: "All the transactions with Joshua Hoffman were easy and efficient. Great products for a reasonable price. I am heavily invested in metals but I would consider Goldco if I increase my holdings", name: "William Brown", location: "US", rating: 5, date: "Sep 26, 2026" },
+        { title: "They explained the things I didn't...", text: "They explained the things I didn't understand or know!\nVery professional!!", name: "Frank E. \"Eddie\" Elliott", location: "US", rating: 5, date: "Sep 25, 2026" },
+        { title: "Buying experience with Joshua", text: "Joshua Hoffman and Ryan thoroughly and clearly explained investing in gold and silver. Josh was especially patient with me and very accomadating in helping with the incidentals. Thanks for the attentiveness.", name: "Anita Kobilis", location: "US", rating: 5, date: "Sep 24, 2026" },
+        { title: "Great customer service", text: "Both Abraham and Ruby at Goldco were very courteous, helpful and patient walking me through the process to complete my transaction. Brilliant customer service from both of them. I highly recommend Goldco!", name: "Valerie", location: "US", rating: 5, date: "Jun 2, 2026" },
+        { title: "Since opening my account with GOLDCO I...have been happy with the service I have received in working with Arthur Schwartz. Thank you so much.", text: "Since opening my account with GOLDCO I have worked with Arthur Schwartz and have been very happy with his pleasant helpful expertise in handling my account. He has Always been patient & answered all my questions in a timely manner.\nWith the recent contact & my last purchase I was directed to several other people and must admit I have not been quite as pleased with their service. I received an offer in the mail & that is mainly why I decided to make another purchase but after talking to several people it seems the offer was not as I understood it. It seems the offer had some stipulations that were in the tiny print at the bottom of the information which I felt was very misleading but finally was told if I completed this survey I would receive the FREE Home Safe.", name: "Carlene Cripe", location: "US", rating: 4, date: "Apr 1, 2026" },
+        { title: "All that I talked to were friendly and...", text: "All that I talked to were friendly and knowledgeable. They explained the many options available and answered all my questions to my satisfaction. A positive experience.", name: "Mark J", location: "US", rating: 5, date: "Mar 20, 2026" },
+        { title: "My account manager is very helpful and...", text: "My account manager is very helpful and available for answering questions, no pressure and respectful.\n\nThe main office is always staffed to answer calls.", name: "jahana k", location: "US", rating: 5, date: "Mar 19, 2026" },
+        { title: "very helpful", text: "Joshua Hoffman was very helpful and knowledgeable. He helped me understand my choices and was patient with me. I enjoyed our interaction. Carla was very nice and helpful too.", name: "Heather", location: "US", rating: 5, date: "Mar 18, 2026" },
+        { title: "Having purchased from Goldco in the past...", text: "Having purchased from Goldco in the past, this time it was a slam dunk/ The people at Goldco are knowledgeable and eager to point our the pros and cons of gold/silver purchasing. I would highly recommend Goldco, and have , to my family and friends for their metals requirements.", name: "Bill Borrello", location: "US", rating: 5, date: "Mar 14, 2026" },
+        { title: "I felt important", text: "I was treated with respect and honesty.\nRyan was very concerned that we were educated on what we were to expect and allowed us to make our own decisions on the way my wife and I choose to proceed.\nWill recommend this company to anyone.", name: "Rock", location: "US", rating: 5, date: "Mar 14, 2026" },
+      ],
       minInvestment: 25000,
       setupFee: 50,
       annualFee: 225,

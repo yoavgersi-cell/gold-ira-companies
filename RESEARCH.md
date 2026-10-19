@@ -22,7 +22,7 @@ Source material for the site content. Every company figure comes from search-sur
   - ConsumerAffairs: $125 admin + $100 storage (non-segregated) or $150 (segregated).
   - Finder: $50 setup.
 - **Custodian and storage:** Equity Trust [K]; Delaware Depository and Brink's.
-- **Ratings:** Trustpilot 4.8 (1,585 reviews, Mar 2025, Finder).
+- **Ratings:** Trustpilot 4.4 from 1,791 reviews (operator screenshot of the live profile, Oct 19, 2026). Earlier: 4.8 / 1,585 (Mar 2025, Finder).
 - **Promo:** up to 10% back in free silver.
 - **Watch-outs:** Finder's live chat would not quote fees and pushed for a sales call. One ConsumerAffairs complaint about silver pricing.
 

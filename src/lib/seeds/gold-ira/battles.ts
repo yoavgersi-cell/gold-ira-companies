@@ -63,10 +63,10 @@ export const battles: BattleData[] = [
       },
       {
         name: "Track record & reviews",
-        winner: "provider2",
+        winner: "tie",
         explanation:
-          "Goldco has operated since 2006, shows Trustpilot 4.8 across 1,585 reviews (Mar 2025) and says it has placed over $3.5 billion. American Hartford Gold has a BBB A+ and Trustpilot 4.9 (1,947 reviews, Oct 2026), but BestGuide scores it 3.2/5, citing whistleblower complaints and advertising practices.",
-        supportingPoints: ["Goldco: since 2006, Trustpilot 4.8", "AHG: BBB A+, BestGuide 3.2/5"],
+          "Goldco has operated since 2006, shows Trustpilot 4.4 from 1,791 reviews (Oct 2026) and says it has placed over $3.5 billion. American Hartford Gold has a BBB A+ and Trustpilot 4.9 (1,947 reviews, Oct 2026), but BestGuide scores it 3.2/5, citing whistleblower complaints and advertising practices.",
+        supportingPoints: ["Goldco: since 2006, Trustpilot 4.4", "AHG: BBB A+, BestGuide 3.2/5"],
       },
     ],
     features: features("american-hartford-gold", "goldco", { minimum: "provider1", setup: "provider2", since: "provider2" }),
@@ -197,8 +197,8 @@ export const battles: BattleData[] = [
         name: "Track record & reviews",
         winner: "tie",
         explanation:
-          "Goldco has operated since 2006, shows Trustpilot 4.8 across 1,585 reviews (Mar 2025) and says it has placed over $3.5 billion. Augusta reports BBB A+, BCA AAA and Trustpilot 4.8-4.9. Both have strong review profiles.",
-        supportingPoints: ["Goldco: since 2006, Trustpilot 4.8", "Augusta: Trustpilot 4.8-4.9"],
+          "Goldco has operated since 2006, shows Trustpilot 4.4 from 1,791 reviews (Oct 2026) and says it has placed over $3.5 billion. Augusta reports BBB A+, BCA AAA and a higher Trustpilot score (4.8-4.9); Goldco has the longer track record.",
+        supportingPoints: ["Goldco: since 2006, Trustpilot 4.4", "Augusta: Trustpilot 4.8-4.9"],
       },
     ],
     features: features("augusta-precious-metals", "goldco", {
@@ -288,10 +288,10 @@ export const battles: BattleData[] = [
     intro:
       "Goldco has been in business since 2006, reports a $25,000 minimum and advertises up to 10% in bonus silver. American Gold and Silver Group advertises a 7-day full refund, up to $15,000 in free silver and no buy-back fees, but we found little independent information on its minimums or fees.",
     verdict:
-      "Goldco is our pick for most savers because you can check its record: it has operated since 2006, shows Trustpilot 4.8 and advertises a buyback guarantee. American Gold and Silver Group may appeal if a 7-day full refund matters most to you, but ask for its minimum, fees and markup in writing first. On larger purchases, compare Goldco's percentage-based bonus with AGSG's flat cap.",
+      "Goldco is our pick for most savers because you can check its record: it has operated since 2006, shows Trustpilot 4.4 from 1,791 reviews and advertises a buyback guarantee. American Gold and Silver Group may appeal if a 7-day full refund matters most to you, but ask for its minimum, fees and markup in writing first. On larger purchases, compare Goldco's percentage-based bonus with AGSG's flat cap.",
     verdictWinnerPoints: [
       "In business since 2006",
-      "Trustpilot 4.8 across 1,585 reviews (Mar 2025)",
+      "Trustpilot 4.4 from 1,791 reviews (Oct 2026)",
       "Buyback guarantee (advertised)",
     ],
     verdictLoserPoints: [
@@ -333,7 +333,7 @@ export const battles: BattleData[] = [
         name: "Track record & reviews",
         winner: "provider1",
         explanation:
-          "Goldco has operated since 2006, shows Trustpilot 4.8 across 1,585 reviews (Mar 2025) and says it has placed over $3.5 billion. We found little independent review history for American Gold and Silver Group.",
+          "Goldco has operated since 2006, shows Trustpilot 4.4 from 1,791 reviews (Oct 2026) and says it has placed over $3.5 billion. We found little independent review history for American Gold and Silver Group.",
         supportingPoints: ["Goldco: since 2006", "AGSG: limited public reviews"],
       },
     ],

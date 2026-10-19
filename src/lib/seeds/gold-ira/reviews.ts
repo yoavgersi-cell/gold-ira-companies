@@ -80,7 +80,7 @@ export const reviews: ReviewData[] = [
       "Buyback guarantee (company claim)",
       "Over $3.5 billion in metals placed (company claim)",
       "Storage at the Delaware Depository or Brink's",
-      "4.8 on Trustpilot across about 1,500+ reviews (reported, Mar 2025)",
+      "4.4 on Trustpilot from 1,791 reviews (Oct 2026)",
     ],
     pricingSummary:
       "Approximate only - sources disagree. Finder reports a setup fee of about $50, and ConsumerAffairs lists about $125 a year for administration plus $100 (non-segregated) or $150 (segregated) a year for storage. Yahoo Finance instead reports a $275 application fee and about $225 a year. CNBC reports a $10,000 minimum first purchase and a $25,000 minimum account balance. Goldco does not post its markups, and the bonus silver is tied to how much you buy - so compare the total price, not just the bonus. Finder found that Goldco's live chat would not quote fees and pushed for a phone call. Ask for every fee, the spread and the buyback terms in writing.",
@@ -118,7 +118,7 @@ export const reviews: ReviewData[] = [
       { timing: "Step 3", title: "Fund the account", detail: "Use a direct transfer or rollover from your existing IRA, 401(k) or TSP." },
       { timing: "Step 4", title: "Choose your metals", detail: "Select IRA-eligible gold or silver, shipped to the Delaware Depository or Brink's." },
     ],
-    trustBadges: ["Since 2006", "4.8 Trustpilot (reported)", "Buyback guarantee (advertised)"],
+    trustBadges: ["Since 2006", "4.4 Trustpilot (1,791 reviews)", "Buyback guarantee (advertised)"],
     finalVerdict:
       "Goldco is an established, well-reviewed choice for gold and silver IRAs, with an advertised buyback guarantee and a generous-sounding bonus-silver offer. The weak spot is transparency: fees are not posted, sources report different numbers and you will likely need a sales call to get a quote. Our editors rate it highly for its track record, but treat the bonus as a perk, not a reason to buy, and get the spread on each product in writing.",
     updatedAt: UPDATED,

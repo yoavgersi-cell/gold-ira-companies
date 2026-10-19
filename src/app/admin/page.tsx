@@ -13,22 +13,22 @@ export default function AdminPage() {
   const [message, setMessage] = useState("");
   const [activeTab, setActiveTab] = useState<"providers" | "ranking" | "hero" | "sidebar" | "faqs" | "reviews" | "articles" | "battles" | "pages" | "sidebars" | "quiz" | "team" | "general">("providers");
 
-  const token = typeof window !== "undefined" ? sessionStorage.getItem("admin_token") : null;
-
+  // Resume a session saved in this tab: re-check the stored password against
+  // the API, and only mark the editor authed once the config actually loads.
   useEffect(() => {
-    if (token) {
-      setAuthed(true);
-      loadConfig(token);
-    }
-  }, [token]);
+    const saved = sessionStorage.getItem("admin_token");
+    if (saved) void loadConfig(saved, DEFAULT_VERTICAL, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  async function loadConfig(pw: string, v: string = vertical) {
+  async function loadConfig(pw: string, v: string = vertical, markAuthed = false) {
     const res = await fetch(`/api/config?vertical=${v}`, {
       headers: { Authorization: `Bearer ${pw}` },
     });
     if (res.ok) {
       const data = await res.json();
       setConfig(data);
+      if (markAuthed) setAuthed(true);
     } else {
       const body = (await res.json().catch(() => null)) as { error?: string } | null;
       setMessage(`Failed to load config (${res.status})${body?.error ? `: ${body.error}` : ""}`);

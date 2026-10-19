@@ -154,8 +154,8 @@ export function EditorialContent({ midSlot }: { midSlot?: React.ReactNode }) {
       </p>
       <p className="mb-8">
         If your balance is below a company&apos;s minimum, it is usually a sign that company is built
-        for larger accounts, not a reason to stretch. Use the amount filter at the top of this page to
-        see which companies fit.
+        for larger accounts, not a reason to stretch. Check each company&apos;s minimum in our{" "}
+        <Link href="/" className={link}>comparison</Link> before you start.
       </p>
 
       {midSlot && <div className="mb-8">{midSlot}</div>}

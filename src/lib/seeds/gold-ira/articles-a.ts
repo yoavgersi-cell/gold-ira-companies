@@ -193,7 +193,7 @@ export const articlesA: ArticleData[] = [
       },
       {
         heading: "Which coins and bars are commonly eligible?",
-        body: `<p>These are widely accepted by IRA custodians:</p><ul><li><strong>American Gold Eagle</strong> (US Mint)</li><li><strong>American Gold Buffalo</strong> (US Mint)</li><li><strong>Canadian Gold Maple Leaf</strong> (Royal Canadian Mint)</li><li><strong>Austrian Gold Philharmonic</strong> (Austrian Mint)</li><li><strong>American Silver Eagle</strong> (US Mint)</li><li><strong>Gold, silver, platinum and palladium bars</strong> from accredited refiners that meet the fineness standards</li></ul><p>Your custodian has the final say on what it will accept, so confirm before you place an order. For silver-specific options, see the <a href="/articles/silver-ira-guide">silver IRA guide</a>.</p>`,
+        body: `<p>These are widely accepted by IRA custodians:</p><ul><li><strong>American Gold Eagle</strong> (US Mint)</li><li><strong>American Gold Buffalo</strong> (US Mint)</li><li><strong>Canadian Gold Maple Leaf</strong> (Royal Canadian Mint)</li><li><strong>Austrian Gold Philharmonic</strong> (Austrian Mint)</li><li><strong>American Silver Eagle</strong> (US Mint)</li><li><strong>Gold, silver, platinum and palladium bars</strong> from accredited refiners that meet the fineness standards</li></ul><p>Your custodian has the final say on what it will accept, so confirm before you place an order. For silver-specific options, see the <a href="/articles/silver-ira">silver IRA guide</a>.</p>`,
       },
       {
         heading: "Which coins are not eligible?",

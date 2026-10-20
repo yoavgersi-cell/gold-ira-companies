@@ -141,7 +141,7 @@ export const part4: ArticleSection[] = [
 <li><strong>Now:</strong> about $57.70 (October 19, 2026) - roughly 53% below that reported record ($57.70 / $121.62 - 1 = -0.526).</li>
 <li><strong>Gold/silver ratio:</strong> about 72:1 ($4,170 / $57.70 = 72.3), meaning one ounce of gold buys about 72 ounces of silver.</li>
 </ul>
-<p>Silver's swings are larger than gold's - a 145% gain followed by a roughly 50% fall within about a year. It also has heavier industrial demand, so it is more sensitive to the economy. And it typically costs more to buy: American Silver Eagles averaged about a 6.87% premium in August 2026, versus about 3-6% for Gold Eagles, and silver takes far more storage space per dollar. See our <a href="/articles/silver-ira-guide">silver IRA guide</a>.</p>
+<p>Silver's swings are larger than gold's - a 145% gain followed by a roughly 50% fall within about a year. It also has heavier industrial demand, so it is more sensitive to the economy. And it typically costs more to buy: American Silver Eagles averaged about a 6.87% premium in August 2026, versus about 3-6% for Gold Eagles, and silver takes far more storage space per dollar. See our <a href="/articles/silver-ira">silver IRA guide</a>.</p>
 <h3>Platinum and palladium</h3>
 <p>Both are much smaller markets, driven heavily by industrial use (especially vehicle catalytic converters). That makes them more volatile and more tied to manufacturing cycles than gold. Premiums can be high: Platinum Eagles averaged about 9.21% over spot in July 2026 and about 13.35% in February 2026. For most retirement savers, these metals are niche holdings at best.</p>
 <h3>The bottom line on other metals</h3>

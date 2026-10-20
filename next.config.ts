@@ -21,10 +21,11 @@ const nextConfig: NextConfig = {
   // the image instead of a 404. Re-check the hashes in the build output
   // ("opengraph-image-xxxxxx") if an opengraph-image.tsx file is ever moved.
   // Checked against this site's `next build` output (Oct 2026): unchanged.
-  // The short fees guide was folded into the long-form fees pillar.
+  // Short guides folded into their long-form pillars.
   async redirects() {
     return [
       { source: "/articles/gold-ira-fees-explained", destination: "/articles/gold-ira-fees", permanent: true },
+      { source: "/articles/silver-ira-guide", destination: "/articles/silver-ira", permanent: true },
     ];
   },
   async rewrites() {

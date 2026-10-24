@@ -14,10 +14,14 @@ import { bestGoldCoinsForIraGuide } from "./pillars/best-gold-coins-for-ira";
 import { howToSellGoldIraGuide } from "./pillars/how-to-sell-gold-ira";
 import { goldIraKitGuide } from "./pillars/gold-ira-kit";
 import { goldPriceHistoryGuide } from "./pillars/gold-price-history";
+import { goldIraReviewsGuide } from "./pillars/gold-ira-reviews";
+import { goldIraBankruptcyGuide } from "./pillars/gold-ira-company-bankruptcy";
 
 // Long-form pillar guides first (the hubs), then the shorter supporting guides.
 export const articles: ArticleData[] = [
   goldIraCompleteGuide,
+  goldIraReviewsGuide,
+  goldIraBankruptcyGuide,
   goldIraRolloverGuide,
   goldIraFeesGuide,
   goldIraRulesGuide,

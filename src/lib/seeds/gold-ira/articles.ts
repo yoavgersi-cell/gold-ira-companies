@@ -17,10 +17,12 @@ import { goldPriceHistoryGuide } from "./pillars/gold-price-history";
 import { goldIraReviewsGuide } from "./pillars/gold-ira-reviews";
 import { goldIraBankruptcyGuide } from "./pillars/gold-ira-company-bankruptcy";
 import { celebrityGoldEndorsementsGuide } from "./pillars/celebrity-gold-endorsements";
+import { howToBuyGoldGuide } from "./pillars/how-to-buy-gold";
 
 // Long-form pillar guides first (the hubs), then the shorter supporting guides.
 export const articles: ArticleData[] = [
   goldIraCompleteGuide,
+  howToBuyGoldGuide,
   goldIraReviewsGuide,
   goldIraBankruptcyGuide,
   celebrityGoldEndorsementsGuide,
